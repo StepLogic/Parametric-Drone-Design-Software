@@ -1,0 +1,1 @@
+{"Aerdodynamics": {"CL_Max": 2.4889689073646335, "alpha_stall": 40.0, "velocity_stall": 45.0}, "Max_Deflections": {"rudder_limit_lower": -45.0, "elevator_limit_lower": -45.0, "aileron_limit_lower": -45.0, "rudder_limit_upper": 45.0, "elevator_limit_upper": 45.0, "aileron_limit_upper": -5.0}}
