@@ -1,0 +1,462 @@
+  ****************************************************
+  *    USAF STABILITY AND CONTROL  DIGITAL DATCOM    *
+  *    PROGRAM REV. JAN 96   DIRECT INQUIRIES TO:    *
+  *    WRIGHT LABORATORY  (WL/FIGC)  ATTN: W. BLAKE  *
+  *      WRIGHT PATTERSON AFB, OHIO  45433           *
+  *    PHONE (513) 255-6764,   FAX (513) 258-4054    *
+  ****************************************************
+1                         CONERR - INPUT ERROR CHECKING
+0 ERROR CODES - N* DENOTES THE NUMBER OF OCCURENCES OF EACH ERROR
+0 A - UNKNOWN VARIABLE NAME
+0 B - MISSING EQUAL SIGN FOLLOWING VARIABLE NAME
+0 C - NON-ARRAY VARIABLE HAS AN ARRAY ELEMENT DESIGNATION - (N)
+0 D - NON-ARRAY VARIABLE HAS MULTIPLE VALUES ASSIGNED
+0 E - ASSIGNED VALUES EXCEED ARRAY DIMENSION
+0 F - SYNTAX ERROR
+
+0******************************  INPUT DATA CARDS  ******************************
+
+                                                                                 
+  $FLTCON NALT=1.0,ALT(1)=10.0$                                                  
+  $FLTCON NALPHA=5.0,ALSCHD(1)=1.0,2.0,3.0,4.0,5.0,LOOP=2.0$                     
+  $FLTCON NMACH=2.0,MACH(1)=1.0,2.0$                                             
+  $SYNTHS XCG=0.0,ZCG=0.0$                                                       
+  $SYNTHS XW=0.0,ZW=0.0$                                                         
+  $SYNTHS XH=0.0,ZH=0.0$                                                         
+  $SYNTHS XV=0.0,ZV=0.0$                                                         
+ NACA-W-4-0012                                                                   
+  $WGPLNF CHRDR=300.0$                                                           
+  $WGPLNF CHRDTP=0.01$                                                           
+  $WGPLNF SSPN=560.0$                                                            
+  $WGPLNF SSPNE=560.0$                                                           
+  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF TWISTA=1.1$                                                            
+  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF DHDADO=1.2$                                                            
+  $WGPLNF DHDADI=1.2$                                                            
+  $WGPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ NACA-H-4-0012                                                                   
+  $HTPLNF CHRDR=100.0$                                                           
+  $HTPLNF CHRDTP=100.0$                                                          
+  $HTPLNF SSPN=125.0$                                                            
+  $HTPLNF SSPNE=125.0$                                                           
+  $HTPLNF SAVSI=0.0$                                                             
+  $HTPLNF TWISTA=1.1$                                                            
+  $HTPLNF SAVSI=0.0$                                                             
+  $HTPLNF DHDADO=1.3$                                                            
+  $HTPLNF DHDADI=1.3$                                                            
+  $HTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ NACA-V-4-0012                                                                   
+  $VTPLNF CHRDR=100.0$                                                           
+  $VTPLNF CHRDTP=66.66666666666667$                                              
+  $VTPLNF SSPN=125.0$                                                            
+  $VTPLNF SSPNE=125.0$                                                           
+  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF TWISTA=1.1$                                                            
+  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF DHDADO=1.3$                                                            
+  $VTPLNF DHDADI=1.3$                                                            
+  $VTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ CASEID TESTCRAFT                                                                
+ DIM M                                                                           
+ DAMP                                                                            
+ BUILD                                                                           
+ NEXT CASE                                                                       
+1          THE FOLLOWING IS A LIST OF ALL INPUT CARDS FOR THIS CASE.
+0
+                                                                                 
+  $FLTCON NALT=1.0,ALT(1)=10.0$                                                  
+  $FLTCON NALPHA=5.0,ALSCHD(1)=1.0,2.0,3.0,4.0,5.0,LOOP=2.0$                     
+  $FLTCON NMACH=2.0,MACH(1)=1.0,2.0$                                             
+  $SYNTHS XCG=0.0,ZCG=0.0$                                                       
+  $SYNTHS XW=0.0,ZW=0.0$                                                         
+  $SYNTHS XH=0.0,ZH=0.0$                                                         
+  $SYNTHS XV=0.0,ZV=0.0$                                                         
+ NACA-W-4-0012                                                                   
+  $WGPLNF CHRDR=300.0$                                                           
+  $WGPLNF CHRDTP=0.01$                                                           
+  $WGPLNF SSPN=560.0$                                                            
+  $WGPLNF SSPNE=560.0$                                                           
+  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF TWISTA=1.1$                                                            
+  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF DHDADO=1.2$                                                            
+  $WGPLNF DHDADI=1.2$                                                            
+  $WGPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ NACA-H-4-0012                                                                   
+  $HTPLNF CHRDR=100.0$                                                           
+  $HTPLNF CHRDTP=100.0$                                                          
+  $HTPLNF SSPN=125.0$                                                            
+  $HTPLNF SSPNE=125.0$                                                           
+  $HTPLNF SAVSI=0.0$                                                             
+  $HTPLNF TWISTA=1.1$                                                            
+  $HTPLNF SAVSI=0.0$                                                             
+  $HTPLNF DHDADO=1.3$                                                            
+  $HTPLNF DHDADI=1.3$                                                            
+  $HTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ NACA-V-4-0012                                                                   
+  $VTPLNF CHRDR=100.0$                                                           
+  $VTPLNF CHRDTP=66.66666666666667$                                              
+  $VTPLNF SSPN=125.0$                                                            
+  $VTPLNF SSPNE=125.0$                                                           
+  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF TWISTA=1.1$                                                            
+  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF DHDADO=1.3$                                                            
+  $VTPLNF DHDADI=1.3$                                                            
+  $VTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
+ CASEID TESTCRAFT                                                                
+ DIM M                                                                           
+ DAMP                                                                            
+ BUILD                                                                           
+ NEXT CASE                                                                       
+0 INPUT DIMENSIONS ARE IN M , SCALE FACTOR IS 1.0000
+
+1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM   
+                                                        WING SECTION DEFINITION
+0                                 IDEAL ANGLE OF ATTACK =   0.00000 DEG.
+
+                              ZERO LIFT ANGLE OF ATTACK =   0.00000 DEG.
+
+                                 IDEAL LIFT COEFFICIENT =   0.00000
+
+                  ZERO LIFT PITCHING MOMENT COEFFICIENT =   0.00000
+
+                             MACH ZERO LIFT-CURVE-SLOPE =   0.09596 /DEG.
+
+                                    LEADING EDGE RADIUS =   0.01587 FRACTION CHORD
+
+                              MAXIMUM AIRFOIL THICKNESS =   0.12000 FRACTION CHORD
+
+                                                DELTA-Y =   3.16898 PERCENT CHORD
+
+
+0                                    *** CREST CRITICAL MACH NUMBER EXCEEDED ***
+
+                                    CREST CRITICAL MACH =   0.73019
+
+                                               LOCATION =   0.26314 FRACTION CHORD
+
+                                       LIFT-CURVE-SLOPE =   0.10870 /DEG.
+1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM   
+                                                   HORIZONTAL TAIL SECTION DEFINITION
+0                                 IDEAL ANGLE OF ATTACK =   0.00000 DEG.
+
+                              ZERO LIFT ANGLE OF ATTACK =   0.00000 DEG.
+
+                                 IDEAL LIFT COEFFICIENT =   0.00000
+
+                  ZERO LIFT PITCHING MOMENT COEFFICIENT =   0.00000
+
+                             MACH ZERO LIFT-CURVE-SLOPE =   0.09596 /DEG.
+
+                                    LEADING EDGE RADIUS =   0.01587 FRACTION CHORD
+
+                              MAXIMUM AIRFOIL THICKNESS =   0.12000 FRACTION CHORD
+
+                                                DELTA-Y =   3.16898 PERCENT CHORD
+
+
+0                                    *** CREST CRITICAL MACH NUMBER EXCEEDED ***
+
+                                    CREST CRITICAL MACH =   0.73019
+
+                                               LOCATION =   0.26314 FRACTION CHORD
+
+                                       LIFT-CURVE-SLOPE =   0.10870 /DEG.
+1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM   
+                                                    VERTICAL TAIL SECTION DEFINITION
+0                                 IDEAL ANGLE OF ATTACK =   0.00000 DEG.
+
+                              ZERO LIFT ANGLE OF ATTACK =   0.00000 DEG.
+
+                                 IDEAL LIFT COEFFICIENT =   0.00000
+
+                  ZERO LIFT PITCHING MOMENT COEFFICIENT =   0.00000
+
+                             MACH ZERO LIFT-CURVE-SLOPE =   0.09596 /DEG.
+
+                                    LEADING EDGE RADIUS =   0.01587 FRACTION CHORD
+
+                              MAXIMUM AIRFOIL THICKNESS =   0.12000 FRACTION CHORD
+
+                                                DELTA-Y =   3.16898 PERCENT CHORD
+
+
+0                                    *** CREST CRITICAL MACH NUMBER EXCEEDED ***
+
+                                    CREST CRITICAL MACH =   0.73019
+
+                                               LOCATION =   0.26314 FRACTION CHORD
+
+                                       LIFT-CURVE-SLOPE =   0.10870 /DEG.
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                      WING ALONE CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    0.108    NDM       NDM     NDM      NDM     -0.462    8.520E-02   -3.936E-02      NDM          NDM          NDM 
+    2.0                                                                                                                NDM 
+    3.0                                                                                                                NDM 
+    4.0                                                                                                                NDM 
+    5.0                                                                                                                NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                      WING ALONE CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00    1.213E-01   -7.697E-02       NDM          NDM          NDM          NDM          NDM          NDM          NDM 
+     2.00                                                           NDM          NDM          NDM          NDM          NDM 
+     3.00                                                           NDM          NDM          NDM          NDM          NDM 
+     4.00                                                           NDM          NDM          NDM          NDM          NDM 
+     5.00                                                           NDM          NDM          NDM          NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                    HORIZONTAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    0.012    NDM       NDM     NDM      NDM     -0.150    6.568E-03   -9.870E-04      NDM          NDM          NDM 
+    2.0                                                                                                                NDM 
+    3.0                                                                                                                NDM 
+    4.0                                                                                                                NDM 
+    5.0                                                                                                                NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                    HORIZONTAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00    3.616E-03   -8.009E-03       NDM          NDM          NDM          NDM          NDM          NDM          NDM 
+     2.00                                                           NDM          NDM          NDM          NDM          NDM 
+     3.00                                                           NDM          NDM          NDM          NDM          NDM 
+     4.00                                                           NDM          NDM          NDM          NDM          NDM 
+     5.00                                                           NDM          NDM          NDM          NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                     VERTICAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    NDM      0.000    0.0000   0.000    NDM     ******    0.000E+00    0.000E+00      NDM          NDM          NDM 
+    2.0                                                                                                                NDM 
+    3.0                                                                                                                NDM 
+    4.0                                                                                                                NDM 
+    5.0                                                                                                                NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                     VERTICAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00      NDM          NDM           NDM          NDM          NDM          NDM          NDM          NDM          NDM 
+     2.00                                                           NDM          NDM          NDM          NDM          NDM 
+     3.00                                                           NDM          NDM          NDM          NDM          NDM 
+     4.00                                                           NDM          NDM          NDM          NDM          NDM 
+     5.00                                                           NDM          NDM          NDM          NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                             CONFIGURATION AUXILIARY AND PARTIAL OUTPUT
+                                                     VERTICAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 1.000      10.00     340.22   1.0121E+05     288.085     2.3169E+07         *********    200.000  1120.000     0.000     0.000
+
+
+                                         XCG RELATIVE TO THEORETICAL LEADING EDGE MAC= -21.74
+
+
+                                                       BASIC PLANFORM PROPERTIES
+
+                                    TAPER     ASPECT   QUARTER CHORD             QUARTER CHORD              ZERO LIFT    FRICTION
+                         AREA       RATIO      RATIO       SWEEP        MAC        X(MAC)       Y(MAC)        DRAG     COEFFICIENT
+0      WING
+   TOTAL THEORITICAL
++                     0.1680E+06    0.000    0.7466E+01    -1.000    0.200E+03    0.717E+02    0.187E+03                       
+       TOTAL EXPOSED
++                     0.1680E+06    0.000    0.7466E+01    -1.000    0.200E+03    0.717E+02    0.187E+03    0.108E+00    0.156E-02
+0  HORIZONTAL TAIL
+   TOTAL THEORITICAL
++                     0.2500E+05    1.000    0.2500E+01     0.000    0.100E+03    0.250E+02    0.625E+02                       
+       TOTAL EXPOSED
++                     0.2500E+05    1.000    0.2500E+01     0.000    0.100E+03    0.250E+02    0.625E+02    0.120E-01    0.147E-02
+0   VERTICAL TAIL
+   TOTAL THEORITICAL
++                     0.1038E+05    0.660    0.1506E+01    30.000    0.842E+02    0.586E+02    0.582E+02                       
+       TOTAL EXPOSED
++                     0.1038E+05    0.660    0.1506E+01    30.000    0.842E+02    0.586E+02    0.582E+02      NA           NA  
+0*** NA PRINTED WHEN METHOD NOT APPLICABLE
+1
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                      WING ALONE CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    0.040    0.040   -0.0241   0.041    0.040   -0.586    3.996E-02   -2.408E-02      NDM          NDM       -2.112E-04
+    2.0    0.045    0.082   -0.0482   0.083    0.042   -0.579    4.154E-02                                          -2.152E-04
+    3.0    0.052    0.124   -0.0722   0.126    0.046   -0.573    4.211E-02                                          -2.192E-04
+    4.0    0.063    0.166   -0.0963   0.170    0.052   -0.567    4.252E-02                                          -2.233E-04
+    5.0    0.078    0.209   -0.1204   0.215    0.059   -0.561    4.285E-02                                          -2.274E-04
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                      WING ALONE CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00    4.890E-02   -3.801E-02    -1.295E-02    1.085E-02   -4.301E-03    6.861E-06    7.466E-05      NDM          NDM 
+     2.00                                                                      1.372E-05    1.493E-04      NDM          NDM 
+     3.00                                                                      2.058E-05    2.240E-04      NDM          NDM 
+     4.00                                                                      2.744E-05    2.986E-04      NDM          NDM 
+     5.00                                                                      3.431E-05    3.733E-04      NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                    HORIZONTAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    0.006    0.005   -0.0014   0.005    0.006   -0.252    5.305E-03   -1.379E-03   -1.372E-04    3.904E-07   -3.472E-05
+    2.0    0.006    0.011   -0.0028   0.011    0.006   -0.249    5.548E-03                                          -3.472E-05
+    3.0    0.007    0.016   -0.0041   0.017    0.006   -0.246    5.638E-03                                          -3.472E-05
+    4.0    0.008    0.022   -0.0055   0.023    0.006   -0.244    5.705E-03                                          -3.472E-05
+    5.0    0.009    0.028   -0.0069   0.029    0.006   -0.242    5.761E-03                                          -3.472E-05
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                    HORIZONTAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00   -2.141E+00    5.563E-01    -9.443E-04   -2.935E-05   -4.235E-06    1.230E-05   -6.300E-07      NDM          NDM 
+     2.00                                                                      2.460E-05   -1.260E-06      NDM          NDM 
+     3.00                                                                      3.690E-05   -1.890E-06      NDM          NDM 
+     4.00                                                                      4.920E-05   -2.520E-06      NDM          NDM 
+     5.00                                                                      6.150E-05   -3.150E-06      NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                         CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
+                                                     VERTICAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
+0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
+0
+    1.0    0.002    0.000    0.0000   0.000    0.002   ******    0.000E+00    0.000E+00   -NaN         NaN          -NaN      
+    2.0                                                                                                             -NaN      
+    3.0                                                                                                             -NaN      
+    4.0                                                                                                             -NaN      
+    5.0                                                                                                             -NaN      
+1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
+                                                         DYNAMIC DERIVATIVES
+                                                     VERTICAL TAIL CONFIGURATION
+                                                             TESTCRAFT
+ 
+ -----------------------  FLIGHT CONDITIONS  ------------------------           --------------  REFERENCE DIMENSIONS  ------------
+  MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
+ NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
+              M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
+0 2.000      10.00     680.44   1.0121E+05     288.085     4.6338E+07         *********    200.000  1120.000     0.000     0.000
+                                                    DYNAMIC DERIVATIVES (PER DEGREE)
+0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
+0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
+0
+     1.00      NDM          NDM           NDM          NDM          NDM          NDM          NDM          NDM          NDM 
+     2.00                                                           NDM          NDM          NDM          NDM          NDM 
+     3.00                                                           NDM          NDM          NDM          NDM          NDM 
+     4.00                                                           NDM          NDM          NDM          NDM          NDM 
+     5.00                                                           NDM          NDM          NDM          NDM          NDM 
+0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
+1          THE FOLLOWING IS A LIST OF ALL INPUT CARDS FOR THIS CASE.
+0
+1 END OF JOB.

@@ -1,0 +1,8 @@
+center_of_gravity="center_of_gravity"
+mass_of_battery_or_fuel="mass_of_battery_or_fuel"
+moments_of_inertia="moments_of_inertia"
+mass_of_payload="mass_of_payload"
+mass_of_wing="mass_of_wing"
+mass_of_fuselage="mass_of_fuselage"
+maximum_takeoff_weight="maximum_takeoff_weight"
+mass_of_engine_or_motor="mass_of_engine_or_motor"
