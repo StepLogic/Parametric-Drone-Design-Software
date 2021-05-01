@@ -5,7 +5,7 @@ by Gyaase Ohemeng
 ## Overview
 This is a Python project  for parametric aircraft design that employs the use various libraries to assist in the conceptual design of fixed-wing  aircraft and design validation
 
-It is simply a collection of various libraries and work arounds to enable quick 3D modelling of aircraft and estimating various parameters for design validation** 
+It is simply a collection of various libraries and "work arounds" to enable quick 3D modelling of aircraft and estimating various parameters for design validation
 It uses:
 * [Tigl](https://dlr-sc.github.io/tigl/) for geometry generation
 * Datcom  for stability and control derivaives estimation(Very Problemtic) 
