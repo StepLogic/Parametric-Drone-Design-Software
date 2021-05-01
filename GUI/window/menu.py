@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QThreadPool
 from PyQt5.QtWidgets import QMessageBox
 
+from GUI.dialogs.aerodynamics_dialogs.report_dialogs.plotter_dialog import plotter_dialog
+from GUI.dialogs.aerodynamics_dialogs.report_dialogs.table_dialog import table_dialog
 from GUI.dialogs.aerodynamics_dialogs.settings_dialogs import settings_dialog
 from GUI.dialogs.geometry_dialogs.boom_dialog_.boom_dialog import boom_dialog
 from GUI.dialogs.geometry_dialogs.control_surface.control_surface_dialogs import control_surface_dialog
@@ -10,6 +12,7 @@ from GUI.dialogs.propulsion_dialogs.propeller.propeller_dialog import propeller_
 from GUI.dialogs.propulsion_dialogs.propulsion_dialog import propulsion_dialog
 from GUI.dialogs.propulsion_dialogs.shroud.shroud_dialog import shroud_dialog
 from GUI.dialogs.structure_dialogs.structures_dialog import structures_dialog
+from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThread
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
 from Structures.trimesh.trimeshWrapper import get_functions
 from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_surface_3D_, update_boom_3D_, build_cs, \
@@ -134,13 +137,26 @@ def setup_ui(workflow):
         workflow.add_menu("Aerodynamics")
 
         def sandbox():
-            execute_command(command=sandbox_)
+            pool = QThreadPool.globalInstance()
+            runnable = AerodynamicThread(workflow,command=sandbox_)
+            pool.start(runnable)
 
         def datcom():
-            execute_command(command=datcom_)
+            pool = QThreadPool.globalInstance()
+            runnable = AerodynamicThread(workflow, command=datcom_)
+            pool.start(runnable)
 
         def multisandbox():
-            execute_command(command=start_multisandbox)
+            pool = QThreadPool.globalInstance()
+            runnable = AerodynamicThread(workflow, command=start_multisandbox)
+            pool.start(runnable)
+        def plot_graphs():
+            dialog = plotter_dialog()
+            results = dialog.exec_()
+        def show_tables():
+            dialog = table_dialog()
+            results = dialog.exec_()
+
 
         def settings():
             dialog = settings_dialog()
@@ -151,6 +167,8 @@ def setup_ui(workflow):
         workflow.add_function_to_menu("Aerodynamics", sandbox)
         workflow.add_function_to_menu("Aerodynamics", datcom)
         workflow.add_function_to_menu("Aerodynamics", multisandbox)
+        workflow.add_function_to_menu("Aerodynamics", plot_graphs)
+        workflow.add_function_to_menu("Aerodynamics", show_tables)
         workflow.add_function_to_menu("Aerodynamics", settings)
 
     def design_overview():

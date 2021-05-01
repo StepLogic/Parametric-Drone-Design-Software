@@ -25,7 +25,7 @@ class work_flow_monitor(QApplication):
     def execute_design_window(self):
         self.viewer, self.start_display, \
         self.add_menu, self.add_function_to_menu, self.add_sub_menu_to_menu, \
-        self.add_function_to_sub_menu, self.add_text_to_console,self.close_window = init_display(
+        self.add_function_to_sub_menu, self.add_text_to_console,self.update_progress,self.close_window = init_display(
             "qt-pyqt5", app=self)
         setup_ui(self)
 

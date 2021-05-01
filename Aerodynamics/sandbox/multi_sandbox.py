@@ -3,8 +3,8 @@ from math import radians
 from Aerodynamics.sandbox.functions_sandbox import f_q, f_alpha
 from Utils.data_objects.aerodynamics_placeholders import *
 from Utils.database import database
-from Utils.database.aerodyanmics.sandbox_database import get_free_stream_velocity_range
-from Utils.database.aerodyanmics.settings_database import get_aoa_range
+from Utils.database.aerodynamics.sandbox_database import get_free_stream_velocity_range
+from Utils.database.aerodynamics.settings_database import get_aoa_range
 
 
 def run_sandbox_simulation():
@@ -17,7 +17,7 @@ def run_sandbox_simulation():
     cyp_ = []
 
     col_q_ = []
-    cd_q = []
+    cd_q_ = []
     cm_q_ = []
 
     cnr = []
@@ -71,8 +71,9 @@ def run_sandbox_simulation():
         Cl: {cl_beta: clb, cl_p: clp, cl_r: clr},
         Cm: {cm_alpha: cm_a, cm_q:cm_q_},
         CL: {col_alpha: col_a, col_q: col_q_},
-        CD: {cd_alpha: cd_, cd_q: cd_},
+        CD: {cd_alpha: cd_, cd_q: cd_q},
         CY: {cy_beta: cyb, cy_p: cyp_}}
-    database.write_datcom_stability_specification(stability_derivatives)
+
+    database.write_stability_specification(stability_derivatives)
 
     return 1

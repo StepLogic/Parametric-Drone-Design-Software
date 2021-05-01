@@ -2,7 +2,7 @@ from aerosandbox import Fuselage, FuselageXSec, np
 
 from Utils.data_objects.lifting_surface_placeholder import fin
 from Utils.data_objects.placeholder import conventional_design, unconventional_design
-from Utils.database.aerodyanmics.sandbox_database import get_parameters_for_conventional, \
+from Utils.database.aerodynamics.sandbox_database import get_parameters_for_conventional, \
     get_parameters_for_unconventional, get_parameters_for_boom, get_parameters_for_fuselage
 from Utils.database.geometry.boom_database import get_boom_object_data, read_boom_objects
 from Utils.database.geometry.lifting_database import get_surface_object_data, read_lifting_surface_objects, tailplane

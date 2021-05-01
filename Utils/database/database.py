@@ -6,7 +6,7 @@ resource_dir_cpacs = resource_path(absolute_path + "/resources/cpacs")
 work_file_path = resource_path(absolute_path + "/resources/json/workfile.json")
 aircraft_specifications_filepath = resource_path(absolute_path + "/resources/json/specification.json")
 aerodynamic_specification_filepath = resource_path(absolute_path + "/resources/json/aerodynamic_specification.json")
-vlm_stability_specification_filepath = resource_path(absolute_path + "/resources/json/stability_specification.json")
+stability_specification_filepath = resource_path(absolute_path + "/resources/json/stability_specification.json")
 structure_specification_filepath = absolute_path + "/resources/json/structure_specification.json"
 propulsion_specification_filepath = absolute_path + "/resources/json/propulsion_specification.json"
 performance_specification_filepath = absolute_path + "/resources/json/performance_specification.json"
@@ -92,11 +92,11 @@ def write_aerodynamic_results(Values={}):
 
 
 def read_control_specifications():
-    return readFile(vlm_stability_specification_filepath)
+    return readFile(stability_specification_filepath)
 
 
 def write_control_specifications(values={}):
-    write(vlm_stability_specification_filepath, values)
+    write(stability_specification_filepath, values)
 
 
 def update_control_specifications(key="", value={}):
@@ -164,11 +164,11 @@ def update_aircraft_specifications(key="", value={}):
 
 
 def read_stability_specifications():
-    return readFile(vlm_stability_specification_filepath)
+    return readFile(stability_specification_filepath)
 
 
 def write_stability_specification(values={}):
-    write(vlm_stability_specification_filepath, values)
+    write(stability_specification_filepath, values)
 
 
 def update_stability_specifications(key="", value={}):

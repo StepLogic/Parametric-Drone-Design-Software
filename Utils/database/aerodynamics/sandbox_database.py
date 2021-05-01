@@ -5,7 +5,7 @@ from scipy.interpolate import interp1d
 from Utils.data_objects.boom_placeholders import *
 from Utils.data_objects.lifting_surface_placeholder import fin, tailplane
 from Utils.database import database
-from Utils.database.aerodyanmics.settings_database import get_mach_number_range
+from Utils.database.aerodynamics.settings_database import get_mach_number_range
 from Utils.database.geometry.lifting_database import read_surface_data
 
 

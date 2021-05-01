@@ -9,20 +9,44 @@ def get_aoa_range():
 def set_aoa_range(max=0, min=0):
     data = database.read_work_file()
     try:
-        data[aoa_range] = [(x / 10) for x in range(int(min * 10), int(max * 10 + 10), 10)]
+        delta=max/10
+        array=[]
+        counter=min
+        while counter< max or counter==max:
+            array.append(round(counter,2))
+            counter+=delta
+        data[aoa_range] = array
         database.write_work_file(data)
     except Exception as e:
-        data.update({aoa_range: [(x / 10) for x in range(int(min * 10), int(max * 10 + 10), 10)]})
+        delta = max/ 10
+        array = []
+        counter = min
+        while counter < max or counter == max:
+            array.append(round(counter,2))
+            counter += delta
+        data.update({aoa_range: array})
         database.write_work_file(data)
 
 
 def set_mach_number_range(max=0, min=0):
     data = database.read_work_file()
     try:
-        data[mach_number_range] = [(x / 100) for x in range(int(min * 100), int(max * 100 + 100), 100)]
+        delta = max/ 10
+        array = []
+        counter = min
+        while counter < max or counter == max:
+            array.append(round(counter,2))
+            counter += delta
+        data[mach_number_range] = array
         database.write_work_file(data)
     except Exception as e:
-        data.update({mach_number_range: [(x / 100) for x in range(int(min * 100), int(max * 100 + 100), 100)]})
+        delta = max/ 5
+        array = []
+        counter = min
+        while counter < max or counter == max:
+            array.append(round(counter,2))
+            counter += delta
+        data.update({mach_number_range: array})
         database.write_work_file(data)
 
 

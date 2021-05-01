@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QVBoxLayout, QWidget, QLabel
 
 from GUI.window.cad.display_engine import display_engine
+from Utils.data_objects.workflow_placeholders import done_, instructions
 
 log = logging.getLogger(__name__)
 
@@ -50,8 +51,9 @@ def init_display(backend_str=None, app=None):
                 self.canva = display_engine()
                 self.setWindowTitle("Aerosoft")
                 self.mainvbox_ = QVBoxLayout()
-                self.console = QLabel("Welcome")
+                self.console = QLabel(instructions)
                 self.console.setFixedHeight(20)
+
                 self.mainvbox_.addWidget(self.console)
                 self.mainvbox_.addWidget(self.canva)
 
@@ -67,8 +69,15 @@ def init_display(backend_str=None, app=None):
                 # place the window in the center of the screen, at half the
                 # screen size
                 self.centerOnScreen()
+
             def add_text_to_console(self, message):
                 self.console.setText(message)
+
+            def update_progress(self, value):
+                if value== done_:
+                    self.menu_bar.setEnabled(True)
+                else:
+                    self.menu_bar.setDisabled(True)
 
             def centerOnScreen(self):
                 '''Centers the window on the screen.'''
@@ -80,6 +89,7 @@ def init_display(backend_str=None, app=None):
             def add_menu(self, menu_name):
                 _menu = self.menu_bar.addMenu("&" + menu_name)
                 self._menus[menu_name] = _menu
+
             def add_sub_menu_to_menu(self, sub_menu_name, menu_name):
                 _menu = self._menus[menu_name]
                 sub_menu = _menu.addMenu(sub_menu_name)
@@ -124,6 +134,9 @@ def init_display(backend_str=None, app=None):
         global viewer
         viewer = win.canva
 
+        def update_progress(*args, **kwargs):
+            win.update_progress(*args, **kwargs)
+
         def add_text_to_console(*args, **kwargs):
             win.add_text_to_console(*args, **kwargs)
 
@@ -145,4 +158,4 @@ def init_display(backend_str=None, app=None):
         def close():
             win.close()
 
-        return viewer, start_display, add_menu, add_function_to_menu, add_sub_menu_to_menu, add_function_to_sub_menu, add_text_to_console, close
+        return viewer, start_display, add_menu, add_function_to_menu, add_sub_menu_to_menu, add_function_to_sub_menu, add_text_to_console,update_progress, close

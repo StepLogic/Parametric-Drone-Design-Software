@@ -9,4 +9,8 @@ build_landing_gear="build_landing_gear"
 start_multisandbox="start_multisandbox"
 build_shroud="build_shroud"
 build_propeller="build_propeller"
+instructions="Start!"
+build_message="Wait"
+done_=1
+start_=0
 

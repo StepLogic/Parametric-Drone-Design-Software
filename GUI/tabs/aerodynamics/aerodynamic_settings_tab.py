@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 
-from Utils.database.aerodyanmics.settings_database import set_mach_number_range, set_aoa_range, set_altitude, \
+from Utils.database.aerodynamics.settings_database import set_mach_number_range, set_aoa_range, set_altitude, \
     read_settings
 
 

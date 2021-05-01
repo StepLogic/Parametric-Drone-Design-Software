@@ -3,10 +3,10 @@ import numpy as np
 from Utils.data_objects.lifting_surface_placeholder import wing, fin
 from Utils.data_objects.placeholder import conventional_design, unconventional_design
 from Utils.database import database
-from Utils.database.aerodyanmics.datcom_database import get_parameters_from_conventional_boom, \
+from Utils.database.aerodynamics.datcom_database import get_parameters_from_conventional_boom, \
     get_parameters_from_conventional_wing, \
     get_parameters_from_sections_lifting_surface
-from Utils.database.aerodyanmics.settings_database import get_mach_number_range, get_aoa_range, get_altitude
+from Utils.database.aerodynamics.settings_database import get_mach_number_range, get_aoa_range, get_altitude
 from Utils.database.geometry.boom_database import read_boom_objects, get_boom_object_data
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data
 
@@ -77,7 +77,7 @@ def split_text(type="W,G"):
     return val[0] + val[1]
 
 
-def set_flight_conditions(mach_numbers=None, altitude=10, angle_of_attack=None):
+def set_flight_conditions(mach_numbers=None, altitude=401, angle_of_attack=None):
     if angle_of_attack is None:
         angle_of_attack = []
     if mach_numbers is None:
