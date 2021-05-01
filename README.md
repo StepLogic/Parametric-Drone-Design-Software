@@ -16,19 +16,19 @@ This is merely a means to help imporve my skills and understanding aircraft desi
 
 
 ![Design Image](images/5.png)
-* Sample Geometry Designed*
+*Sample Geometry Designed*
 
 
 ![Design Image](images/2.png)
-* Sample Geometry Designed*
+*Sample Geometry Designed*
 
 ## Getting Started
 
 ### Installation and Tutorials
 
 * First download the code from this repository or clone it
-* Then install all dependencies with `pip install .`
-* Make sure you are running on Python 3.7.*
+* Then install all dependencies with `pip install`
+* Make sure you are running on *Python 3.7.*
 
 
 ### Usage
