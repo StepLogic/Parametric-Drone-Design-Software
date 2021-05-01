@@ -6,30 +6,29 @@ by [Gyaase Ohemeng] (<pds [at]  KNUST [dot] edu>)
 This is a Python project  for parametric aircraft design that employs the use various libraries to assit int the conceptual design of fixed-wing rc aircraft and design validation
 
 It is simply a collection of various libraries and work arounds to enable quick 3D modelling of aircraft and estimating various parameters for design validation** 
-
 It uses:
+* [Tigl](https://dlr-sc.github.io/tigl/) for geometry generation
+* Datcom  for stability and control derivaives estimation(Very Problemtic) 
+* [Trimesh] (https://github.com/mikedh/trimesh) to estimate momnents of inertia and center of mass
+* [Aerosandbox](https://github.com/peterdsharpe/AeroSandbox) for determining aerodynamic coefficients,and alos for stability and control deriavtives
 
-*[Tigl](https://dlr-sc.github.io/tigl/) for geometry generation
-*Datcom  for stability and control derivaives estimation(Very Problemtic) 
-*[Trimesh] (https://github.com/mikedh/trimesh) to estimate momnents of inertia and center of mass
-*[Aerosandbox](https://github.com/peterdsharpe/AeroSandbox) for determining aerodynamic coefficients,and alos for stability and control deriavtives
 This is merely a means to help imporve my skills and understanding aircraft design.I have by ,no means, figured anything out :sweat_smile: **Hop on if you want to help or you have suggestios as to how to make is better cool**.
 
 
-![Design Image](/images/5.jpg)
-*Sample Geometry Designed*
+![Design Image](images/5.png)
+* Sample Geometry Designed*
 
 
-![Design Image](/images/2.jpg)
-*Sample Geometry Designed*
+![Design Image](images/2.png)
+* Sample Geometry Designed*
 
 ## Getting Started
 
 ### Installation and Tutorials
 
-*First download the code from this repository or clone it
-*Then install all dependencies with `pip install .`
-*Make sure you are running on Python 3.7.*
+* First download the code from this repository or clone it
+* Then install all dependencies with `pip install .`
+* Make sure you are running on Python 3.7.*
 
 
 ### Usage
@@ -37,15 +36,15 @@ The "main" script is located in "run-point".
 Please email me your "specification.json" file if you manage to come up with cool designs.:smile:
 ####Note
 Design is split into two categories;
-*Conventional for simple designs
-*Unconventional for complex designs
+* Conventional for simple designs
+* Unconventional for complex designs
 
 ## Future Goals
-*I hope to fully Comment the code with detailed descriptions :sweat_smile:
-*I would like to possible get a better library  or create one to increase the fidelity of the simulations(Aerodyamic simluations)
-*Add drag and Drop funtionality
-*Posssible come up with a better design for the UI :sweat_smile:
-*If Have any features in mind ,contact me:smiley:
+* I hope to fully Comment the code with detailed descriptions :sweat_smile:
+* I would like to possible get a better library  or create one to increase the fidelity of the simulations(Aerodyamic simluations)
+* Add drag and Drop funtionality
+* Posssible come up with a better design for the UI :sweat_smile:
+* If Have any features in mind ,contact me:smiley:
 
 
 ## Bugs
