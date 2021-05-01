@@ -16,11 +16,11 @@ This is merely a means to help imporve my skills and understanding aircraft desi
 
 
 ![Design Image](images/5.png)
-*Sample Geometry Designed*
+
 
 
 ![Design Image](images/2.png)
-*Sample Geometry Designed*
+
 
 ## Getting Started
 
