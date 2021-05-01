@@ -1,5 +1,5 @@
 # [Parametric Drone Design Software] :airplane:
-by [Gyaase Ohemeng] (<pds [at]  KNUST [dot] edu>)
+by Gyaase Ohemeng 
 
 
 ## Overview
@@ -9,7 +9,7 @@ It is simply a collection of various libraries and work arounds to enable quick 
 It uses:
 * [Tigl](https://dlr-sc.github.io/tigl/) for geometry generation
 * Datcom  for stability and control derivaives estimation(Very Problemtic) 
-* [Trimesh] (https://github.com/mikedh/trimesh) to estimate momnents of inertia and center of mass
+* [Trimesh](https://github.com/mikedh/trimesh) to estimate momnents of inertia and center of mass
 * [Aerosandbox](https://github.com/peterdsharpe/AeroSandbox) for determining aerodynamic coefficients,and alos for stability and control deriavtives
 
 This is merely a means to help imporve my skills and understanding aircraft design.I have by ,no means, figured anything out :sweat_smile: **Hop on if you want to help or you have suggestios as to how to make is better cool**.
