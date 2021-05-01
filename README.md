@@ -44,7 +44,7 @@ Design is split into two categories;
 * I would like to possible get a better library  or create one to increase the fidelity of the simulations(Aerodyamic simluations)
 * Add drag and Drop funtionality
 * Posssible come up with a better design for the UI :sweat_smile:
-* If Have any features in mind ,contact me:smiley:
+* If you have any features in mind ,contact me:smiley:
 
 
 ## Bugs
