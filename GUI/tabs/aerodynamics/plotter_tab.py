@@ -23,15 +23,18 @@ class plotter_tab(QWidget):
         self.plot(type_,major_key,name)
 
     def plot(self, type_="",major_key="",name=""):
-        alpha_, velocity_, y =  read_datcom_table_data(type_, major_key, name) if type_ == datcom_data else read_sandbox_table_data()
+        alpha_, velocity_, y =  read_datcom_table_data(type_, major_key, name) if type_ == datcom_data else read_sandbox_table_data(type_, major_key, name)
         self.graphWidget.setLabel('bottom', alpha, units='degrees')
         self.graphWidget.setLabel('left',name)
         self.graphWidget.addLegend()
         for l in velocity_:
 
-            self.graphWidget.plot(alpha_[:len(y[velocity_.index(l)])], y[velocity_.index(l)], name=f"{l}m/s",
-                                  pen=pg.mkPen(color=(random.randint(0, 255),
-                                                      random.randint(0, 255),
-                                                      random.randint(0, 255))))
+            try:
+                self.graphWidget.plot(alpha_[:len(y[velocity_.index(l)])], y[velocity_.index(l)], name=f"{l}m/s",
+                                      pen=pg.mkPen(color=(random.randint(0, 255),
+                                                          random.randint(0, 255),
+                                                          random.randint(0, 255))))
+            except:
+                pass
 
 

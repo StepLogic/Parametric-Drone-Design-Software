@@ -12,7 +12,7 @@ class table_tab(QWidget):
         layout = QFormLayout(self)
         self.setWindowTitle(name)
         self.tableWidget = QLabel(
-            get_pandas_datcom_table(type_, major_key, name) if type_ == datcom_data else get_pandas_sandbox_table())
+            get_pandas_datcom_table(type_, major_key, name) if type_ == datcom_data else get_pandas_sandbox_table(type_, major_key, name))
         layout.addWidget(self.tableWidget)
 
         self.toolbox_ = QHBoxLayout()
