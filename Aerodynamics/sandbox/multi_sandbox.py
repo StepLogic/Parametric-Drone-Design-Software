@@ -6,7 +6,7 @@ from Utils.database import database
 from Utils.database.aerodynamics.sandbox_database import get_free_stream_velocity_range
 from Utils.database.aerodynamics.settings_database import get_aoa_range
 
-
+#TODO Remove multiple mach number support
 def run_sandbox_simulation():
     cnb = []
     clb = []

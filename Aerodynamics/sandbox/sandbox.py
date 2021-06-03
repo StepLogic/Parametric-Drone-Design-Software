@@ -5,6 +5,7 @@ from aerosandbox_legacy_v0 import vlm3
 
 from Aerodynamics.sandbox.input import create_aircraft
 
+#TODO Remove multiple mach number support
 
 def run_analysis():
     airplane = create_aircraft()

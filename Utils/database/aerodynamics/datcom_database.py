@@ -5,6 +5,8 @@ from Utils.data_objects.lifting_surface_placeholder import *
 from Utils.database import database
 
 
+divider=100
+
 def get_area(width=0, height=0):
     return width * height
 
@@ -63,11 +65,11 @@ def get_parameters_from_unconventional_boom(boom_name=""):
     section_3_width_ = values.get(section_3_width)
     section_3_height_ = values.get(section_3_height)
     section_3_position_z_ = values.get(section_3_position_z)
-    s = [get_area(nose_width_,nose_height_),get_area(section_1_width_,section_1_height_),get_area(section_2_width_,section_2_height_)
-         ,get_area(section_3_width_,section_3_height_),get_area(tail_width_,tail_height_)]
-    x = [nose_length_, sum([nose_length_, section_1_length_, section_2_length_]),
+    s = list(np.array([get_area(nose_width_,nose_height_),get_area(section_1_width_,section_1_height_),get_area(section_2_width_,section_2_height_)
+         ,get_area(section_3_width_,section_3_height_),get_area(tail_width_,tail_height_)])/divider)
+    x = list(np.array([nose_length_, sum([nose_length_, section_1_length_, section_2_length_]),
          sum([nose_length_, section_1_length_, section_2_length_, section_3_length_]),
-         sum([nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_])]
+         sum([nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_])])/divider)
     return s,x
 
 
@@ -103,12 +105,11 @@ def get_parameters_from_conventional_boom(boom_name=""):
     section_3_length_ = values.get(section_3_length)
     section_3_radius_ = values.get(section_3_width)
     section_3_position_z_ = values.get(section_3_position_z)
-    radii = [nose_radius_, section_1_radius_, section_2_radius_, section_3_radius_, tail_radius_]
-    x = [nose_length_, sum([nose_length_, section_1_length_, section_2_length_]),
+    radii = list(np.array([nose_radius_, section_1_radius_, section_2_radius_, section_3_radius_, tail_radius_])/divider)
+    x = list(np.array([nose_length_, sum([nose_length_, section_1_length_, section_2_length_]),
          sum([nose_length_, section_1_length_, section_2_length_, section_3_length_]),
-         sum([nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_])]
-    z = list(np.array(
-        [nose_position_z_, section_1_position_z_, section_2_position_z_, section_3_position_z_, tail_position_z_]) / 2)
+         sum([nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_])])/divider)
+    z = list(np.array([nose_position_z_, section_1_position_z_, section_2_position_z_, section_3_position_z_, tail_position_z_]) / 2000)
     return radii, x, z
 
 
@@ -122,7 +123,7 @@ def get_parameters_from_conventional_wing(surface_name=""):
     taper_ratio_ = values[taper_ratio]
     profile_ = values.get(profile)
     tip_chord = root_chord / taper_ratio_
-    return span_, tip_chord, root_chord, dihedral_, sweep_
+    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_
 
 
 def get_parameters_from_sections_lifting_surface(surface_name=""):
@@ -149,4 +150,4 @@ def get_parameters_from_sections_lifting_surface(surface_name=""):
     span_ = max(y_list)
     tip_chord = min(chords)
     root_chord = max(chords)
-    return span_, tip_chord, root_chord, dihedral_, sweep_
+    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_

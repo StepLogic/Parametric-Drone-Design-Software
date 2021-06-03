@@ -7,7 +7,7 @@ from Utils.data_objects.lifting_surface_placeholder import fin, tailplane
 from Utils.database import database
 from Utils.database.aerodynamics.settings_database import get_mach_number_range
 from Utils.database.geometry.lifting_database import read_surface_data
-
+divider=100
 
 def get_parameters_for_fuselage(fuselage_name=''):
     values = database.read_aircraft_specifications()[boom][fuselage_name]
@@ -47,17 +47,18 @@ def get_parameters_for_fuselage(fuselage_name=''):
     section_3_length_ = values.get(section_3_length)
     section_3_radius_ = values.get(section_3_width)
     section_3_position_z_ = values.get(section_3_position_z)
-    radii = [0, nose_radius_, section_1_radius_, section_2_radius_, section_3_radius_, tail_radius_, tip_radius_]
-    z = [nose_tip_position_, nose_position_z_, section_1_position_z_, section_2_position_z_, section_3_position_z_,
+    radii =list(np.array([0, nose_radius_, section_1_radius_, section_2_radius_, section_3_radius_, tail_radius_, tip_radius_])/divider)
+    z = list(np.array([nose_tip_position_, nose_position_z_, section_1_position_z_, section_2_position_z_, section_3_position_z_,
          tail_position_z_,
-         tail_tip_position_]
-    length_ = [0, nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_ / 2, tail_length_]
+         tail_tip_position_])/divider)
+    length_ = list(np.array([0, nose_length_, section_1_length_, section_2_length_, section_3_length_, tail_length_ / 2, tail_length_])/divider)
     temp = []
     x = []
     for x_ in length_:
         temp.append(x_)
         x.append(sum(temp))
     xz_mirror_ = False
+    x=list(np.array(x)/divider)
     return radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_
 
 
@@ -137,7 +138,7 @@ def get_parameters_for_boom(boom_name=""):
     z_f = interp1d(x, z, kind="cubic")
     z__ = z_f(x__)
     print("radii__", radii__, "x__", x__, "z__", z__)
-    return radii__, x__, z__, root_position_x_, root_position_y_, root_position_z_, xz_mirror_
+    return list(np.array(radii__)/divider), list(np.array(x__)/divider),list(np.array(z__)/divider), root_position_x_/divider, root_position_y_/divider, root_position_z_/divider, xz_mirror_
 
 
 def get_parameters_for_conventional(surface_name="", part=""):
@@ -199,7 +200,7 @@ def get_parameters_for_conventional(surface_name="", part=""):
         a.interpolate(method="polynomial", order=2)
         chords.extend(a.to_list())
         chords.reverse()
-    return x_1, y, z_1, chords, twist_, profile_, root_location_x, root_location_y, root_location_z
+    return list(np.array(x_1)/divider), list(np.array(y)/divider), list(np.array(z_1)/divider),list(np.array(chords)/divider), twist_, profile_,root_location_x/divider,root_location_y/divider, root_location_z/divider
 
 
 def get_parameters_for_unconventional(surface_name="", part=""):
@@ -245,7 +246,7 @@ def get_parameters_for_unconventional(surface_name="", part=""):
         y.append(point[1])
         z.append(point[2])
 
-    return x, y, z, chords__, twist_angle__, profile_, root_le_pos_x_, root_le_pos_y_, root_le_pos_z_, xz_mirror_
+    return list(np.array(x)/divider),list(np.array(y)/divider),list(np.array(z)/divider),list(np.array(chords)/divider), twist_angle__, profile_, root_le_pos_x_/divider, root_le_pos_y_/divider, root_le_pos_z_/divider, xz_mirror_
 
 
 def get_free_stream_velocity_range():

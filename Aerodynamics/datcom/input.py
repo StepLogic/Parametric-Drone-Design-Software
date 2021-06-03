@@ -11,6 +11,8 @@ from Utils.database.geometry.boom_database import read_boom_objects, get_boom_ob
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data
 
 
+#TODO Remove multiple mach number support
+
 def build_datcom_input():
     boom_list = read_boom_objects()
     surface_list = read_lifting_surface_objects()
