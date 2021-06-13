@@ -5,7 +5,7 @@ from scipy.interpolate import interp1d
 from Utils.data_objects.boom_placeholders import *
 from Utils.data_objects.lifting_surface_placeholder import fin, tailplane
 from Utils.database import database
-from Utils.database.aerodynamics.settings_database import get_mach_number_range
+from Utils.database.aerodynamics.settings_database import get_mach_number
 from Utils.database.geometry.lifting_database import read_surface_data
 divider=100
 
@@ -204,7 +204,7 @@ def get_parameters_for_conventional(surface_name="", part=""):
 
 
 def get_parameters_for_unconventional(surface_name="", part=""):
-    surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_ \
+    airfoil,surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_ \
         , rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
     root_le_pos_y_, root_le_pos_z_, section_1_x_, section_2_x_, \
     section_3_x_, section_4_x_, section_5_x_, section_1_y_, \
@@ -250,5 +250,5 @@ def get_parameters_for_unconventional(surface_name="", part=""):
 
 
 def get_free_stream_velocity_range():
-    value = np.array(get_mach_number_range()) * (341)
-    return list(value)
+    value = np.array(get_mach_number()) * 341
+    return [value]

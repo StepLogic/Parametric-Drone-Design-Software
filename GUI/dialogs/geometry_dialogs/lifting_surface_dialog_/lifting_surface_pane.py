@@ -5,31 +5,31 @@ from scipy.interpolate import interpolate
 from GUI.tabs.geometry_tabs_.unconventional_geometry.lifiting_surface_tabs.lifting_surface_tab import \
     lifting_surface_tab
 from Utils.data_objects.lifting_surface_placeholder import *
+from Utils.data_objects.placeholder import surface_curve_type
 
 
 class lifting_surface_pane(QWidget):
     def __init__(self, name="", surface_type_="",design_type_=""):
         super().__init__()
         self.graphWidget = pg.PlotWidget()
-        self.tab_ = lifting_surface_tab(name=name, surface_type_=surface_type_,design_type_=design_type_)
+        plot_button = QPushButton("Plot")
+        plot_button.clicked.connect(self.plot)
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(self.graphWidget)
+        main_layout.addWidget(plot_button)
+
+        temp = QWidget()
+        temp.setLayout(main_layout)
+
+        self.tab_ = lifting_surface_tab(name=name, surface_type_=surface_type_,design_type_=design_type_,lifting_surface_pane=temp)
         self.name_=name
         section_widget = QWidget()
         section_widget.setLayout(self.tab_.create_widget())
 
-        plot_button = QPushButton("Plot")
-        plot_button.clicked.connect(self.plot)
-
-        save_button = QPushButton("Save")
-        save_button.clicked.connect(self.save)
-
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(section_widget)
-        main_layout.addWidget(self.graphWidget)
-        final_layout=QVBoxLayout()
-        temp=QWidget()
+        final_layout = QVBoxLayout()
         temp.setLayout(main_layout)
-        final_layout.addWidget(temp)
-        final_layout.addWidget(plot_button)
+        final_layout.addWidget(section_widget)
+
 
         self.setLayout(final_layout)
 
@@ -49,9 +49,9 @@ class lifting_surface_pane(QWidget):
                 x_upper.append(x + (length / 2))
                 x_lower.append(x - (length / 2))
                 x_mid.append(x)
-            x_mid, y = self.interpolate_coordinates(x_mid, y_list)
-            x_upper, y = self.interpolate_coordinates(x_upper, y_list)
-            x_lower, y = self.interpolate_coordinates(x_lower, y_list)
+            x_mid, y = self.interpolate_coordinates(x_mid, y_list,parameters[surface_curve_type])
+            x_upper, y = self.interpolate_coordinates(x_upper, y_list,parameters[surface_curve_type])
+            x_lower, y = self.interpolate_coordinates(x_lower, y_list,parameters[surface_curve_type])
             pen = pg.mkPen(color=(255, 0, 0))
             self.graphWidget.clear()
             self.graphWidget.showGrid(x=True, y=True)
@@ -63,10 +63,13 @@ class lifting_surface_pane(QWidget):
 
 
 
-    def interpolate_coordinates(self, x_list, y_list):
+    def interpolate_coordinates(self, x_list, y_list,curve_extrusion):
         y_temp = []
         x_temp = []
-        interp_func = interpolate.interp1d(y_list, x_list, kind="cubic", fill_value="extrapolate")
+        if curve_extrusion:
+          interp_func = interpolate.interp1d(y_list, x_list, kind="cubic", fill_value="extrapolate")
+        else:
+          interp_func = interpolate.interp1d(y_list, x_list, kind="linear", fill_value="extrapolate")
         delta = 0.01
         for x, y in zip(x_list, y_list):
             index = y

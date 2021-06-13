@@ -79,66 +79,43 @@
                   <element uID="Wing_section1_element1">
                     <name>Wing_section1_element1</name>
                     <airfoilUID>NACA0012</airfoilUID>
-                    <transformation uID="Wing_section1_element1_transformation1">
-                      <scaling uID="Wing_section1_element1_transformation1_scaling1">
-                        <x>0.5</x>
-                        <y>0.5</y>
-                        <z>0.5</z>
-                      </scaling>
-                      <rotation uID="Wing_section1_element1_transformation1_rotation1">
-                        <x>0</x>
-                        <y>0</y>
-                        <z>0</z>
-                      </rotation>
-                      <translation refType="absLocal" uID="Wing_section1_element1_transformation1_translation1">
-                        <x>0</x>
-                        <y>0</y>
-                        <z>0</z>
-                      </translation>
-                    </transformation>
                   </element>
                 </elements>
               </section>
               <section uID="Wing_section2">
                 <name>Wing_section2</name>
-                <transformation uID="Wing_section2_transformation1">
-                  <scaling uID="Wing_section2_transformation1_scaling1">
-                    <x>1</x>
-                    <y>1</y>
-                    <z>1</z>
-                  </scaling>
-                  <rotation uID="Wing_section2_transformation1_rotation1">
-                    <x>0</x>
-                    <y>0</y>
-                    <z>0</z>
-                  </rotation>
-                  <translation refType="absLocal" uID="Wing_section2_transformation1_translation1">
-                    <x>0</x>
-                    <y>1</y>
-                    <z>0</z>
-                  </translation>
-                </transformation>
                 <elements>
                   <element uID="Wing_section2_element1">
                     <name>Wing_section2_element1</name>
                     <airfoilUID>NACA0012</airfoilUID>
-                    <transformation uID="Wing_section2_element1_transformation1">
-                      <scaling uID="Wing_section2_element1_transformation1_scaling1">
-                        <x>0.5</x>
-                        <y>0.5</y>
-                        <z>0.5</z>
-                      </scaling>
-                      <rotation uID="Wing_section2_element1_transformation1_rotation1">
-                        <x>0</x>
-                        <y>0</y>
-                        <z>0</z>
-                      </rotation>
-                      <translation refType="absLocal" uID="Wing_section2_element1_transformation1_translation1">
-                        <x>0</x>
-                        <y>0</y>
-                        <z>0</z>
-                      </translation>
-                    </transformation>
+                  </element>
+                </elements>
+              </section>
+                <section uID="Wing_section3">
+                <name>Wing_section1</name>
+                <elements>
+                  <element uID="Wing_section3_element1">
+                    <name>Wing_section1_element1</name>
+                    <airfoilUID>NACA0012</airfoilUID>
+                  </element>
+                </elements>
+              </section>
+                <section uID="Wing_section4">
+                <name>Wing_section1</name>
+                <elements>
+                  <element uID="Wing_section4_element1">
+                    <name>Wing_section1_element1</name>
+                    <airfoilUID>NACA0012</airfoilUID>
+                  </element>
+                </elements>
+              </section>
+
+                <section uID="Wing_section4">
+                <name>Wing_section1</name>
+                <elements>
+                  <element uID="Wing_section4_element1">
+                    <name>Wing_section1_element1</name>
+                    <airfoilUID>NACA0012</airfoilUID>
                   </element>
                 </elements>
               </section>
@@ -149,6 +126,21 @@
                 <fromElementUID>Wing_section1_element1</fromElementUID>
                 <toElementUID>Wing_section2_element1</toElementUID>
               </segment>
+                 <segment uID="Wing_segment2">
+                     <name>Wing_segment2</name>
+                     <fromElementUID>Wing_section2_element1</fromElementUID>
+                     <toElementUID>Wing_section3_element1</toElementUID>
+                   </segment>
+                 <segment uID="Wing_segment3">
+                     <name>Wing_segment3</name>
+                     <fromElementUID>Wing_section3_element1</fromElementUID>
+                     <toElementUID>Wing_section4_element1</toElementUID>
+                   </segment>
+                 <segment uID="Wing_segment4">
+                       <name>Wing_segment4</name>
+                       <fromElementUID>Wing_section4_element1</fromElementUID>
+                       <toElementUID>Wing_section5_element1</toElementUID>
+                     </segment>
             </segments>
             <componentSegments>
               <componentSegment uID="CS1">

@@ -18,7 +18,7 @@ class lifting_surface_model:
         self._name = name
         self.surface_type_=surface_type_
         self.design_type_=design_type_
-        self.airfoil_type = "0012"
+        self.airfoil_type = "NACA0012"
         self.current_loft = None
         self.name_ = name
         self.aircraft = config
@@ -68,7 +68,7 @@ class lifting_surface_model:
 
     def read_parameters(self):
         try:
-            self.surfaceType_,self.xz_mirror_,self.xy_mirror_,self.yz_mirror_ ,self.rot_x_, self.rot_y_, self.rot_z_, self.root_le_pos_x_, self.root_le_pos_y_, self.root_le_pos_z_, \
+            self.airfoil_type,self.surfaceType_,self.xz_mirror_,self.xy_mirror_,self.yz_mirror_ ,self.rot_x_, self.rot_y_, self.rot_z_, self.root_le_pos_x_, self.root_le_pos_y_, self.root_le_pos_z_, \
             self.section_1_x_, self.section_2_x_, self.section_3_x_, self.section_4_x_, self.section_5_x_, \
             self.section_1_y_, self.section_2_y_, self.section_3_y_, self.section_4_y_, self.section_5_y_, \
             self.section_1_z_, self.section_2_z_, self.section_3_z_, self.section_4_z_, self.section_5_z_, \
@@ -76,7 +76,7 @@ class lifting_surface_model:
             self.section_5_chord_, self.section_1_twist_angle_, self.section_2_twist_angle_, \
             self.section_3_twist_angle_, self.section_4_twist_angle_, self.section_5_twist_angle_ = read_surface_data(self._name)
         except(Exception):
-            self.airfoil_type = "0012"
+            self.airfoil_type = "NACA0012"
 
     def get_current_loft(self):
         self.read_parameters()
@@ -91,7 +91,7 @@ class lifting_surface_model:
 
 
         n = random.random()
-        self.lifting_surface = self.wings.create_wing(f"{n}", 5, f"NACA{self.airfoil_type}")
+        self.lifting_surface = self.wings.create_wing(f"{n}", 5, "NACA0012")
 
         chords = [self.section_1_chord_, self.section_2_chord_, self.section_3_chord_, self.section_4_chord_,
                   self.section_5_chord_]
@@ -101,9 +101,9 @@ class lifting_surface_model:
         twist = [self.section_1_twist_angle_, self.section_2_twist_angle_, self.section_3_twist_angle_,
                  self.section_4_twist_angle_, self.section_5_twist_angle_]
 
-        profile = "naca" + self.airfoil_type
+        profile = self.airfoil_type
         constant = 0.0
-        nacanumber = profile.split("naca")[1]
+        nacanumber = profile.split("NACA")[1]
         if nacanumber.isdigit():
             if len(nacanumber) == 4:
                 constant = int(nacanumber[2:]) * 0.01
@@ -155,7 +155,7 @@ class lifting_surface_model:
     def curved_surface(self):
         self.read_parameters()
         n = random.random()
-        self.lifting_surface = self.wings.create_wing(f"{n}", 5, f"NACA{self.airfoil_type}")
+        self.lifting_surface = self.wings.create_wing(f"{n}", 5, self.airfoil_type)
         print(self.name_,(self.root_le_pos_x_,self.root_le_pos_y_, self.root_le_pos_z_))
 
 
@@ -167,8 +167,8 @@ class lifting_surface_model:
         twist = [self.section_1_twist_angle_, self.section_2_twist_angle_, self.section_3_twist_angle_,
                  self.section_4_twist_angle_, self.section_5_twist_angle_]
 
-        profile = "naca" + self.airfoil_type
-        constant = 0.0
+        profile =self.airfoil_type
+        constant = 0.5
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():
             if len(nacanumber) == 4:
@@ -177,7 +177,7 @@ class lifting_surface_model:
         print()
         wires=[]
         curves=[]
-
+        print(constant)
         n_sections = self.lifting_surface.get_section_count()
         print(n_sections)
         for idx in range(1, n_sections + 1):

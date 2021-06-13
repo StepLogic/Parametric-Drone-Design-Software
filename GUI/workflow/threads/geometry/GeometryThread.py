@@ -28,12 +28,7 @@ class GeometryThread(QRunnable):
             self.workflow.events.set()
             self.workflow.sendTasks.send([self.command])
         for name, loft in self.workflow.receiveLofts.recv().items():
-            loader_points = []
             self.workflow.viewer.update_object(part_name=name, lofts=loft)
-            for i in range(0, 5):
-                loader_points.append(".")
-                self.workflow.add_text_to_console(build_message + "".join(loader_points))
-                time.sleep(0.5)
         self.workflow.add_text_to_console(instructions)
         self.workflow.update_progress(done_)
 

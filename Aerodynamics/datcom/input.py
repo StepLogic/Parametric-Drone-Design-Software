@@ -6,7 +6,7 @@ from Utils.database import database
 from Utils.database.aerodynamics.datcom_database import get_parameters_from_conventional_boom, \
     get_parameters_from_conventional_wing, \
     get_parameters_from_sections_lifting_surface
-from Utils.database.aerodynamics.settings_database import get_mach_number_range, get_aoa_range, get_altitude
+from Utils.database.aerodynamics.settings_database import get_mach_number, get_aoa_range, get_altitude
 from Utils.database.geometry.boom_database import read_boom_objects, get_boom_object_data
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data
 
@@ -53,12 +53,12 @@ def build_datcom_input():
         if design_type_ == unconventional_design:
           pass
         elif design_type_ == conventional_design:
-            radii, x, z = get_parameters_from_conventional_boom()
+            radii, x, z = get_parameters_from_conventional_boom(l)
             boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
                                                               iter_=(boom_list.index(l) + 1)))
 
 
-    input_ = "".join([set_flight_conditions(mach_numbers=get_mach_number_range(), angle_of_attack=get_aoa_range(),altitude=get_altitude()),
+    input_ = "".join([set_flight_conditions(mach_numbers=get_mach_number(), angle_of_attack=get_aoa_range(), altitude=get_altitude()),
                       set_synths_parameters(),
                       "".join(ls_statements),
                       "".join(boom_statements),
@@ -85,8 +85,8 @@ def set_flight_conditions(mach_numbers=None, altitude=401, angle_of_attack=None)
     if mach_numbers is None:
         mach_numbers = []
     altitude_condition = f"\n $FLTCON NALT=1.0,ALT(1)={float(altitude)}$"
-    mach_condition = f"\n $FLTCON NMACH={float(len(mach_numbers))},MACH(1)={create_listing_datcom(mach_numbers)}$"
-    angle_of_attack_condition = f"\n $FLTCON NALPHA={float(len(angle_of_attack))},ALSCHD(1)={create_listing_datcom(angle_of_attack)},LOOP=2.0$"
+    mach_condition = f"\n $FLTCON NMACH={1.0},MACH(1)={mach_numbers}$"
+    angle_of_attack_condition = f"\n $FLTCON NALPHA={float(len(angle_of_attack))},ALSCHD(1)={create_listing_datcom(angle_of_attack)},LOOP=2.0$ "
     flight_conditions_block = altitude_condition + angle_of_attack_condition + mach_condition
     return flight_conditions_block
 
@@ -190,7 +190,7 @@ def create_listing_datcom(list=None):
         if list.index(i) == len(list) - 1:
             _list = _list + f"{val}"
         else:
-            if break_point < 4:
+            if break_point < len(list)/2:
                 break_point = break_point + 1
                 _list = _list + f"{val},"
             else:

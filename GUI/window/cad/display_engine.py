@@ -24,7 +24,6 @@ class display_engine(_viewer_):
         else:
             pass
 
-
     def update_object(self, part_name="", lofts=None):
         if self.current_table.get(part_name) is None:
             self.show_object(part_name=part_name, lofts=lofts)
@@ -62,3 +61,8 @@ class display_engine(_viewer_):
         for part in self.current_table.values():
             for loft in part:
                 stl_writer.Write(loft, model_filepath)
+
+    def switch_to_normal(self):
+        self.eraseAll()
+        for name, lofts in self.current_table.values():
+            self.show_object(part_name=name, lofts=lofts)

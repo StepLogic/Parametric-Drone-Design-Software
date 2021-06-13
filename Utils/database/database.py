@@ -1,8 +1,9 @@
 import json
 
 from Helper import absolute_path, resource_path
-
+airfoil_path = resource_path(absolute_path + "/Resources/airfoil/export/names.txt")
 resource_dir_cpacs = resource_path(absolute_path + "/Resources/cpacs")
+resource_dir_cpacs_out = resource_path(absolute_path + "/Resources/cpacs/structure.xml")
 work_file_path = resource_path(absolute_path + "/Resources/json/workfile.json")
 aircraft_specifications_filepath = resource_path(absolute_path + "/Resources/json/specification.json")
 aerodynamic_specification_filepath = resource_path(absolute_path + "/Resources/json/aerodynamic_specification.json")
@@ -17,6 +18,8 @@ datcom_exe = absolute_path + "/Resources/programs_exe/datcom.exe"
 datcom_stability_specification_filepath = resource_path(
     absolute_path + "/Resources/json/datcom_stability_specification.json")
 model_filepath = resource_path(absolute_path + "/Resources/model/model.stl")
+sim_export_fixed = resource_path(absolute_path + "/Resources/model/body")
+sim_export_moveable = resource_path(absolute_path + "/Resources/model/moveables")
 model_dir = resource_path(absolute_path + "/Resources/model")
 settings_filepath = absolute_path + "/Resources/json/settings.json"
 

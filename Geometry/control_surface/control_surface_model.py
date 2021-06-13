@@ -82,7 +82,7 @@ class control_surface_model():
 
 
         if read_parent_data(self.parent__,key=design_type) == conventional_design:
-            wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x_-read_parent_data(self.parent__, key=chord) + root_location_x_
+            wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x_+ root_location_x_
                                                                     , self.root_location_y_ + root_location_y_
                                                                     , self.root_location_z_ + root_location_z_))
         elif read_parent_data(self.parent__, key=design_type) == unconventional_design:

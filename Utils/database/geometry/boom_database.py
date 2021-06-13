@@ -12,7 +12,7 @@ def read_boom_data(boom_name_=""):
     if design_type_ == unconventional_design:
             return read_boom_values(values[part][boom_name_])
     else:
-            return read_fuselage_values(values[part][boom_name_])
+            return read_fuselage_values(values["boom"][boom_name_])
 
 
 def get_boom_object_data(boom_name_=""):
