@@ -78,7 +78,7 @@ class h_stab_model():
         if nacanumber.isdigit():
             if len(nacanumber) == 4:
                 constant = int(nacanumber[2:]) * 0.01
-        # decrease section size towards wing tips
+
         root_width = self.chord
         root_height = self.chord * constant
         tip_width = self.chord / self.taper_ratio
