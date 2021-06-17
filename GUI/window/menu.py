@@ -13,19 +13,24 @@ from GUI.dialogs.propulsion_dialogs.propulsion_dialog import propulsion_dialog
 from GUI.dialogs.propulsion_dialogs.shroud.shroud_dialog import shroud_dialog
 from GUI.dialogs.structure_dialogs.structures_dialog import structures_dialog
 from GUI.window.cad.structure_view import show_structure
+from GUI.workflow.design_workflow import export_files
 from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThread
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
 from Structures.trimesh.trimeshWrapper import get_functions
 from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_surface_3D_, update_boom_3D_, build_cs, \
-    build_landing_gear, start_multisandbox, build_shroud, build_propeller
+    build_landing_gear, start_multisandbox, build_shroud, build_propeller, done_
 from Utils.database.geometry.control_surface_database import read_control_surface_objects
 from Utils.database.geometry.main_database import wipe_design_options, wipe_design
 
 
 def setup_ui(workflow):
-    def execute_command(command="", current_loft=None):
-        workflow.events.set()
-        workflow.sendTasks.send([command, current_loft])
+
+    def show_objects(trig):
+        for name, loft in trig.items():
+            workflow.viewer.update_object(part_name=name, lofts=loft)
+        workflow.update_progress(done_)
+
+
 
     def setup_design_menu():
         workflow.add_menu("Design")
@@ -38,9 +43,11 @@ def setup_ui(workflow):
             results = dialog.exec_()
             if results == 1:
                 dialog.save_all()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow,command=build_cs)
-                pool.start(runnable)
+                thread = GeometryThread()
+                thread.trigger.connect(show_objects)  # connect to it's signal
+                thread.setup(workflow, command=build_cs)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         workflow.add_function_to_menu("Geometry", control_surface)
 
@@ -50,10 +57,11 @@ def setup_ui(workflow):
             results = dialog.exec_()
             if results == 1:
                 dialog.tab.init_action()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow, command=build_landing_gear)
-                pool.start(runnable)
-
+                thread = GeometryThread()
+                thread.trigger.connect(show_objects)  # connect to it's signal
+                thread.setup(workflow, command=build_landing_gear)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
         workflow.add_function_to_menu("Geometry", landing_gear)
 
     def setup_propulsion_menu():
@@ -70,18 +78,22 @@ def setup_ui(workflow):
             results = dialog.exec_()
             if results == 1:
                 dialog.save_all()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow,command=build_propeller)
-                pool.start(runnable)
+                thread = GeometryThread()
+                thread.trigger.connect(show_objects)  # connect to it's signal
+                thread.setup(workflow, command=build_propeller)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         def shroud():
-            dialog = shroud_dialog()
-            results = dialog.exec_()
-            if results == 1:
-                dialog.tab.init_action()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow, command=build_shroud)
-                pool.start(runnable)
+                dialog = shroud_dialog()
+                results = dialog.exec_()
+                if results == 1:
+                    dialog.tab.init_action()
+                    thread = GeometryThread()
+                    thread.trigger.connect(show_objects)  # connect to it's signal
+                    thread.setup(workflow, command=build_shroud)  # just setting up a parameter
+                    thread.start()
+                    workflow.threads.append(thread)
 
         workflow.add_function_to_menu("Propulsion", enter_parameters)
         workflow.add_function_to_menu("Propulsion", propeller)
@@ -104,18 +116,22 @@ def setup_ui(workflow):
 
             if results == 1:
                 dialog.save_all()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow, command=update_boom_3D_)
-                pool.start(runnable)
+                thread = GeometryThread()
+                thread.trigger.connect(show_objects)  # connect to it's signal
+                thread.setup(workflow, command=update_boom_3D_)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         def lifting_surfaces():
             dialog = lifting_surface_dialog(workflow=workflow)
             results = dialog.exec_()
             if results == 1:
                 dialog.save_all()
-                pool = QThreadPool.globalInstance()
-                runnable = GeometryThread(workflow, command=update_surface_3D_)
-                pool.start(runnable)
+                thread = GeometryThread()
+                thread.trigger.connect(show_objects)  # connect to it's signal
+                thread.setup(workflow, command=update_surface_3D_)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         workflow.add_function_to_menu("Geometry", booms)
         workflow.add_function_to_menu("Geometry", lifting_surfaces)
@@ -188,7 +204,11 @@ def setup_ui(workflow):
         workflow.add_function_to_menu("Aerodynamics", plot_graphs)
         workflow.add_function_to_menu("Aerodynamics", show_tables)
         workflow.add_function_to_menu("Aerodynamics", settings)
-
+    def setup_simulation_menu():
+        workflow.add_menu("Simulation")
+        def start_simulation():
+          workflow.viewer.export_files_for_simulation(body=export_files(workflow.config))
+        workflow.add_function_to_menu("Simulation",start_simulation)
     def design_overview():
         workflow.design_window.exec_()
 
@@ -211,4 +231,5 @@ def setup_ui(workflow):
     setup_structures_menu()
     setup_propulsion_menu()
     setup_aerodynamics_menu()
+    setup_simulation_menu()
     setup_performance_menu()

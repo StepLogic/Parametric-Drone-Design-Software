@@ -110,7 +110,7 @@ class control_surface_model():
 
         return loft
 
-    @functools.lru_cache(maxsize=512)
+
     def get_current_loft(self):
         lofts = self.part_loft
         surfaces = self.create_aileron()
@@ -145,5 +145,64 @@ class control_surface_model():
                 wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
                 ret_loft = [wing_2, wing_1, surfaces[0], surfaces[1]]
 
+
+        return ret_loft
+
+
+    def get_surface_loft(self):
+        lofts = self.part_loft
+        surfaces = self.create_aileron()
+        ret_loft = {}
+        if read_parent_data(self.parent__, key=design_type) == conventional_design:
+            if read_parent_data(self.parent__, key=surface_type) == fin:
+                ret_loft = {self.name:surfaces[0]}
+            else:
+                ret_loft = {self.name+"Left": surfaces[0],self.name+"Right": surfaces[1]}
+
+
+        else:
+            if read_parent_data(self.parent__, key=xz_mirror):
+                ret_loft = {self.name + "Left": surfaces[0], self.name + "Right": surfaces[1]}
+            elif read_parent_data(self.parent__, key=xy_mirror):
+                ret_loft = {self.name + "Left": surfaces[0], self.name + "Right": surfaces[1]}
+            elif read_parent_data(self.parent__, key=yz_mirror):
+                ret_loft = {self.name + "Left": surfaces[0], self.name + "Right": surfaces[1]}
+
+        return ret_loft
+
+    @functools.lru_cache(maxsize=512)
+    def get_wing_loft(self):
+        lofts = self.part_loft
+        surfaces = self.create_aileron()
+        cut_shapes = self.create_aileron(10)
+        logging.info(time.strftime('%X'))
+        wing_1 = cut_wing(lofts[0], cut_shapes[0])
+        logging.info(time.strftime('%X'))
+        ret_loft = []
+        if read_parent_data(self.parent__, key=design_type) == conventional_design:
+            if read_parent_data(self.parent__, key=surface_type) == fin:
+                ret_loft = [wing_1]
+            else:
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_xzplane()
+                wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
+                ret_loft = [wing_2, wing_1]
+
+        else:
+            if read_parent_data(self.parent__, key=xz_mirror):
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_xzplane()
+                wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
+                ret_loft = [wing_2, wing_1]
+            elif read_parent_data(self.parent__, key=xy_mirror):
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_xyplane()
+                wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
+                ret_loft = [wing_2, wing_1]
+            elif read_parent_data(self.parent__, key=yz_mirror):
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_yzplane()
+                wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
+                ret_loft = [wing_2, wing_1]
 
         return ret_loft

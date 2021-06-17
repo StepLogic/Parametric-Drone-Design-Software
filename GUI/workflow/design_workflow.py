@@ -3,6 +3,7 @@ import sys
 import tigl3.configuration
 import tigl3.tigl3wrapper
 import tixi3.tixi3wrapper
+from PyQt5.QtWidgets import QMessageBox
 
 from Aerodynamics.sandbox.multi_sandbox import run_sandbox_simulation
 from Geometry.control_surface.control_surface_model import control_surface_model
@@ -56,7 +57,7 @@ def start(e, receiveTasks, sendLofts):
         elif command == update_surface_3D_:
             sendLofts.send(update_surface_3d(config=config))
         if command == build_cs:
-            sendLofts.send(update_control_surfaces(config=config, res=res))
+            sendLofts.send(generate_control_surfaces(config=config))
         elif command == build_landing_gear:
             sendLofts.send(update_landing_gear())
         elif command == start_multisandbox:
@@ -89,11 +90,31 @@ def update_control_surfaces(config=None, res=None):
     for surface in surface_list:
         for name, loft in loft_table.items():
             if name == get_parent_name(surface):
-
-                print(name)
                 lofts.update(
                     {name: control_surface_model(name=surface, config=config, part_loft=loft).get_current_loft()})
 
+    return lofts
+
+
+def generate_control_surfaces(config=None):
+    lofts = {}
+    try:
+        surface_list = read_control_surface_objects()
+        for surface in surface_list:
+            lofts.update(control_surface_model(name=surface, config=config, part_loft=None).get_surface_loft())
+
+    except:
+        pass
+    try:
+        surface_list = read_control_surface_objects()
+        loft_table = update_surface_3d(config)
+        for surface in surface_list:
+            for name, loft in loft_table.items():
+                if name == get_parent_name(surface):
+                    lofts.update(
+                        {name: control_surface_model(name=surface, config=config, part_loft=loft).get_wing_loft()})
+    except:
+        lofts = update_surface_3d(config)
     return lofts
 
 
@@ -104,6 +125,32 @@ def update_boom_3d(config=None):
         design_type_, boom_type_ = get_boom_object_data(l)
         lofts.update({l: generate_boom_3D_model(config, name=l, boom_type_=boom_type_, design_type_=design_type_)})
     return lofts
+
+
+def export_files(config=None):
+    loft={}
+    try:
+     booms =update_boom_3d(config=config)
+     loft.update(booms)
+    except:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText("Error")
+        msg.setInformativeText("ERROR! Exporting Boom")
+        msg.setWindowTitle("Aerosoft")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    try:
+     wing =generate_control_surfaces(config=config)
+     loft.update(wing)
+    except:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText("Error")
+        msg.setInformativeText("ERROR! Exporting Wing")
+        msg.setWindowTitle("Aerosoft")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+    return loft
 
 
 def update_surface_3d(config=None):
@@ -124,7 +171,6 @@ def generate_boom_3D_model(config=None, name="", boom_type_="", design_type_="")
         return boom_model(config=config, text=name,
                           boom_type_=boom_type_,
                           design_type_=design_type_).get_current_loft()
-
 
 
 def generate_wing_3D(config=None, name="", surface_type_="", design_type_=""):
@@ -154,8 +200,6 @@ def generate_wing_3D(config=None, name="", surface_type_="", design_type_=""):
                                      design_type_=design_type_).get_current_loft()
 
 
-
-
 def update_surface_lower_3d(config=None):
     surface_list = read_lifting_surface_objects()
     lofts = {}
@@ -166,8 +210,7 @@ def update_surface_lower_3d(config=None):
 
 
 def generate_wing_lower_3D(config=None, name="", surface_type_="", design_type_=""):
-      if surface_type_ == wing and design_type_ == unconventional_design:
+    if surface_type_ == wing and design_type_ == unconventional_design:
         return lifting_surface_model(config=config, name=name,
                                      surface_type_=surface_type_,
                                      design_type_=design_type_).get_lower_surface()
-
