@@ -129,6 +129,7 @@ class fuselage_model():
             WTBFlength = self.cockpit_length_  # 787:26
             WBF_shape = make_ellipsoid([WTBFXCentre, self.cockpit_position_y_, WTBFZ], WTBFlength, WTBFwidth, WTBFheight)
             return [self.fuselage.get_loft().shape(),WBF_shape]
+        print(self.fuselage.get_loft().shape())
         return [self.fuselage.get_loft().shape()]
 
 

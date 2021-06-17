@@ -1,6 +1,13 @@
+import os
+
+from PyQt5.QtWidgets import QMessageBox
+
 from GUI.window.cad._viewer_ import _viewer_
 from Utils.database.database import model_filepath, model_dir
 from Utils.database.geometry.control_surface_database import get_surface_type
+import meshio
+
+from Utils.file_manager.file_manager_ import clean_after_moveables, clean_after_body
 
 
 class display_engine(_viewer_):
@@ -10,10 +17,21 @@ class display_engine(_viewer_):
         self.parts_table = []
 
     def show_object(self, part_name="", lofts=None):
+      try:
         for loft in lofts:
             self.add(loft)
-        self.current_table[part_name] = lofts
-        self.parts_table.append(part_name)
+      except:
+          try:
+                 self.add(lofts)
+          except:
+              msg = QMessageBox()
+              msg.setIcon(QMessageBox.Warning)
+              msg.setText("Error")
+              msg.setInformativeText("ERROR!")
+              msg.setWindowTitle("Aerosoft")
+              msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+      self.current_table[part_name] = lofts
+      self.parts_table.append(part_name)
 
     def delete_object(self, part_name=""):
 
@@ -67,24 +85,21 @@ class display_engine(_viewer_):
         self.eraseAll()
         for name, lofts in self.current_table.values():
             self.show_object(part_name=name, lofts=lofts)
-    def export_part(self,part_name):
-        from OCC.StlAPI import StlAPI_Writer
-        stl_writer = StlAPI_Writer()
-        stl_writer.SetASCIIMode(True)
-        for part,loft in self.current_table.items():
-            if part==part_name:
-                stl_writer.Write(loft, model_dir+part_name)
 
-    def export_files_for_simulation(self):
+    def export_files_for_simulation(self,control_surface={},body={}):
         from OCC.StlAPI import StlAPI_Writer
         stl_writer = StlAPI_Writer()
         stl_writer.SetASCIIMode(True)
-        for part, loft in self.current_table.items():
-            cs=False
-            filepath=model_dir
+
+        for part, loft in body.items():
+
             try:
-                sname= get_surface_type(part)
-                stl_writer.Write(loft, model_dir + "/moveables/"+sname+".stl")
+                for l in loft:
+                     stl_writer.Write(l, part+".stl")
+                     os.system(f"meshio-convert {part}.stl   {part}.obj")
+                     clean_after_body(part)
             except:
-                pass
-            stl_writer.Write(loft, model_dir + "/body/" + part+".stl")
+                stl_writer.Write(loft, part + ".stl")
+                os.system(f"meshio-convert {part}.stl  {part}.obj")
+                clean_after_moveables(part)
+
