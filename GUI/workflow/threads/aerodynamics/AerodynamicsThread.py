@@ -25,11 +25,6 @@ class AerodynamicThread(QRunnable):
             else:
                 self.workflow.events.set()
                 self.workflow.sendTasks.send([self.command])
-            loader_points = []
-            for i in range(0, 5):
-                loader_points.append(".")
-                self.workflow.add_text_to_console(build_message + "".join(loader_points))
-                time.sleep(0.5)
             result = self.workflow.receiveLofts.recv()
 
         if result == done:

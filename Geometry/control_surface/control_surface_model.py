@@ -34,14 +34,14 @@ class control_surface_model():
         profile = self.profile
         wings = self.aircraft.get_wings()
         try:
-            wing_main = wings.create_wing(f"{self.name}{self.iter}", 3, "NACA{}".format(profile))
+            wing_main = wings.create_wing(f"{self.name}{self.iter}", 3, "naca0012")
         except:
             n = random.random()
-            wing_main = wings.create_wing(f"{self.name}{n}{self.iter}", 3, "NACA{}".format(profile))
+            wing_main = wings.create_wing(f"{self.name}{n}{self.iter}", 3, "naca0012")
 
         self.iter += 1
 
-        profile = "naca" + self.profile
+        profile = "naca0012"
         constant = 1
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():
@@ -82,7 +82,7 @@ class control_surface_model():
 
 
         if read_parent_data(self.parent__,key=design_type) == conventional_design:
-            wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x_-read_parent_data(self.parent__, key=chord) + root_location_x_
+            wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x_+ root_location_x_
                                                                     , self.root_location_y_ + root_location_y_
                                                                     , self.root_location_z_ + root_location_z_))
         elif read_parent_data(self.parent__, key=design_type) == unconventional_design:

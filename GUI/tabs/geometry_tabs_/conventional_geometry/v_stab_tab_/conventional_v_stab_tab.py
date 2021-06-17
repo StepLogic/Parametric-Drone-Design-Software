@@ -89,7 +89,7 @@ class v_stab_tab(QDialog):
 
     ############################################################################
     def show_default_values(self, root_location_x=0, root_location_y=0, root_location_z=0, dihedral=0, sweep=0, twist=0,
-                            span=0, taper_ratio=1, chord=0,profile=""):
+                            span=0, taper_ratio=1, chord=0,profile="naca0012"):
         self.span_text.setText(str(span))
 
         self.chord_length_text.setText(str(chord))
@@ -111,7 +111,6 @@ class v_stab_tab(QDialog):
         self.vtp_position_z_text.setText(str(root_location_z))
 
     def init_action(self):
-
         self.parameters = {
             lifting_surface: {
                 str(self.text): {

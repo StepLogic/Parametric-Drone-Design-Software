@@ -122,7 +122,7 @@ def get_surface_for_cas():
                         z_le=z_,
                         chord=chord_,
                         twist=t,
-                        airfoil=Airfoil(name="naca4412")
+                        airfoil=Airfoil('naca0012')
                     ))
             wings.append(
                 Wing(
@@ -146,7 +146,7 @@ def get_surface_for_cas():
                             z_le=z_,
                             chord=chord_,
                             twist=twist,
-                            airfoil=generic_cambered_airfoil
+                            airfoil=Airfoil('naca0012')
                         ))
                 else:
                     print(x_)
@@ -157,7 +157,7 @@ def get_surface_for_cas():
                             z_le=y_,
                             chord=chord_,
                             twist=twist,
-                            airfoil=generic_cambered_airfoil
+                            airfoil=Airfoil('naca0012')
                         ))
 
             wings.append(

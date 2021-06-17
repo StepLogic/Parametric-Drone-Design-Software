@@ -3,8 +3,16 @@ import logging
 from Utils.data_objects.lifting_surface_placeholder import *
 from Utils.data_objects.placeholder import surface_curve_type, objects, unconventional_design
 from Utils.database import database
+from Utils.database.database import airfoil_path
 
 
+def airfoil_profiles():
+    profiles=[]
+    with open(airfoil_path) as p:
+        line=p.readline()
+        profiles.extend(line.split(","))
+        print(profiles)
+    return profiles
 def get_sweep_and_dihedral(part=""):
     values = database.read_aircraft_specifications()[part]
     sweep_ = values[part + "_sweep"]
@@ -31,7 +39,7 @@ def read_lifting_surface_params(values):
     root_le_pos_x_ = values[root_le_position_x]
     root_le_pos_y_ = values[root_le_position_y]
     root_le_pos_z_ = values[root_le_position_z]
-
+    profile_=values.get(profile)
     xz_mirror_ = values.get(xz_mirror)
     xy_mirror_ = values.get(xy_mirror)
     yz_mirror_ = values.get(yz_mirror)
@@ -65,7 +73,7 @@ def read_lifting_surface_params(values):
     section_5_y_ = values[section_5_y]
     section_5_z_ = values[section_5_z]
     section_5_twist_angle_ = values[section_5_twist_angle]
-    return surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_ \
+    return profile_,surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_ \
         , rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
            root_le_pos_y_, root_le_pos_z_, section_1_x_, section_2_x_, \
            section_3_x_, section_4_x_, section_5_x_, section_1_y_, \

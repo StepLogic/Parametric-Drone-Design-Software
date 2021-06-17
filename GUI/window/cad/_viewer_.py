@@ -1,11 +1,14 @@
 from OCC.Display import OCCViewer
 from OCC.Display.backend import get_qt_modules, load_backend
+
 backend_str = "qt-pyqt5"
 used_backend = load_backend(backend_str)
 
 if 'qt' in used_backend:
     from OCC.Display.qtDisplay import qtViewer3d
+
     QtCore, QtGui, QtWidgets, QtOpenGL = get_qt_modules()
+
 
     class _viewer_(qtViewer3d):
 
@@ -19,20 +22,33 @@ if 'qt' in used_backend:
             self._display.SetModeShaded()
             self._SetupKeyMap()
 
-        def add(self, shape,color=None,transparency=None):
+        def top_view(self):
+            self._display.View.SetProj(0, 0, 1)
+
+        def side_view(self):
+            self._display.View.SetProj(0,1, 0)
+
+        def end_view(self):
+            self._display.View.SetProj(1,0, 0)
+
+        def localize_camera(self):
+            self._display.View.SetProj(-1, -1, 1)
+            self._display.View.SetAt(0, 0, 0)
+            self._display.View.SetScale(100)
+
+        def add(self, shape, color=None, transparency=None):
             if shape:
                 if color is None and transparency is None:
-                  self._display.DisplayShape(shape)
+                    self._display.DisplayShape(shape)
                 elif color is None and transparency is not None:
-                    self._display.DisplayShape(shape,transparency=transparency)
+                    self._display.DisplayShape(shape, transparency=transparency)
                 elif color is not None and transparency is None:
                     self._display.DisplayShape(shape, color=color)
                 else:
                     self._display.DisplayShape(shape, color=color, transparency=transparency)
+
         def eraseAll(self):
             self._display.EraseAll()
-
-
 
         def remove(self, shape):
             if shape:
@@ -45,7 +61,6 @@ if 'qt' in used_backend:
         def __init__(self, *args, **kwargs):
             OCCViewer.Viewer3d.__init__(self, *args, **kwargs)
             self.ShapeMap = {}
-
 
         def DisplayShape(self, shapes, **kwargs):
 

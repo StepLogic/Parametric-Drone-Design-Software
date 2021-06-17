@@ -159,3 +159,22 @@ def generate_wing_3D(config=None, name="", surface_type_="", design_type_=""):
         return lifting_surface_model(config=config, name=name,
                                      surface_type_=surface_type_,
                                      design_type_=design_type_).get_current_loft()
+
+
+
+
+def update_surface_lower_3d(config=None):
+    surface_list = read_lifting_surface_objects()
+    lofts = {}
+    for l in surface_list:
+        design_type_, surface_type_ = get_surface_object_data(l)
+        lofts.update({l: generate_wing_lower_3D(config, l, surface_type_, design_type_)})
+    return lofts
+
+
+def generate_wing_lower_3D(config=None, name="", surface_type_="", design_type_=""):
+      if surface_type_ == wing and design_type_ == unconventional_design:
+        return lifting_surface_model(config=config, name=name,
+                                     surface_type_=surface_type_,
+                                     design_type_=design_type_).get_lower_surface()
+

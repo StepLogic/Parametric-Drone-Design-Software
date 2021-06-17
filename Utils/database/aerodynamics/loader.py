@@ -3,7 +3,7 @@ import pandas as pd
 from Utils.data_objects.aerodynamics_placeholders import *
 from Utils.database import database
 from Utils.database.aerodynamics.sandbox_database import get_free_stream_velocity_range
-from Utils.database.aerodynamics.settings_database import get_aoa_range, get_mach_number_range
+from Utils.database.aerodynamics.settings_database import get_aoa_range, get_mach_number
 
 
 def get_pandas_datcom_table(type_="", major_key="", name=""):

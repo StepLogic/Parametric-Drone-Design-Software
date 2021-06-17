@@ -35,15 +35,18 @@ class propeller_pane(QWidget):
         x_upper = []
         x_lower = []
         x_mid = []
-        x_list = [parameters[section_1_length], parameters[section_2_length], parameters[section_3_length],
-                  parameters[section_4_length],
-                  parameters[section_5_length]]
-        y_list = [parameters[section_1_y], parameters[section_2_y], parameters[section_3_y], parameters[section_4_y],
-                  parameters[section_5_y]]
+        y_list = [parameters[section_1_length],
+                  parameters[section_2_length]+parameters[section_1_length],
+                  parameters[section_3_length]+parameters[section_2_length]+parameters[section_1_length],
+                  parameters[section_4_length]+parameters[section_3_length]+parameters[section_2_length]+parameters[section_1_length],
+                  parameters[section_5_length]+parameters[section_4_length] + parameters[section_3_length]+parameters[section_2_length]+parameters[section_1_length]
+                  ]
+        z_list = [parameters[section_1_z], parameters[section_2_z], parameters[section_3_z], parameters[section_4_z],
+                  parameters[section_5_z]]
         chords = [parameters[section_1_chord], parameters[section_2_chord], parameters[section_3_chord],
                   parameters[section_4_chord], parameters[section_5_chord]]
         print(y_list)
-        for x, y, length in zip(x_list, y_list, chords):
+        for x, y, length in zip(y_list, z_list, chords):
             x_upper.append(x + (length / 2))
             x_lower.append(x - (length / 2))
             x_mid.append(x)

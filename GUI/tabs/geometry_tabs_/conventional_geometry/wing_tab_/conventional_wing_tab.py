@@ -4,7 +4,7 @@ from Utils.data_objects.lifting_surface_placeholder import *
 from Utils.data_objects.placeholder import design_type
 from Utils.database import database
 from Utils.database.geometry.lifting_database import write_lifting_surface_objects, \
-    write_lifting_surface_to_objects, read_surface_data
+    write_lifting_surface_to_objects, read_surface_data, airfoil_profiles
 
 
 class wing_tab(QWidget):
@@ -63,9 +63,14 @@ class wing_tab(QWidget):
 
         # ##########################################################################################
 
-        self.Wing_profile_label = QLabel("Airfoil(Do not Add NACA)")
-        self.Wing_profile_text = QLineEdit()
-        layout.addRow(self.Wing_profile_label, self.Wing_profile_text)
+        self.wing_profile_label = QLabel("Airfoil Profile")
+        self.wing_profile_combo = QComboBox()
+        self.wing_profile_combo.addItems(airfoil_profiles())
+        self.wing_profile_selection = None
+        self.wing_profile_combo.currentIndexChanged.connect(self.wing_profile_selectionChanged)
+        self.layout.addRow(self.wing_profile_label, self.wing_profile_combo)
+
+
 
         ##########################################################################################
 
@@ -167,9 +172,9 @@ class wing_tab(QWidget):
 
         # ##########################################################################################
 
-        self.Wing_profile_label = QLabel("Airfoil(Do not Add NACA)")
-        self.Wing_profile_text = QLineEdit()
-        layout.addRow(self.Wing_profile_label, self.Wing_profile_text)
+        self.wing_profile_label = QLabel("Airfoil(Do not Add NACA)")
+        self.wing_profile_combo = QLineEdit()
+        layout.addRow(self.wing_profile_label, self.wing_profile_combo)
 
         ##########################################################################################
 
@@ -237,7 +242,7 @@ class wing_tab(QWidget):
     def show_default_values(self,root_location_x=0, root_location_y=0, root_location_z=0, dihedral=0, sweep=0, twist=0,
                             span=0, taper_ratio=1, chord=0, winglet_width=0, winglet_rotation=0,
                             winglet_center_translation_x=0
-                            , winglet_center_translation_y=0, winglet_center_translation_z=0, profile="0012"):
+                            , winglet_center_translation_y=0, winglet_center_translation_z=0, profile="naca4412"):
 
 
 
@@ -253,7 +258,7 @@ class wing_tab(QWidget):
 
         self.taper_ratio_text.setText(str(taper_ratio))
 
-        self.Wing_profile_text.setText(profile)
+        self.wing_profile_combo.setCurrentIndex(airfoil_profiles().index(profile))
 
         self.Wing_postion_x_text.setText(str(root_location_x))
 
@@ -273,7 +278,7 @@ class wing_tab(QWidget):
 
 
     def init_action(self):
-        print(float(self.Wing_postion_x_text.text()))
+        self.accept_inputs()
         self.parameters = {
             lifting_surface: {
                 str(self.text): {
@@ -284,7 +289,7 @@ class wing_tab(QWidget):
                 root_le_position_y: float(self.Wing_postion_y_text.text()),
                 root_le_position_z: float(self.Wing_postion_z_text.text()),
                 span: float(self.span_text.text()),
-                profile: str(self.Wing_profile_text.text()),
+                profile: str(self.wing_profile_selection),
                 chord: float(self.chord_length_text.text()),
                 taper_ratio: float(self.taper_ratio_text.text()),
                 sweep: float(self.sweep_angle_text.text()),
@@ -305,3 +310,9 @@ class wing_tab(QWidget):
         write_lifting_surface_to_objects(surface_name=self.text, design_type_=self.design_type_,
                                          surface_type_=self.surface_type_)
         return self.parameters
+    def wing_profile_selectionChanged(self, i):
+        self.wing_profile_selection = airfoil_profiles()[i]
+
+    def accept_inputs(self):
+        if self.wing_profile_selection is None:
+            self.wing_profile_selection = airfoil_profiles()[self.wing_profile_combo.currentIndex()]

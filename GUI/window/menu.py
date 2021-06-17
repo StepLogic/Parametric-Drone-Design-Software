@@ -12,6 +12,7 @@ from GUI.dialogs.propulsion_dialogs.propeller.propeller_dialog import propeller_
 from GUI.dialogs.propulsion_dialogs.propulsion_dialog import propulsion_dialog
 from GUI.dialogs.propulsion_dialogs.shroud.shroud_dialog import shroud_dialog
 from GUI.dialogs.structure_dialogs.structures_dialog import structures_dialog
+from GUI.window.cad.structure_view import show_structure
 from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThread
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
 from Structures.trimesh.trimeshWrapper import get_functions
@@ -127,11 +128,28 @@ def setup_ui(workflow):
             results = dialog.exec_()
             if results == 1:
                 dialog.tab.init_action()
-
+        def show_internals():
+            show_structure(workflow.viewer)
         workflow.add_function_to_menu("Structures", structures)
+        workflow.add_function_to_menu("Structures", show_internals)
         func_ = get_functions(workflow)
         for l in func_:
             workflow.add_function_to_menu("Structures", l)
+    def setup_cad_menu():
+        workflow.add_menu("Cad")
+        def localize_camera():
+            workflow.viewer.localize_camera()
+        def top_view():
+            workflow.viewer.top_view()
+        def side_view():
+            workflow.viewer.side_view()
+        def end_view():
+            workflow.viewer.end_view()
+
+        workflow.add_function_to_menu("Cad", localize_camera)
+        workflow.add_function_to_menu("Cad", top_view)
+        workflow.add_function_to_menu("Cad", side_view)
+        workflow.add_function_to_menu("Cad", end_view)
 
     def setup_aerodynamics_menu():
         workflow.add_menu("Aerodynamics")
@@ -186,6 +204,7 @@ def setup_ui(workflow):
             pass
 
     setup_design_menu()
+    setup_cad_menu()
     setup_geometry_menu()
     setup_control_surface()
     setup_landing_gear()

@@ -38,7 +38,7 @@ class lifting_surface_dialog(QDialog):
 
 
     def load_surfaces(self):
-        try:
+
             surface_list = read_lifting_surface_objects()
             if len(surface_list) == 0:
                 self.new_surfaces()
@@ -66,8 +66,7 @@ class lifting_surface_dialog(QDialog):
                             self.surfaces.append(self.surfaca_tab_)
                             self.inputArea.addTab(self.surfaca_tab_,l)
                             self.indexes.append(l)
-        except :
-            self.new_surfaces()
+
     def new_surfaces(self):
         dialog = surface_design_dialog()
         results = dialog.exec_()

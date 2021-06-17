@@ -42,11 +42,11 @@ class v_stab_model():
     def get_current_loft(self):
         self.read_parameters()
         n = random.random()
-        self.v_stab = self.wings.create_wing(f"v_stab{n}", 3, "NACA{}".format(self.airfoil_type))
+        self.v_stab = self.wings.create_wing(f"v_stab{n}", 3, self.airfoil_type)
         self.v_stab.set_symmetry(tigl3.geometry.TIGL_X_Z_PLANE)
         self.iter += 1
 
-        self.v_stab.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x
+        self.v_stab.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x+(self.chord/2)
                                                                   , self.root_location_y
                                                                   , self.root_location_z))
         wing_main_half_span = self.span / 2
@@ -75,8 +75,8 @@ class v_stab_model():
         center.z = theta * tip.z + (1 - theta) * pre_tip.z
         ce.set_center(center)
 
-        profile = "naca" + self.airfoil_type
-        constant = 0.0
+        profile = self.airfoil_type
+        constant = 0.2
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():
             if len(nacanumber) == 4:
@@ -106,5 +106,8 @@ class v_stab_model():
         self.old_profile = self.airfoil_type
 
         return self.current_loft
-
+    def get_lower_surface(self):
+        loft = []
+        loft.append(self.h_stab.get_lower_shape())
+        return loft
 
