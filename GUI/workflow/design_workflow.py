@@ -116,22 +116,15 @@ def update_surface_3d(config=None):
 
 
 def generate_boom_3D_model(config=None, name="", boom_type_="", design_type_=""):
-    if boom_type_ == fuselage and design_type_ == unconventional_design:
-        return boom_model(config=config, text=name,
-                          boom_type_=boom_type_,
-                          design_type_=design_type_).get_current_loft()
-    elif boom_type_ == fuselage and design_type_ == conventional_design:
+    if design_type_ == conventional_design:
         return fuselage_model(config=config, text=name,
                               boom_type_=boom_type_,
                               design_type_=design_type_).get_current_loft()
-    elif boom_type_ == boom and design_type_ == unconventional_design:
+    elif design_type_ == unconventional_design:
         return boom_model(config=config, text=name,
                           boom_type_=boom_type_,
                           design_type_=design_type_).get_current_loft()
-    elif boom_type_ == boom and design_type_ == conventional_design:
-        return fuselage_model(config=config, text=name,
-                              boom_type_=boom_type_,
-                              design_type_=design_type_).get_current_loft()
+
 
 
 def generate_wing_3D(config=None, name="", surface_type_="", design_type_=""):
