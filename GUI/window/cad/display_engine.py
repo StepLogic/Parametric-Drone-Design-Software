@@ -95,6 +95,7 @@ class display_engine(_viewer_):
 
             try:
                 for l in loft:
+
                      stl_writer.Write(l, part+".stl")
                      os.system(f"meshio-convert {part}.stl   {part}.obj")
                      clean_after_body(part)
