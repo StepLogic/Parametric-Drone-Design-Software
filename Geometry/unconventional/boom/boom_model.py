@@ -145,6 +145,7 @@ class boom_model():
             trafo = tigl3.geometry.CTiglTransformation()
             trafo.add_mirroring_at_yzplane()
             loft.append(tigl3.geometry.CNamedShape(trafo.transform(loft[0]), "cut").shape())
+        print(loft)
         return loft
 
 
