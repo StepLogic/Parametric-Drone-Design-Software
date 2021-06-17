@@ -15,6 +15,7 @@ from GUI.dialogs.structure_dialogs.structures_dialog import structures_dialog
 from GUI.window.cad.structure_view import show_structure
 from GUI.workflow.design_workflow import export_files
 from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThread
+from GUI.workflow.threads.geometry.ExportThread import ExportThread
 
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
 from Structures.trimesh.trimeshWrapper import get_functions
