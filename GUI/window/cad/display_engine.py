@@ -1,5 +1,6 @@
 from GUI.window.cad._viewer_ import _viewer_
-from Utils.database.database import model_filepath
+from Utils.database.database import model_filepath, model_dir
+from Utils.database.geometry.control_surface_database import get_surface_type
 
 
 class display_engine(_viewer_):
@@ -66,3 +67,24 @@ class display_engine(_viewer_):
         self.eraseAll()
         for name, lofts in self.current_table.values():
             self.show_object(part_name=name, lofts=lofts)
+    def export_part(self,part_name):
+        from OCC.StlAPI import StlAPI_Writer
+        stl_writer = StlAPI_Writer()
+        stl_writer.SetASCIIMode(True)
+        for part,loft in self.current_table.items():
+            if part==part_name:
+                stl_writer.Write(loft, model_dir+part_name)
+
+    def export_files_for_simulation(self):
+        from OCC.StlAPI import StlAPI_Writer
+        stl_writer = StlAPI_Writer()
+        stl_writer.SetASCIIMode(True)
+        for part, loft in self.current_table.items():
+            cs=False
+            filepath=model_dir
+            try:
+                sname= get_surface_type(part)
+                stl_writer.Write(loft, model_dir + "/moveables/"+sname+".stl")
+            except:
+                pass
+            stl_writer.Write(loft, model_dir + "/body/" + part+".stl")

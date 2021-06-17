@@ -10,6 +10,21 @@ def get_parent_name(surface_name = ""):
     return values.get(parent_)
 
 
+def get_surface_type(surface_name = ""):
+    _type=""
+    values = get_parent_name(surface_name)
+    surface_type_=database.read_aircraft_specifications()[values][surface_type]
+    if surface_type_==wing:
+        _type=aileron_
+    elif surface_type_==tailplane:
+        _type=elevator_
+    elif surface_type_==fin:
+        _type=rudder_
+
+    return _type
+
+
+
 def read_parent_data(surface_name="",key=""):
     values = database.read_aircraft_specifications()
     design_type_ = values[objects][surface_name][design_type]
