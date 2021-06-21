@@ -6,9 +6,9 @@ from Utils.database.propulsion.propulsion_database import write_propeller_object
 
 
 class propeller_tab(QWidget):
-    def __init__(self,name=""):
+    def __init__(self, name=""):
         super().__init__()
-        self._name=name
+        self._name = name
         self.xz_mirror_ = None
         self.xy_mirror_ = None
         self.yz_mirror_ = None
@@ -219,8 +219,8 @@ class propeller_tab(QWidget):
         self.layout.addRow(self.section_5_x_label, self.section_5_x_text)
 
         self.section_5_y_label = QLabel("Y")
-        self.section_5_y_text = QLineEdit()
-        self.layout.addRow(self.section_5_y_label, self.section_5_y_text)
+        self.section_5_profile_text = QLineEdit()
+        self.layout.addRow(self.section_5_y_label, self.section_5_profile_text)
 
         self.section_5_z_label = QLabel("Z")
         self.section_5_z_text = QLineEdit()
@@ -252,59 +252,59 @@ class propeller_tab(QWidget):
 
     def yz_mirror_Checked(self, button):
         self.yz_mirror_ = button
+
     def zero_all_text_fields(self):
-      try:
-          propeller_number_,xz_mirror_, xy_mirror_, yz_mirror_ \
-              , rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
-          root_le_pos_y_, root_le_pos_z_, section_1_length_, section_2_length_, \
-          section_3_length_, section_4_length_, section_5_length_, section_1_profile_, \
-          section_2_profile_, section_3_profile_, section_4_profile_, section_5_profile_, \
-          section_1_z_, section_2_z_, section_3_z_, section_4_z_, section_5_z_ \
-              , section_1_chord_, section_2_chord_, section_3_chord_, section_4_chord_, \
-          section_5_chord_, section_1_pitch_angle_, section_2_pitch_angle_, \
-          section_3_pitch_angle_, section_4_pitch_angle_, section_5_pitch_angle_ = read_propeller_parameters(self._name)
+        try:
+            propeller_number_, xz_mirror_, xy_mirror_, yz_mirror_ \
+                , rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
+            root_le_pos_y_, root_le_pos_z_, section_1_length_, section_2_length_, \
+            section_3_length_, section_4_length_, section_5_length_, section_1_profile_, \
+            section_2_profile_, section_3_profile_, section_4_profile_, section_5_profile_, \
+            section_1_z_, section_2_z_, section_3_z_, section_4_z_, section_5_z_ \
+                , section_1_chord_, section_2_chord_, section_3_chord_, section_4_chord_, \
+            section_5_chord_, section_1_pitch_angle_, section_2_pitch_angle_, \
+            section_3_pitch_angle_, section_4_pitch_angle_, section_5_pitch_angle_ = read_propeller_parameters(
+                self._name)
 
-          self.show_default_values(propeller_number_=propeller_number_,
-                                   xz_mirror_=xz_mirror_,
-                                   xy_mirror_=xy_mirror_,
-                                   yz_mirror_=yz_mirror_,
-                                   rot_x_=rot_x_,
-                                   rot_y_=rot_y_,
-                                   rot_z_=rot_z_,
-                                   root_le_pos_x_=root_le_pos_x_,
-                                   root_le_pos_y_=root_le_pos_y_,
-                                   root_le_pos_z_=root_le_pos_z_,
-                                   section_1_length_=section_1_length_,
-                                   section_2_length_=section_2_length_,
-                                   section_3_length_=section_3_length_,
-                                   section_4_length_=section_4_length_,
-                                   section_5_length_=section_5_length_,
-                                   section_1_profile_=section_1_profile_,
-                                   section_2_profile_=section_2_profile_,
-                                   section_3_profile_=section_3_profile_,
-                                   section_4_profile_=section_4_profile_,
-                                   section_5_profile_=section_5_profile_,
-                                   section_1_z_=section_1_z_,
-                                   section_2_z_=section_2_z_,
-                                   section_3_z_=section_3_z_,
-                                   section_4_z_=section_4_z_,
-                                   section_5_z_=section_5_z_,
-                                   section_1_chord_=section_1_chord_,
-                                   section_2_chord_=section_2_chord_,
-                                   section_3_chord_=section_3_chord_,
-                                   section_4_chord_=section_4_chord_,
-                                   section_5_chord_=section_5_chord_,
-                                   section_1_pitch_angle_=section_1_pitch_angle_,
-                                   section_2_pitch_angle_=section_2_pitch_angle_,
-                                   section_3_pitch_angle_=section_3_pitch_angle_,
-                                   section_4_pitch_angle_=section_4_pitch_angle_,
-                                   section_5_pitch_angle_=section_5_pitch_angle_)
-      except Exception as e:
-          print("error",e)
-          print(self._name)
-          self.show_default_values()
-
-
+            self.show_default_values(propeller_number_=propeller_number_,
+                                     xz_mirror_=xz_mirror_,
+                                     xy_mirror_=xy_mirror_,
+                                     yz_mirror_=yz_mirror_,
+                                     rot_x_=rot_x_,
+                                     rot_y_=rot_y_,
+                                     rot_z_=rot_z_,
+                                     root_le_pos_x_=root_le_pos_x_,
+                                     root_le_pos_y_=root_le_pos_y_,
+                                     root_le_pos_z_=root_le_pos_z_,
+                                     section_1_length_=section_1_length_,
+                                     section_2_length_=section_2_length_,
+                                     section_3_length_=section_3_length_,
+                                     section_4_length_=section_4_length_,
+                                     section_5_length_=section_5_length_,
+                                     section_1_profile_=section_1_profile_,
+                                     section_2_profile_=section_2_profile_,
+                                     section_3_profile_=section_3_profile_,
+                                     section_4_profile_=section_4_profile_,
+                                     section_5_profile_=section_5_profile_,
+                                     section_1_z_=section_1_z_,
+                                     section_2_z_=section_2_z_,
+                                     section_3_z_=section_3_z_,
+                                     section_4_z_=section_4_z_,
+                                     section_5_z_=section_5_z_,
+                                     section_1_chord_=section_1_chord_,
+                                     section_2_chord_=section_2_chord_,
+                                     section_3_chord_=section_3_chord_,
+                                     section_4_chord_=section_4_chord_,
+                                     section_5_chord_=section_5_chord_,
+                                     section_1_pitch_angle_=section_1_pitch_angle_,
+                                     section_2_pitch_angle_=section_2_pitch_angle_,
+                                     section_3_pitch_angle_=section_3_pitch_angle_,
+                                     section_4_pitch_angle_=section_4_pitch_angle_,
+                                     section_5_pitch_angle_=section_5_pitch_angle_)
+        except Exception as e:
+            print("error", e)
+            print(self._name)
+            self.show_default_values()
 
     def show_default_values(self,
                             propeller_number_=0,
@@ -364,13 +364,13 @@ class propeller_tab(QWidget):
 
         self.section_1_length_text.setText(str(section_1_length_))
         self.section_1_profile_text.setText(str(section_1_profile_))
-        self.section_1_z_text.setText(str(section_1_profile_))
+        self.section_1_z_text.setText(str(section_1_z_))
         self.section_1_chord_text.setText(str(section_1_chord_))
         self.section_1_pitch_angle_text.setText(str(section_1_pitch_angle_))
 
         self.section_2_length_text.setText(str(section_2_length_))
         self.section_2_profile_text.setText(str(section_2_profile_))
-        self.section_2_z_text.setText(str(section_2_profile_))
+        self.section_2_z_text.setText(str(section_2_z_))
         self.section_2_chord_text.setText(str(section_2_chord_))
         self.section_2_pitch_angle_text.setText(str(section_2_pitch_angle_))
 
@@ -387,54 +387,52 @@ class propeller_tab(QWidget):
         self.section_4_pitch_angle_text.setText(str(section_4_pitch_angle_))
 
         self.section_5_x_text.setText(str(section_5_length_))
-        self.section_5_y_text.setText(str(section_5_profile_))
+        self.section_5_profile_text.setText(str(section_5_profile_))
         self.section_5_z_text.setText(str(section_5_z_))
         self.section_5_chord_text.setText(str(section_5_chord_))
         self.section_5_pitch_angle_text.setText(str(section_5_pitch_angle_))
 
-
-
     def init_action(self):
         self.parameters = {
-         propeller:{
-            self._name: {
-                propeller_number:int(self.propeller_number_text.text()),
-                hub_position_x: float(self.root_le_position_x_text.text()),
-                hub_position_y: float(self.root_le_position_y_text.text()),
-                hub_position_z: float(self.root_le_position_z_text.text()),
-                xy_mirror: self.xy_mirror_,
-                xz_mirror: self.xz_mirror_,
-                yz_mirror: self.yz_mirror_,
-                rotation_x: float(self.hub_diameter_text.text()),
-                rotation_y: float(self.hub_length_text.text()),
-                pitch_angle: int(self.pitch_angle_text.text()),
-                section_1_length: float(self.section_1_length_text.text()),
-                section_1_profile: self.section_1_profile_text.text(),
-                section_1_z: float(self.section_1_z_text.text()),
-                section_1_chord: float(self.section_1_chord_text.text()),
-                section_1_pitch_angle: float(self.section_1_pitch_angle_text.text()),
-                section_2_length: float(self.section_2_length_text.text()),
-                section_2_profile:self.section_2_profile_text.text(),
-                section_2_z: float(self.section_2_z_text.text()),
-                section_2_chord: float(self.section_2_chord_text.text()),
-                section_2_pitch_angle: float(self.section_2_pitch_angle_text.text()),
-                section_3_length: float(self.section_3_x_text.text()),
-                section_3_profile: self.section_3_y_text.text(),
-                section_3_z: float(self.section_3_z_text.text()),
-                section_3_chord: float(self.section_3_chord_text.text()),
-                section_3_pitch_angle: float(self.section_3_pitch_angle_text.text()),
-                section_4_length: float(self.section_4_x_text.text()),
-                section_4_profile: self.section_4_profile_text.text(),
-                section_4_z: float(self.section_4_z_text.text()),
-                section_4_chord: float(self.section_4_chord_text.text()),
-                section_4_pitch_angle: float(self.section_4_pitch_angle_text.text()),
-                section_5_length: float(self.section_5_x_text.text()),
-                section_5_profile: self.section_5_y_text.text(),
-                section_5_z: float(self.section_5_z_text.text()),
-                section_5_chord: float(self.section_5_chord_text.text()),
-                section_5_pitch_angle: float(self.section_5_pitch_angle_text.text()),
+            propeller: {
+                self._name: {
+                    propeller_number: int(self.propeller_number_text.text()),
+                    hub_position_x: float(self.root_le_position_x_text.text()),
+                    hub_position_y: float(self.root_le_position_y_text.text()),
+                    hub_position_z: float(self.root_le_position_z_text.text()),
+                    xy_mirror: self.xy_mirror_,
+                    xz_mirror: self.xz_mirror_,
+                    yz_mirror: self.yz_mirror_,
+                    rotation_x: float(self.hub_diameter_text.text()),
+                    rotation_y: float(self.hub_length_text.text()),
+                    pitch_angle: int(self.pitch_angle_text.text()),
+                    section_1_length: float(self.section_1_length_text.text()),
+                    section_1_profile: self.section_1_profile_text.text(),
+                    section_1_z: float(self.section_1_z_text.text()),
+                    section_1_chord: float(self.section_1_chord_text.text()),
+                    section_1_pitch_angle: float(self.section_1_pitch_angle_text.text()),
+                    section_2_length: float(self.section_2_length_text.text()),
+                    section_2_profile: self.section_2_profile_text.text(),
+                    section_2_z: float(self.section_2_z_text.text()),
+                    section_2_chord: float(self.section_2_chord_text.text()),
+                    section_2_pitch_angle: float(self.section_2_pitch_angle_text.text()),
+                    section_3_length: float(self.section_3_x_text.text()),
+                    section_3_profile: self.section_3_y_text.text(),
+                    section_3_z: float(self.section_3_z_text.text()),
+                    section_3_chord: float(self.section_3_chord_text.text()),
+                    section_3_pitch_angle: float(self.section_3_pitch_angle_text.text()),
+                    section_4_length: float(self.section_4_x_text.text()),
+                    section_4_profile: self.section_4_profile_text.text(),
+                    section_4_z: float(self.section_4_z_text.text()),
+                    section_4_chord: float(self.section_4_chord_text.text()),
+                    section_4_pitch_angle: float(self.section_4_pitch_angle_text.text()),
+                    section_5_length: float(self.section_5_x_text.text()),
+                    section_5_profile: self.section_5_profile_text.text(),
+                    section_5_z: float(self.section_5_z_text.text()),
+                    section_5_chord: float(self.section_5_chord_text.text()),
+                    section_5_pitch_angle: float(self.section_5_pitch_angle_text.text()),
 
-            }}}
+                }}}
         try:
             database.update_propulsion_specifications(key=propeller, value=self.parameters[propeller])
         except:

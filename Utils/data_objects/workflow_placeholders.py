@@ -11,6 +11,7 @@ build_shroud="build_shroud"
 build_propeller="build_propeller"
 instructions="Start!"
 build_message="Wait"
+designs_="designs_"
 done_=1
 start_=0
 

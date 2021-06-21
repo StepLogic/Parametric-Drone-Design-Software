@@ -73,7 +73,7 @@ class wing_model:
 
 
 
-        wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x+(self.chord/2)
+        wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x
                                                                 , self.root_location_y
                                                                 , self.root_location_z))
         wing_main_half_span = self.span / 2
@@ -141,7 +141,7 @@ class wing_model:
                 elif len(nacanumber) == 5:
                     constant = int(nacanumber[3:]) * 0.01
 
-        wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x + (self.chord / 2)
+        wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x
                                                                 , self.root_location_y
                                                                 , self.root_location_z))
         wing_main_half_span = self.span / 2

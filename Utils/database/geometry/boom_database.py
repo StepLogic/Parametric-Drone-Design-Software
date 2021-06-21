@@ -10,9 +10,9 @@ def read_boom_data(boom_name_=""):
     design_type_ = values[objects][boom_name_][design_type]
     part = values[objects][boom_name_][boom_type]
     if design_type_ == unconventional_design:
-            return read_boom_values(values[part][boom_name_])
+        return read_boom_values(values[part][boom_name_])
     else:
-            return read_fuselage_values(values["boom"][boom_name_])
+        return read_fuselage_values(values["boom"][boom_name_])
 
 
 def get_boom_object_data(boom_name_=""):
@@ -34,16 +34,6 @@ def write_boom_objects(value=""):
     database.write_aircraft_specification(data)
 
 
-def delete_boom_objects(value=""):
-    data = database.read_aircraft_specifications()
-    array = data[boom_objects]
-    array.remove(value)
-    data[boom_objects] = array
-    print(database.read_aircraft_specifications())
-    database.write_aircraft_specification(data)
-
-
-
 def write_boom_to_objects(boom_name="", boom_type_="", design_type_=""):
     data = database.read_aircraft_specifications()
     try:
@@ -51,7 +41,7 @@ def write_boom_to_objects(boom_name="", boom_type_="", design_type_=""):
         val[boom_name] = {boom_type: boom_type_, design_type: design_type_}
     except Exception as e:
         logging.error(e)
-        data.update({objects: {boom_name: {boom_type: boom_type, design_type: design_type_}}})
+        data.update({objects: {boom_name: {boom_type: boom_type_, design_type: design_type_}}})
     database.write_aircraft_specification(data)
 
 
@@ -104,17 +94,6 @@ def read_fuselage_values(values={}):
            tail_length_, tail_position_z_
 
 
-def delete_boom_from_objects(surface_name=""):
-    data = database.read_aircraft_specifications()
-    try:
-        array = data[objects]
-        array.pop(surface_name)
-        data[objects] = array
-    except:
-        pass
-    database.write_aircraft_specification(data)
-
-
 def read_boom_values(values={}):
     fuselage_length = values.get(boom_length)
     fuselage_diameter = values.get(boom_diameter)
@@ -146,7 +125,6 @@ def read_boom_values(values={}):
     section_1_profile_ = values.get(section_1_profile)
     section_2_profile_ = values.get(section_2_profile)
     section_3_profile_ = values.get(section_3_profile)
-
 
     tail_length_ = values.get(tail_length)
     tail_width_ = values.get(tail_width)
@@ -184,11 +162,32 @@ def read_boom_values(values={}):
            section_3_width_, section_3_height_, \
            section_3_length_, \
            section_3_position_z_, \
-           tip_width_,tail_height_, tail_width_,tip_height_, \
+           tip_width_, tail_height_, tail_width_, tip_height_, \
            tail_length_, tail_position_z_
+
+
+def delete_boom_from_objects(surface_name=""):
+    data = database.read_aircraft_specifications()
+    try:
+        array = data[objects]
+        array.pop(surface_name)
+        data[objects] = array
+    except:
+        pass
+    database.write_aircraft_specification(data)
+
+
+def delete_boom_objects(value=""):
+    data = database.read_aircraft_specifications()
+    try:
+        array = data[boom_objects]
+        array.remove(value)
+        data[boom_objects] = array
+    except:
+        pass
+    database.write_aircraft_specification(data)
 
 
 def read_boom_objects():
     data = database.read_aircraft_specifications()
-    print("reading_objects")
     return data[boom_objects]

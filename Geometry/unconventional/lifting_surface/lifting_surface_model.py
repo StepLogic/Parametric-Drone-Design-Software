@@ -89,7 +89,7 @@ class lifting_surface_model:
     def straight_surface(self):
 
         n = random.random()
-        self.lifting_surface = self.wings.create_wing(f"{n}", 5, "NACA0012")
+        self.lifting_surface = self.wings.create_wing(f"{n}", 5, self.airfoil_type)
 
         chords = [self.section_1_chord_, self.section_2_chord_, self.section_3_chord_, self.section_4_chord_,
                   self.section_5_chord_]
@@ -146,7 +146,6 @@ class lifting_surface_model:
             loft.append(tigl3.geometry.CNamedShape(trafo.transform(loft[0]), "cut").shape())
         self.old_profile = self.airfoil_type
 
-        print(loft)
         return loft
 
     def curved_surface(self):

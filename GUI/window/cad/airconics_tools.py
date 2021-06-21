@@ -811,7 +811,7 @@ def mirror(brep, plane='xz', axe2=None, copy=False):
 #        time.sleep(0.21)
 
 
-# These functions are from the core_geometry_util examples in pythonocc-core
+# These functions are from the core_geometry_util saved_designs in pythonocc-core
 def make_edge(*args):
     edge = BRepBuilderAPI_MakeEdge(*args)
     with assert_isdone(edge, 'failed to produce edge'):

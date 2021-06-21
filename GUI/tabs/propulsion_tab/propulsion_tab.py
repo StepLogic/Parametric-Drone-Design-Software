@@ -1,5 +1,8 @@
 from PyQt5.QtWidgets import *
 
+from Utils.data_objects.propulsion_keys import voltage, propulsion, discharge_rate, max_thrust, battery_capacity, \
+    max_current
+from Utils.database.propulsion.propulsion_database import write_propulsion_parameters, read_propulsion_parameters
 
 
 class propulsion_tab(QWidget):
@@ -29,11 +32,7 @@ class propulsion_tab(QWidget):
         self.layout.addRow(self.current_label, self.current_text)
         ###################################################
         ##########################################################################
-        ##################################################################################
 
-        self.mass_motor_label = QLabel("Mass of Motor (Kg)")
-        self.mass_text = QLineEdit()
-        self.layout.addRow(self.mass_motor_label, self.mass_text)
 
         ##################################################################################
         ##############################################################################
@@ -49,9 +48,7 @@ class propulsion_tab(QWidget):
         layout.addRow(self.battery_capacity_label, self.battery_capacity_text)
         ##############################################################################
 
-        self.battery_mass_label = QLabel("Mass Battery(kg)")
-        self.battery_mass_text = QLineEdit()
-        self.layout.addRow(self.battery_mass_label, self.battery_mass_text)
+
         ############################################################################
         self.discharge_rate_label = QLabel("Discharge Rate(C)")
         self.discharge_rate_text = QLineEdit()
@@ -75,7 +72,6 @@ class propulsion_tab(QWidget):
 
         self.current_text.setText(str(max_current_))
         self.voltage_text.setText(str(voltage_))
-
         self.discharge_rate_text.setText(str(discharge_rate_))
         self.battery_capacity_text.setText(str(battery_capacity_))
         self.thrust_text.setText(str(max_thrust_))

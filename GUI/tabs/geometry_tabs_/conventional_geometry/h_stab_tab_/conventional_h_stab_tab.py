@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from Utils.data_objects.lifting_surface_placeholder import *
 from Utils.database import database
 from Utils.database.geometry.lifting_database import write_lifting_surface_objects, write_lifting_surface_to_objects, \
-    read_surface_data
+    read_surface_data, airfoil_profiles
 from PyQt5.QtWidgets import *
 
 from Utils.data_objects.lifting_surface_placeholder import *
@@ -52,10 +52,13 @@ class h_stab_tab(QWidget):
         layout.addRow(self.taper_ratio_label, self.taper_ratio_text)
 
         ##################################################################################
+        self.wing_profile_label = QLabel("Airfoil Profile")
+        self.wing_profile_combo = QComboBox()
+        self.wing_profile_combo.addItems(airfoil_profiles())
+        self.wing_profile_selection = None
+        self.wing_profile_combo.currentIndexChanged.connect(self.wing_profile_selectionChanged)
+        layout.addRow(self.wing_profile_label, self.wing_profile_combo)
 
-        self.Wing_profile_label = QLabel("Airfoil(Do not Add NACA)")
-        self.Wing_profile_text = QLineEdit()
-        layout.addRow(self.Wing_profile_label, self.Wing_profile_text)
         ##################################################################################
 
         self.Wing_postion_tlabel = QLabel("Tailplane Leading Edge Position")
@@ -89,7 +92,7 @@ class h_stab_tab(QWidget):
             self.show_default_values()
     ############################################################################
     def show_default_values(self, root_location_x=0, root_location_y=0, root_location_z=0, dihedral=0, sweep=0, twist=0,
-                            span=0, taper_ratio=1, chord=0,profile="naca0012"):
+                            span=0, taper_ratio=1, chord=0,profile="naca0006"):
         self.span_text.setText(str(span))
 
         self.chord_length_text.setText(str(chord))
@@ -102,7 +105,7 @@ class h_stab_tab(QWidget):
 
         self.taper_ratio_text.setText(str(taper_ratio))
 
-        self.Wing_profile_text.setText(profile)
+        self.wing_profile_combo.setCurrentIndex(airfoil_profiles().index(profile))
 
         self.Wing_postion_x_text.setText(str(root_location_x))
 
@@ -122,7 +125,7 @@ class h_stab_tab(QWidget):
                     root_le_position_y: float(self.Wing_postion_y_text.text()),
                     root_le_position_z: float(self.Wing_postion_z_text.text()),
                     span: float(self.span_text.text()),
-                    profile: str(self.Wing_profile_text.text()),
+                    profile: str(self.wing_profile_selection),
                     chord: float(self.chord_length_text.text()),
                     taper_ratio: float(self.taper_ratio_text.text()),
                     sweep: float(self.sweep_angle_text.text()),
@@ -134,10 +137,13 @@ class h_stab_tab(QWidget):
             database.update_aircraft_specifications(key=lifting_surface, value=self.parameters[lifting_surface])
         except:
             database.write_aircraft_specification(self.parameters)
-
-        write_lifting_surface_objects(value=self.text)
-        write_lifting_surface_to_objects(surface_name=self.text, design_type_=self.design_type_,
-                                         surface_type_=self.surface_type_)
         return self.parameters
+
+    def wing_profile_selectionChanged(self, i):
+        self.wing_profile_selection = airfoil_profiles()[i]
+
+    def accept_inputs(self):
+        if self.wing_profile_selection is None:
+            self.wing_profile_selection = airfoil_profiles()[self.wing_profile_combo.currentIndex()]
 
 

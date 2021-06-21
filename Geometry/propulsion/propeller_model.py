@@ -48,7 +48,7 @@ class propeller_model():
                  section_4_pitch_angle_, section_5_pitch_angle_, section_5_pitch_angle_]
 
         n = random.random()
-        lifting_surface = self.config.get_wings().create_wing(f"{n}", len(chords), f"NACA{section_1_profile_}")
+        lifting_surface = self.config.get_wings().create_wing(f"{n}", len(chords), f"naca0012")
 
         sections = [-hub_length / 2,
                     0.1 * hub_length,
@@ -106,7 +106,7 @@ class propeller_model():
             center.y = y
             center.z = 0.0
             ce.set_center(center)
-            ce.set_profile_uid(f"NACA{profile_}")
+            ce.set_profile_uid(f"{profile_}")
             e.set_rotation(tigl3.geometry.CTiglPoint(0, pitch_, 0))
         lifting_surface.set_rotation(tigl3.geometry.CTiglPoint(0, pitch_angle, 0))
         for idx in range(1, n_sections + 1):

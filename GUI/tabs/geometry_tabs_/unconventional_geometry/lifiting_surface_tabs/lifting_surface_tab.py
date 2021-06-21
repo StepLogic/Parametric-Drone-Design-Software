@@ -269,7 +269,7 @@ class lifting_surface_tab(QWidget):
         self.yz_mirror_ = button
 
     def zero_all_text_fields(self):
-
+        try:
             profile_,surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_, rot_x_, rot_y_, rot_z_, root_le_pos_x_, root_le_pos_y_, root_le_pos_z_, \
             section_1_x_, section_2_x_, section_3_x_, section_4_x_, section_5_x_, \
             section_1_y_, section_2_y_, section_3_y_, section_4_y_, section_5_y_, \
@@ -314,6 +314,8 @@ class lifting_surface_tab(QWidget):
                                      section_3_twist_angle_=section_3_twist_angle_,
                                      section_4_twist_angle_=section_4_twist_angle_,
                                      section_5_twist_angle_=section_5_twist_angle_)
+        except:
+            self.show_default_values()
 
 
     def show_default_values(self,
@@ -462,8 +464,6 @@ class lifting_surface_tab(QWidget):
             database.update_aircraft_specifications(key=lifting_surface, value=self.parameters[lifting_surface])
         except:
             database.write_aircraft_specification(self.parameters)
-        write_lifting_surface_objects(value=self._name)
-        write_lifting_surface_to_objects(surface_name=self._name,design_type_=self.design_type_,surface_type_=self.surface_type_)
         return self.parameters
 
     def wing_profile_selectionChanged(self, i):
