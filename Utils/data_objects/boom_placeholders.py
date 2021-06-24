@@ -1,5 +1,5 @@
 
-fuselage_profiles=["rectangularProfile","circularProfile","circleProfile","squareProfile"]
+fuselage_profiles=["rectangularProfile","circularProfile","squareProfile"]
 default_nose_position_x = 0
 default_nose_position_y = 0
 default_nose_position_z = 0

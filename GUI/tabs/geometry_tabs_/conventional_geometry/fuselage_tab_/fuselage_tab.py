@@ -335,7 +335,4 @@ class fuselage_tab(QWidget):
             database.update_aircraft_specifications(key=boom, value=self.parameters[boom])
         except:
             database.write_aircraft_specification(self.parameters)
-        write_boom_objects(value=self.text)
-        write_boom_to_objects(boom_name=self.text, design_type_=self.design_type_,
-                              boom_type_=self.boom_type_)
         return self.parameters

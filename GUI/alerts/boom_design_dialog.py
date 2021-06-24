@@ -40,4 +40,5 @@ class boom_design_dialog(QDialog):
             self.design_type_ = design_types[self.designComboBox.currentIndex()]
         if self.boom_type_ is None:
             self.boom_type_ = boom_objects_list[self.typeComboBox.currentIndex()]
-        return (self.lineText.text(), self.boom_type_, self.design_type_)
+
+        return self.lineText.text(), self.boom_type_, self.design_type_

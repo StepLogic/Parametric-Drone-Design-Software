@@ -10,7 +10,8 @@ from GUI.tabs.geometry_tabs_.conventional_geometry.wing_tab_.conventional_wing_t
 from Utils.data_objects.lifting_surface_placeholder import fin, tailplane
 from Utils.data_objects.placeholder import unconventional_design, conventional_design
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data, \
-    delete_lifting_surface_objects, delete_lifting_surface_from_objects
+    delete_lifting_surface_objects, delete_lifting_surface_from_objects, write_lifting_surface_to_objects, \
+    write_lifting_surface_objects
 
 
 class lifting_surface_dialog(QDialog):
@@ -38,7 +39,7 @@ class lifting_surface_dialog(QDialog):
 
 
     def load_surfaces(self):
-
+        try:
             surface_list = read_lifting_surface_objects()
             if len(surface_list) == 0:
                 self.new_surfaces()
@@ -66,6 +67,8 @@ class lifting_surface_dialog(QDialog):
                             self.surfaces.append(self.surfaca_tab_)
                             self.inputArea.addTab(self.surfaca_tab_,l)
                             self.indexes.append(l)
+        except:
+            self.new_surfaces()
 
     def new_surfaces(self):
         dialog = surface_design_dialog()
@@ -94,6 +97,10 @@ class lifting_surface_dialog(QDialog):
                             self.surfaces.append(self.surfaca_tab_)
                             self.inputArea.addTab(self.surfaca_tab_, text)
                             self.indexes.append(text)
+                    write_lifting_surface_objects(value=text)
+                    write_lifting_surface_to_objects(surface_name=text, design_type_=design_type_,
+                                                     surface_type_=surface_type_)
+
 
         else:
             raise Exception("error")

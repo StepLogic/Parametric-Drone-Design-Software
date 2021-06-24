@@ -9,6 +9,7 @@ from Utils.maths.geometry_math_tools import get_fuselage_length, get_diameter
 
 class boom_tab(QWidget):
     def __init__(self, name="", boom_type_="", design_type_=""):
+        print("tab", boom_type_)
         super().__init__()
         self.tab_ = self
         self._name = name
@@ -418,7 +419,6 @@ class boom_tab(QWidget):
 
     def init_action(self):
         self.accept_inputs()
-
         self.parameters = {
             boom: {
                 self._name: {
@@ -497,10 +497,6 @@ class boom_tab(QWidget):
             database.update_aircraft_specifications(key=boom, value=self.parameters[boom])
         except:
             database.write_aircraft_specification(self.parameters)
-        write_boom_objects(value=self._name)
-        write_boom_to_objects(boom_name=self._name, design_type_=self.design_type_,
-                              boom_type_=self.boom_type_)
-
         return self.parameters
 
     def section_1_profile_selectionChanged(self, i):

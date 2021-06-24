@@ -17,6 +17,7 @@ class display_engine(_viewer_):
         self.parts_table = []
 
     def show_object(self, part_name="", lofts=None):
+      print("display", part_name, lofts)
       try:
         for loft in lofts:
             self.add(loft)
@@ -37,13 +38,20 @@ class display_engine(_viewer_):
 
         if self.current_table.get(part_name) is not None:
             lofts = self.current_table[part_name]
-            for loft in lofts:
-                self.remove(loft)
-            self.parts_table.remove(part_name)
+            try:
+                for loft in lofts:
+                    self.remove(loft)
+            except:
+                self.remove(lofts)
+            try:
+                self.parts_table.remove(part_name)
+            except:
+                pass
         else:
             pass
 
     def update_object(self, part_name="", lofts=None):
+        print("display",part_name,lofts)
         if self.current_table.get(part_name) is None:
             self.show_object(part_name=part_name, lofts=lofts)
         else:

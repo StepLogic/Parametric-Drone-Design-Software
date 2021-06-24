@@ -32,11 +32,10 @@ class fuselage_model():
         self.tip_radius_ = 0
         self.tail_radius_ = 0
         self.tail_length_ = 0
-
         self.current_lofts = None
         self.update = False
         self.prev_name = ""
-        self.fuselage_profile = "circleProfile"
+        self.fuselage_profile = "circularProfile"
         self.fuselages = config.get_fuselages()
         self.fuselage = None
 

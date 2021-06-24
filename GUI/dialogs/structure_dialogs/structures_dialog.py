@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from GUI.tabs.structures.structures_tab import structures_tab
+from GUI.tabs.structures_tabs_.structures_tab import structures_tab
 
 
 class structures_dialog(QDialog):

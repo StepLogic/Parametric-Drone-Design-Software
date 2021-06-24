@@ -1,6 +1,7 @@
 import json
 
 from Helper import absolute_path, resource_path
+
 airfoil_path = resource_path(absolute_path + "/Resources/airfoil/export/names.txt")
 resource_dir_cpacs = resource_path(absolute_path + "/Resources/cpacs")
 resource_dir_cpacs_out = resource_path(absolute_path + "/Resources/cpacs/structure.xml")
@@ -13,15 +14,16 @@ propulsion_specification_filepath = absolute_path + "/Resources/json/propulsion_
 performance_specification_filepath = absolute_path + "/Resources/json/performance_specification.json"
 datcom_input_file = absolute_path + "/Resources/datcom_files/input.inp"
 datcom_output_file = absolute_path + "/Resources/datcom_files/datcom.out"
-datcom_temp_dir=absolute_path+"Aerodynamics/datcom"
+datcom_temp_dir = absolute_path + "Aerodynamics/datcom"
 datcom_exe = absolute_path + "/Resources/programs_exe/datcom.exe"
-datcom_stability_specification_filepath = resource_path(
-    absolute_path + "/Resources/json/datcom_stability_specification.json")
+datcom_stability_specification_filepath = resource_path(absolute_path + "/Resources/json/datcom_stability_specification.json")
 model_filepath = resource_path(absolute_path + "/Resources/model/model.stl")
 sim_export_fixed = resource_path(absolute_path + "/Resources/model/body")
 sim_export_moveable = resource_path(absolute_path + "/Resources/model/moveables")
 model_dir = resource_path(absolute_path + "/Resources/model")
 settings_filepath = absolute_path + "/Resources/json/settings.json"
+saved_designs_ = absolute_path + "/Resources/saved_designs/saved.json"
+saved_designs_dir = absolute_path + "/Resources/saved_designs/"
 
 
 def read_settings():
@@ -45,12 +47,11 @@ def write_settings(values=None):
     write(settings_filepath, values)
 
 
-
-
 def write_datcom_input(input=""):
     with open(datcom_input_file, "w") as datcom:
         datcom.flush()
         datcom.write(input)
+
 
 def read_structures_specifications():
     return readFile(structure_specification_filepath)
@@ -178,6 +179,20 @@ def update_stability_specifications(key="", value={}):
     data = read_stability_specifications()
     data.update({key: value})
     write_stability_specification(data)
+
+
+def read_saved_designs():
+    return readFile(saved_designs_)
+
+
+def write_saved_designs(values={}):
+    write(saved_designs_, values)
+
+
+def update_saved_designs(key="", value={}):
+    data = read_saved_designs()
+
+    write_saved_designs(data)
 
 
 def read_datcom_stability_specifications():

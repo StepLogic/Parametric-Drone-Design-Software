@@ -172,9 +172,12 @@ class wing_tab(QWidget):
 
         # ##########################################################################################
 
-        self.wing_profile_label = QLabel("Airfoil(Do not Add NACA)")
-        self.wing_profile_combo = QLineEdit()
-        layout.addRow(self.wing_profile_label, self.wing_profile_combo)
+        self.wing_profile_label = QLabel("Airfoil Profile")
+        self.wing_profile_combo = QComboBox()
+        self.wing_profile_combo.addItems(airfoil_profiles())
+        self.wing_profile_selection = None
+        self.wing_profile_combo.currentIndexChanged.connect(self.wing_profile_selectionChanged)
+        self.layout.addRow(self.wing_profile_label, self.wing_profile_combo)
 
         ##########################################################################################
 
@@ -242,7 +245,7 @@ class wing_tab(QWidget):
     def show_default_values(self,root_location_x=0, root_location_y=0, root_location_z=0, dihedral=0, sweep=0, twist=0,
                             span=0, taper_ratio=1, chord=0, winglet_width=0, winglet_rotation=0,
                             winglet_center_translation_x=0
-                            , winglet_center_translation_y=0, winglet_center_translation_z=0, profile="naca4412"):
+                            , winglet_center_translation_y=0, winglet_center_translation_z=0, profile="naca0006"):
 
 
 
@@ -306,9 +309,6 @@ class wing_tab(QWidget):
         except:
             database.write_aircraft_specification(self.parameters)
 
-        write_lifting_surface_objects(value=self.text)
-        write_lifting_surface_to_objects(surface_name=self.text, design_type_=self.design_type_,
-                                         surface_type_=self.surface_type_)
         return self.parameters
     def wing_profile_selectionChanged(self, i):
         self.wing_profile_selection = airfoil_profiles()[i]

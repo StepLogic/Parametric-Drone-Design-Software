@@ -123,6 +123,7 @@ def update_boom_3d(config=None):
     lofts = {}
     for l in boom_list:
         design_type_, boom_type_ = get_boom_object_data(l)
+        print(l)
         lofts.update({l: generate_boom_3D_model(config, name=l, boom_type_=boom_type_, design_type_=design_type_)})
     return lofts
 

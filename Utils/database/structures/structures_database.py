@@ -135,23 +135,20 @@ def get_maximum_takeoff_weight():
 
 
 def get_structures_specifications():
-    value = database.read_structures_specifications
-    moments_of_inertia_ = value[moments_of_inertia]
+    value = database.read_structures_specifications()
+
     mass_of_battery_or_fuel_ = value[mass_of_battery_or_fuel]
-    center_of_gravity_ = value[center_of_gravity]
+
     maximum_takeoff_weight_ = value[maximum_takeoff_weight]
-    mass_of_wing_ = value[mass_of_wing]
+
     mass_of_payload_ = value[mass_of_payload]
-    mass_of_fuselage_ = value[mass_of_fuselage]
+
     mass_of_engine_or_motor_=value[mass_of_engine_or_motor]
-    return moments_of_inertia_, \
-           mass_of_battery_or_fuel_,\
+    return mass_of_battery_or_fuel_,\
            mass_of_engine_or_motor_,\
-           center_of_gravity_, \
            maximum_takeoff_weight_, \
-           mass_of_wing_, \
            mass_of_payload_, \
-           mass_of_fuselage_,
+
 
 
 def set_structure_specifications(value=None):

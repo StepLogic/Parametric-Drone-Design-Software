@@ -7,8 +7,8 @@ from GUI.tabs.propulsion_tab.propulsion_tab import propulsion_tab
 class propulsion_dialog(QDialog):
     def __init__(self):
         super().__init__()
-        tab = propulsion_tab()
-        self.layout = tab.create_widget()
+        self.tab = propulsion_tab()
+        self.layout =self.tab.create_widget()
         self.buttons = QDialogButtonBox(
             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
             Qt.Horizontal, self)
