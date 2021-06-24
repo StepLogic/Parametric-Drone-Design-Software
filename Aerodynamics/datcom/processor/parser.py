@@ -627,6 +627,7 @@ class DatcomParser(Parser):
                 pass
 
         # extract some need dictionaries
+        print(cases)
         dFlap = cases['flap']['SYMFLP'] if cases.get("flap") is not None else {}
         dAileron = cases['aileron']['ASYFLP'] if cases.get("aileron") is not None else {}
         dElevator = cases['total']['SYMFLP']

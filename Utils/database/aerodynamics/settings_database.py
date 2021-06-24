@@ -9,7 +9,7 @@ def get_aoa_range():
 def set_aoa_range(max=0, min=0):
     data = database.read_work_file()
     try:
-        delta = max / 10
+        delta = max / 4
         array = []
         counter = min
         while counter < max or counter == max:
@@ -18,7 +18,7 @@ def set_aoa_range(max=0, min=0):
         data[aoa_range] = array
         database.write_work_file(data)
     except Exception as e:
-        delta = max / 10
+        delta = max / 4
         array = []
         counter = min
         while counter < max or counter == max:
