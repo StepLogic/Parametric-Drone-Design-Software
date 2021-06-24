@@ -18,29 +18,29 @@
 
                                                                                  
   $FLTCON NALT=1.0,ALT(1)=10.0$                                                  
-  $FLTCON NALPHA=4.0,ALSCHD(1)=-10.0,-9.0,                                       
-  9.0,10.0,LOOP=2.0$                                                             
-  $FLTCON NMACH=1.0,MACH(1)=0.08$                                                
+  $FLTCON NALPHA=9.0,ALSCHD(1)=-10.0,-7.5,-5.0,-2.5,0.0,                         
+  2.5,5.0,7.5,10.0,LOOP=2.0$                                                     
+  $FLTCON NMACH=1.0,MACH(1)=0.3$                                                 
   $SYNTHS XCG=0.0,ZCG=0.0$                                                       
   $SYNTHS XW=0.0,ZW=0.0$                                                         
   $SYNTHS XH=0.0,ZH=0.0$                                                         
   $SYNTHS XV=0.0,ZV=0.0$                                                         
  NACA-W-4-0012                                                                   
-  $WGPLNF CHRDR=3.0$                                                             
-  $WGPLNF CHRDTP=0.0001$                                                         
-  $WGPLNF SSPN=5.6$                                                              
-  $WGPLNF SSPNE=5.6$                                                             
-  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF CHRDR=0.01$                                                            
+  $WGPLNF CHRDTP=0.01$                                                           
+  $WGPLNF SSPN=0.05$                                                             
+  $WGPLNF SSPNE=0.05$                                                            
+  $WGPLNF SAVSI=0.0$                                                             
   $WGPLNF TWISTA=1.1$                                                            
-  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF SAVSI=0.0$                                                             
   $WGPLNF DHDADO=1.2$                                                            
   $WGPLNF DHDADI=1.2$                                                            
   $WGPLNF TYPE = 1.0,CHSTAT=0.25$                                                
  NACA-H-4-0012                                                                   
-  $HTPLNF CHRDR=1.0$                                                             
-  $HTPLNF CHRDTP=1.0$                                                            
-  $HTPLNF SSPN=1.25$                                                             
-  $HTPLNF SSPNE=1.25$                                                            
+  $HTPLNF CHRDR=0.01$                                                            
+  $HTPLNF CHRDTP=0.01$                                                           
+  $HTPLNF SSPN=0.05$                                                             
+  $HTPLNF SSPNE=0.05$                                                            
   $HTPLNF SAVSI=0.0$                                                             
   $HTPLNF TWISTA=1.1$                                                            
   $HTPLNF SAVSI=0.0$                                                             
@@ -48,13 +48,13 @@
   $HTPLNF DHDADI=1.3$                                                            
   $HTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
  NACA-V-4-0012                                                                   
-  $VTPLNF CHRDR=1.0$                                                             
-  $VTPLNF CHRDTP=0.6666666666666667$                                             
-  $VTPLNF SSPN=1.25$                                                             
-  $VTPLNF SSPNE=1.25$                                                            
-  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF CHRDR=0.01$                                                            
+  $VTPLNF CHRDTP=0.01$                                                           
+  $VTPLNF SSPN=0.05$                                                             
+  $VTPLNF SSPNE=0.05$                                                            
+  $VTPLNF SAVSI=0.0$                                                             
   $VTPLNF TWISTA=1.1$                                                            
-  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF SAVSI=0.0$                                                             
   $VTPLNF DHDADO=1.3$                                                            
   $VTPLNF DHDADI=1.3$                                                            
   $VTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
@@ -67,29 +67,29 @@
 0
                                                                                  
   $FLTCON NALT=1.0,ALT(1)=10.0$                                                  
-  $FLTCON NALPHA=4.0,ALSCHD(1)=-10.0,-9.0,                                       
-  9.0,10.0,LOOP=2.0$                                                             
-  $FLTCON NMACH=1.0,MACH(1)=0.08$                                                
+  $FLTCON NALPHA=9.0,ALSCHD(1)=-10.0,-7.5,-5.0,-2.5,0.0,                         
+  2.5,5.0,7.5,10.0,LOOP=2.0$                                                     
+  $FLTCON NMACH=1.0,MACH(1)=0.3$                                                 
   $SYNTHS XCG=0.0,ZCG=0.0$                                                       
   $SYNTHS XW=0.0,ZW=0.0$                                                         
   $SYNTHS XH=0.0,ZH=0.0$                                                         
   $SYNTHS XV=0.0,ZV=0.0$                                                         
  NACA-W-4-0012                                                                   
-  $WGPLNF CHRDR=3.0$                                                             
-  $WGPLNF CHRDTP=0.0001$                                                         
-  $WGPLNF SSPN=5.6$                                                              
-  $WGPLNF SSPNE=5.6$                                                             
-  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF CHRDR=0.01$                                                            
+  $WGPLNF CHRDTP=0.01$                                                           
+  $WGPLNF SSPN=0.05$                                                             
+  $WGPLNF SSPNE=0.05$                                                            
+  $WGPLNF SAVSI=0.0$                                                             
   $WGPLNF TWISTA=1.1$                                                            
-  $WGPLNF SAVSI=-1.5108681716736887$                                             
+  $WGPLNF SAVSI=0.0$                                                             
   $WGPLNF DHDADO=1.2$                                                            
   $WGPLNF DHDADI=1.2$                                                            
   $WGPLNF TYPE = 1.0,CHSTAT=0.25$                                                
  NACA-H-4-0012                                                                   
-  $HTPLNF CHRDR=1.0$                                                             
-  $HTPLNF CHRDTP=1.0$                                                            
-  $HTPLNF SSPN=1.25$                                                             
-  $HTPLNF SSPNE=1.25$                                                            
+  $HTPLNF CHRDR=0.01$                                                            
+  $HTPLNF CHRDTP=0.01$                                                           
+  $HTPLNF SSPN=0.05$                                                             
+  $HTPLNF SSPNE=0.05$                                                            
   $HTPLNF SAVSI=0.0$                                                             
   $HTPLNF TWISTA=1.1$                                                            
   $HTPLNF SAVSI=0.0$                                                             
@@ -97,13 +97,13 @@
   $HTPLNF DHDADI=1.3$                                                            
   $HTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
  NACA-V-4-0012                                                                   
-  $VTPLNF CHRDR=1.0$                                                             
-  $VTPLNF CHRDTP=0.6666666666666667$                                             
-  $VTPLNF SSPN=1.25$                                                             
-  $VTPLNF SSPNE=1.25$                                                            
-  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF CHRDR=0.01$                                                            
+  $VTPLNF CHRDTP=0.01$                                                           
+  $VTPLNF SSPN=0.05$                                                             
+  $VTPLNF SSPNE=0.05$                                                            
+  $VTPLNF SAVSI=0.0$                                                             
   $VTPLNF TWISTA=1.1$                                                            
-  $VTPLNF SAVSI=30.0$                                                            
+  $VTPLNF SAVSI=0.0$                                                             
   $VTPLNF DHDADO=1.3$                                                            
   $VTPLNF DHDADI=1.3$                                                            
   $VTPLNF TYPE = 1.0,CHSTAT=0.25$                                                
@@ -133,7 +133,7 @@
                                                 DELTA-Y =   3.16898 PERCENT CHORD
 
 
-0                         MACH= 0.0800 LIFT-CURVE-SLOPE =   0.09622 /DEG.      XAC =   0.25852
+0                         MACH= 0.3000 LIFT-CURVE-SLOPE =   0.09985 /DEG.      XAC =   0.25926
 1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM   
                                                    HORIZONTAL TAIL SECTION DEFINITION
 0                                 IDEAL ANGLE OF ATTACK =   0.00000 DEG.
@@ -153,7 +153,7 @@
                                                 DELTA-Y =   3.16898 PERCENT CHORD
 
 
-0                         MACH= 0.0800 LIFT-CURVE-SLOPE =   0.09622 /DEG.      XAC =   0.25852
+0                         MACH= 0.3000 LIFT-CURVE-SLOPE =   0.09985 /DEG.      XAC =   0.25926
 1                             AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM   
                                                     VERTICAL TAIL SECTION DEFINITION
 0                                 IDEAL ANGLE OF ATTACK =   0.00000 DEG.
@@ -173,7 +173,7 @@
                                                 DELTA-Y =   3.16898 PERCENT CHORD
 
 
-0                         MACH= 0.0800 LIFT-CURVE-SLOPE =   0.09622 /DEG.      XAC =   0.25852
+0                         MACH= 0.3000 LIFT-CURVE-SLOPE =   0.09985 /DEG.      XAC =   0.25926
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
                                          CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
                                                       WING ALONE CONFIGURATION
@@ -183,14 +183,19 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
 0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
 0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
 0
-  -10.0    0.062   -0.789    0.2942  -0.787   -0.076   -0.374    7.556E-02   -2.775E-02   -1.202E-04    1.220E-04   -1.003E-03
-   -9.0    0.051   -0.702    0.2613  -0.702   -0.059   -0.372    8.593E-02   -3.276E-02   -1.202E-04    9.683E-05   -9.172E-04
-    9.0    0.060    0.777   -0.2887   0.777   -0.062   -0.372    8.634E-02   -3.299E-02   -1.202E-04    1.185E-04    5.560E-04
-   10.0    0.072    0.864   -0.3218   0.863   -0.079   -0.373    8.681E-02   -3.326E-02   -1.202E-04    1.464E-04    6.422E-04
+  -10.0    0.042   -0.844    0.2221  -0.838   -0.105   -0.265    8.331E-02   -2.160E-02   -1.215E-04    9.385E-05    4.694E-04
+   -7.5    0.031   -0.616    0.1612  -0.615   -0.050   -0.262    9.051E-02   -2.406E-02   -1.221E-04    5.007E-05    2.487E-04
+   -5.0    0.023   -0.391    0.1018  -0.392   -0.011   -0.260    8.897E-02   -2.334E-02   -1.228E-04    2.017E-05    3.036E-05
+   -2.5    0.019   -0.171    0.0445  -0.172    0.012   -0.258    8.629E-02   -2.245E-02   -1.235E-04    3.876E-06   -1.828E-04
+    0.0    0.019    0.040   -0.0104   0.040    0.019   -0.259    8.537E-02   -2.215E-02   -1.239E-04    2.135E-07   -3.881E-04
+    2.5    0.021    0.255   -0.0663   0.256    0.010   -0.259    8.757E-02   -2.280E-02   -1.232E-04    8.596E-06   -5.968E-04
+    5.0    0.026    0.478   -0.1244   0.479   -0.015   -0.260    9.000E-02   -2.364E-02   -1.225E-04    3.013E-05   -8.128E-04
+    7.5    0.036    0.705   -0.1845   0.704   -0.057   -0.262    8.889E-02   -2.369E-02   -1.219E-04    6.558E-05   -1.033E-03
+   10.0    0.048    0.923   -0.2429   0.917   -0.113   -0.265    8.484E-02   -2.304E-02   -1.198E-04    1.122E-04   -1.244E-03
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
                                                          DYNAMIC DERIVATIVES
                                                       WING ALONE CONFIGURATION
@@ -200,15 +205,20 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
                                                     DYNAMIC DERIVATIVES (PER DEGREE)
 0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
 0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
 0
-   -10.00    9.327E-02   -3.154E-02       NDM          NDM       -5.902E-03    2.087E-03    8.659E-04   -1.518E-04      NDM 
-    -9.00                                                        -5.867E-03    1.821E-03    7.730E-04   -1.311E-04      NDM 
-     9.00                                                        -5.901E-03   -2.752E-03   -8.380E-04   -1.451E-04      NDM 
-    10.00                                                        -5.941E-03   -3.020E-03   -9.314E-04   -1.675E-04      NDM 
+   -10.00    8.485E-02   -2.330E-02       NDM          NDM       -1.008E-02   -1.581E-03    1.693E-03   -7.145E-05   -4.229E-03
+    -7.50                                                        -9.953E-03   -1.310E-03    1.237E-03   -8.383E-05   -3.067E-03
+    -5.00                                                        -9.767E-03   -1.042E-03    7.869E-04   -9.242E-05   -1.916E-03
+    -2.50                                                        -9.464E-03   -7.798E-04    3.471E-04   -9.730E-05   -7.936E-04
+     0.00                                                        -9.361E-03   -5.274E-04   -7.700E-05   -9.872E-05    2.882E-04
+     2.50                                                        -9.606E-03   -2.709E-04   -5.075E-04   -9.687E-05    1.387E-03
+     5.00                                                        -9.885E-03   -5.548E-06   -9.528E-04   -9.145E-05    2.525E-03
+     7.50                                                        -9.785E-03    2.655E-04   -1.409E-03   -8.225E-05    3.687E-03
+    10.00                                                        -9.371E-03    5.245E-04   -1.844E-03   -6.999E-05    4.796E-03
 0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
                                          CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
@@ -219,14 +229,19 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
 0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
 0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
 0
-  -10.0    0.006   -0.072    0.0096  -0.072   -0.007   -0.133    6.913E-03   -8.128E-04   -1.302E-04    4.311E-06    6.997E-05
-   -9.0    0.005   -0.065    0.0087  -0.065   -0.005   -0.134    6.983E-03   -8.384E-04   -1.302E-04    3.521E-06    6.276E-05
-    9.0    0.006    0.072   -0.0105   0.072   -0.005   -0.146    6.600E-03   -1.070E-03   -1.302E-04    4.262E-06   -7.948E-05
-   10.0    0.007    0.078   -0.0115   0.078   -0.007   -0.147    6.487E-03   -1.070E-03   -1.302E-04    5.075E-06   -8.627E-05
+  -10.0    0.042   -0.844    0.2221  -0.838   -0.105   -0.265    8.331E-02   -2.160E-02   -1.316E-04    9.385E-05    4.403E-04
+   -7.5    0.031   -0.616    0.1612  -0.615   -0.050   -0.262    9.051E-02   -2.406E-02   -1.323E-04    5.007E-05    2.197E-04
+   -5.0    0.023   -0.391    0.1018  -0.392   -0.011   -0.260    8.897E-02   -2.334E-02   -1.330E-04    2.017E-05    1.269E-06
+   -2.5    0.019   -0.171    0.0445  -0.172    0.012   -0.258    8.629E-02   -2.245E-02   -1.338E-04    3.876E-06   -2.119E-04
+    0.0    0.019    0.040   -0.0104   0.040    0.019   -0.259    8.537E-02   -2.215E-02   -1.343E-04    2.135E-07   -4.172E-04
+    2.5    0.021    0.255   -0.0663   0.256    0.010   -0.259    8.757E-02   -2.280E-02   -1.335E-04    8.596E-06   -6.259E-04
+    5.0    0.026    0.478   -0.1244   0.479   -0.015   -0.260    9.000E-02   -2.364E-02   -1.327E-04    3.013E-05   -8.419E-04
+    7.5    0.036    0.705   -0.1845   0.704   -0.057   -0.262    8.889E-02   -2.369E-02   -1.320E-04    6.558E-05   -1.062E-03
+   10.0    0.048    0.923   -0.2429   0.917   -0.113   -0.265    8.484E-02   -2.304E-02   -1.298E-04    1.122E-04   -1.273E-03
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
                                                          DYNAMIC DERIVATIVES
                                                     HORIZONTAL TAIL CONFIGURATION
@@ -236,15 +251,20 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
                                                     DYNAMIC DERIVATIVES (PER DEGREE)
 0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
 0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
 0
-   -10.00    3.664E-03   -7.242E-04       NDM          NDM       -1.508E-05      NDM          NDM          NDM          NDM 
-    -9.00                                                        -1.518E-05                                             NDM 
-     9.00                                                        -1.442E-05                                             NDM 
-    10.00                                                        -1.424E-05                                             NDM 
+   -10.00    8.485E-02   -2.330E-02       NDM          NDM       -1.008E-02      NDM          NDM          NDM          NDM 
+    -7.50                                                        -9.953E-03                                             NDM 
+    -5.00                                                        -9.767E-03                                             NDM 
+    -2.50                                                        -9.464E-03                                             NDM 
+     0.00                                                        -9.361E-03                                             NDM 
+     2.50                                                        -9.606E-03                                             NDM 
+     5.00                                                        -9.885E-03                                             NDM 
+     7.50                                                        -9.785E-03                                             NDM 
+    10.00                                                        -9.371E-03                                             NDM 
 0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
                                          CHARACTERISTICS AT ANGLE OF ATTACK AND IN SIDESLIP
@@ -255,13 +275,18 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
 0                                                               -------------------DERIVATIVE (PER DEGREE)-------------------
 0 ALPHA     CD       CL       CM       CN       CA       XCP        CLA          CMA          CYB          CNB          CLB
 0
-  -10.0    0.000    0.000    0.0000   0.000    NDM     ******    0.000E+00    0.000E+00      NDM          NDM          NDM 
-   -9.0                                                                                                                NDM 
-    9.0                                                                                                                NDM 
+  -10.0    0.009    0.000    0.0000   0.000    NDM     ******    0.000E+00    0.000E+00      NDM          NDM          NDM 
+   -7.5                                                                                                                NDM 
+   -5.0                                                                                                                NDM 
+   -2.5                                                                                                                NDM 
+    0.0                                                                                                                NDM 
+    2.5                                                                                                                NDM 
+    5.0                                                                                                                NDM 
+    7.5                                                                                                                NDM 
    10.0                                                                                                                NDM 
 0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
 1                               AUTOMATED STABILITY AND CONTROL METHODS PER APRIL 1976 VERSION OF DATCOM
@@ -273,15 +298,20 @@
   MACH    ALTITUDE   VELOCITY    PRESSURE    TEMPERATURE     REYNOLDS             REF.      REFERENCE LENGTH   MOMENT REF. CENTER
  NUMBER                                                       NUMBER              AREA       LONG.     LAT.     HORIZ      VERT
               M        M/SEC      N/ M**2       DEG K         1/ M                M**2         M         M         M         M
-0 0.080      10.00      27.22   1.0121E+05     288.085     1.8535E+06            16.801      2.000    11.200     0.000     0.000
+0 0.300      10.00     102.07   1.0121E+05     288.085     6.9506E+06             0.001      0.010     0.100     0.000     0.000
                                                     DYNAMIC DERIVATIVES (PER DEGREE)
 0           -------PITCHING-------    -----ACCELERATION------    --------------ROLLING--------------    --------YAWING--------
 0   ALPHA       CLQ          CMQ           CLAD         CMAD         CLP          CYP          CNP          CNR          CLR
 0
-   -10.00      NDM          NDM           NDM          NDM          NDM          NDM          NDM          NDM          NDM 
-    -9.00                                                           NDM          NDM          NDM          NDM          NDM 
-     9.00                                                           NDM          NDM          NDM          NDM          NDM 
-    10.00                                                           NDM          NDM          NDM          NDM          NDM 
+   -10.00      NDM          NDM           NDM          NDM        0.000E+00      NDM          NDM          NDM        0.000E+00
+    -7.50                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+    -5.00                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+    -2.50                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+     0.00                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+     2.50                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+     5.00                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+     7.50                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
+    10.00                                                         0.000E+00      NDM          NDM          NDM        0.000E+00
 0*** NDM PRINTED WHEN NO DATCOM METHODS EXIST
 1          THE FOLLOWING IS A LIST OF ALL INPUT CARDS FOR THIS CASE.
 0

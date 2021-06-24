@@ -14,7 +14,7 @@ from Utils.database.geometry.lifting_database import read_lifting_surface_object
 # TODO Remove multiple mach number support
 
 def build_datcom_input():
-    boom_list = read_boom_objects()
+
     surface_list = read_lifting_surface_objects()
     ls_statements = []
     boom_statements = []
@@ -48,14 +48,18 @@ def build_datcom_input():
                 dihedral_=1.3,
                 profile="0012"
             ))
-    for l in boom_list:
-        design_type_, surface_type_ = get_boom_object_data(l)
-        if design_type_ == unconventional_design:
-            pass
-        elif design_type_ == conventional_design:
-            radii, x, z = get_parameters_from_conventional_boom(l)
-            boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
-                                                              iter_=(boom_list.index(l) + 1)))
+    try:
+        boom_list = read_boom_objects()
+        for l in boom_list:
+            design_type_, surface_type_ = get_boom_object_data(l)
+            if design_type_ == unconventional_design:
+                pass
+            elif design_type_ == conventional_design:
+                radii, x, z = get_parameters_from_conventional_boom(l)
+                boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
+                                                                  iter_=(boom_list.index(l) + 1)))
+    except:
+        pass
 
     input_ = "".join([set_flight_conditions(mach_numbers=get_mach_number(), angle_of_attack=get_aoa_range(),
                                             altitude=get_altitude()),
@@ -190,7 +194,7 @@ def create_listing_datcom(list=None):
         if list.index(i) == len(list) - 1:
             _list = _list + f"{val}"
         else:
-            if break_point < len(list):
+            if break_point < len(list)/2:
                 break_point = break_point + 1
                 _list = _list + f"{val},"
             else:

@@ -27,25 +27,45 @@ def create_aircraft():
 
 
 def get_booms():
-    boom_list = read_boom_objects()
-    fuselages = []
-    for l in boom_list:
-        design_type_, surface_type_ = get_boom_object_data(l)
-        xsecs = []
-        root_position_x_, root_position_y_, root_position_z_ = 0, 0, 0
-        xz_mirror_ = False
-        if design_type_ == conventional_design:
-            radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_fuselage(
-                l)
-            for radius, x_, z_ in zip(radii, x, z):
-                xsecs.append(
-                    FuselageXSec(
-                        x_c=x_,
-                        y_c=0,
-                        z_c=z_,
-                        radius=radius
+    try:
+        boom_list = read_boom_objects()
+        fuselages = []
+        for l in boom_list:
+            design_type_, surface_type_ = get_boom_object_data(l)
+            xsecs = []
+            root_position_x_, root_position_y_, root_position_z_ = 0, 0, 0
+            xz_mirror_ = False
+            if design_type_ == conventional_design:
+                radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_fuselage(
+                    l)
+                for radius, x_, z_ in zip(radii, x, z):
+                    xsecs.append(
+                        FuselageXSec(
+                            x_c=x_,
+                            y_c=0,
+                            z_c=z_,
+                            radius=radius
+                        )
                     )
-                )
+                    fuselages.append(Fuselage(
+                        name=l,
+                        x_le=root_position_x_,
+                        y_le=root_position_y_,
+                        z_le=root_position_z_,
+                        symmetric=xz_mirror_,
+                        xsecs=xsecs
+                    ))
+            elif design_type_ == unconventional_design:
+                radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_boom(l)
+                for radius, x_, z_ in zip(radii, x, z):
+                    xsecs.append(
+                        FuselageXSec(
+                            x_c=x_,
+                            y_c=0,
+                            z_c=z_,
+                            radius=radius
+                        )
+                    )
                 fuselages.append(Fuselage(
                     name=l,
                     x_le=root_position_x_,
@@ -54,26 +74,10 @@ def get_booms():
                     symmetric=xz_mirror_,
                     xsecs=xsecs
                 ))
-        elif design_type_ == unconventional_design:
-            radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_boom(l)
-            for radius, x_, z_ in zip(radii, x, z):
-                xsecs.append(
-                    FuselageXSec(
-                        x_c=x_,
-                        y_c=0,
-                        z_c=z_,
-                        radius=radius
-                    )
-                )
-            fuselages.append(Fuselage(
-                name=l,
-                x_le=root_position_x_,
-                y_le=root_position_y_,
-                z_le=root_position_z_,
-                symmetric=xz_mirror_,
-                xsecs=xsecs
-            ))
-    return fuselages
+                return fuselages
+    except:
+        return []
+
 
 
 def get_lifting_surfaces(type_="vlm"):
@@ -85,28 +89,6 @@ def get_lifting_surfaces(type_="vlm"):
 
 def get_surface_for_cas():
     from aerosandbox import WingXSec, Wing, Airfoil
-    generic_cambered_airfoil = Airfoil(
-        CL_function=lambda alpha, Re, mach, deflection,: (  # Lift coefficient function
-                (alpha * np.pi / 180) * (2 * np.pi) + 0.4550
-        ),
-        CDp_function=lambda alpha, Re, mach, deflection: (  # Profile drag coefficient function
-                (1 + (alpha / 5) ** 2) * 2 * (0.074 / Re ** 0.2)
-        ),
-        Cm_function=lambda alpha, Re, mach, deflection: (  # Moment coefficient function
-            0
-        )
-    )
-    generic_airfoil = Airfoil(
-        CL_function=lambda alpha, Re, mach, deflection,: (  # Lift coefficient function
-                (alpha * np.pi / 180) * (2 * np.pi)
-        ),
-        CDp_function=lambda alpha, Re, mach, deflection: (  # Profile drag coefficient function
-                (1 + (alpha / 5) ** 2) * 2 * (0.074 / Re ** 0.2)
-        ),
-        Cm_function=lambda alpha, Re, mach, deflection: (  # Moment coefficient function
-            0
-        )
-    )
 
     from Utils.data_objects.lifting_surface_placeholder import wing
     wings = []
@@ -185,11 +167,12 @@ def get_surface_for_vlm():
     for l in surface_list:
         design_type_, surface_type_ = get_surface_object_data(l)
         if design_type_ == unconventional_design:
-            from aerosandbox import wing
+            from aerosandbox_legacy_v0 import Wing
             x, y, z, chords, twist_, profile_, root_location_x, root_location_y, root_location_z, xz_mirror_ = get_parameters_for_unconventional(
                 l)
             xsecs = []
             for x_, y_, z_, chord_, t in zip(x, y, z, chords, twist_):
+                print(profile_)
                 xsecs.append(
                     WingXSec(  # Root
                         xyz_le=[x_, y_, z_],

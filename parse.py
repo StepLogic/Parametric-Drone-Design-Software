@@ -630,62 +630,67 @@ class DatcomParser(Parser):
 
         # extract some need dictionaries
         print(cases)
-        dFlap = cases['flap']['SYMFLP'] if cases.get("flap") is not None else {}
-        dAileron = cases['aileron']['ASYFLP'] if cases.get("aileron") is not None else {}
-        dElevator = cases['total']['SYMFLP']
-        dDynamic = cases['total']['DYNAMIC']
-        dStatic = cases['total']['STATIC']
+        try:
+            dFlap = cases['flap']['SYMFLP'] if cases.get("flap") is not None else {}
+            dAileron = cases['aileron']['ASYFLP'] if cases.get("aileron") is not None else {}
+            dElevator = cases['total']['SYMFLP']
+            dDynamic = cases['total']['DYNAMIC']
+            dStatic = cases['total']['STATIC']
 
-        # create model name
-        if self.file_name is None:
-            model_name = 'name'
-        else:
-            model_name = os.path.split(os.path.splitext(self.file_name)[0])[1]
 
-        # fill dict
-        return {
-            'name': model_name,
-            # lift
-            CL: dStatic['CL'],
-            'dCL_Flap': dFlap['DERIV']['D(CL)'] if cases.get("flap") is not None else {},
-            'dCL_Elevator': dElevator['DERIV']['D(CL)'],
-            'dCL_PitchRate': dDynamic['CLQ'],
-            'dCL_AlphaDot': dDynamic['CLAD'],
+            # create model name
+            if self.file_name is None:
+                model_name = 'name'
+            else:
+                model_name = os.path.split(os.path.splitext(self.file_name)[0])[1]
 
-            # drag
-            CD: dStatic['CD'],
-            'dCD_Flap': dFlap['CD'] if cases.get("flap") is not None else {},
-            'dCD_Elevator': dElevator['CD'],
+            # fill dict
+            return {
+                'name': model_name,
+                # lift
+                CL: dStatic['CL'],
+                'dCL_Flap': dFlap['DERIV']['D(CL)'] if cases.get("flap") is not None else {},
+                'dCL_Elevator': dElevator['DERIV']['D(CL)'],
+                'dCL_PitchRate': dDynamic['CLQ'],
+                'dCL_AlphaDot': dDynamic['CLAD'],
 
-            # side force
-            cy_beta: dStatic['CYB'],
-            cy_p: dDynamic['CYP'],
+                # drag
+                CD: dStatic['CD'],
+                'dCD_Flap': dFlap['CD'] if cases.get("flap") is not None else {},
+                'dCD_Elevator': dElevator['CD'],
 
-            # roll moment
-            'dCl_Aileron': dAileron['ROLL']['CL(ROLL)'] if cases.get("flap") is not None else {},
-            cl_beta: dStatic['CLB'],
-            cl_p: dDynamic['CLP'],
-            cl_r: dDynamic['CLR'],
+                # side force
+                cy_beta: dStatic['CYB'],
+                cy_p: dDynamic['CYP'],
 
-            # pitch moment
-            cm_alpha: dStatic['CM'],
-            'dCm_Flap': dFlap['DERIV']['D(CM)'] if cases.get("flap") is not None else {},
-            'dCm_Elevator': dElevator['DERIV']['D(CM)'],
-            cm_q: dDynamic['CMQ'],
-            'dCm_AlphaDot': dDynamic['CMAD'],
+                # roll moment
+                'dCl_Aileron': dAileron['ROLL']['CL(ROLL)'] if cases.get("flap") is not None else {},
+                cl_beta: dStatic['CLB'],
+                cl_p: dDynamic['CLP'],
+                cl_r: dDynamic['CLR'],
 
-            # yaw moment
-            'dCn_Aileron': dAileron['CN'] if cases.get("flap") is not None else {},
-            cn_beta: dStatic['CNB'],
-            cn_p: dDynamic['CNP'],
-            cn_r: dDynamic['CNR'],
+                # pitch moment
+                cm_alpha: dStatic['CM'],
+                'dCm_Flap': dFlap['DERIV']['D(CM)'] if cases.get("flap") is not None else {},
+                'dCm_Elevator': dElevator['DERIV']['D(CM)'],
+                cm_q: dDynamic['CMQ'],
+                'dCm_AlphaDot': dDynamic['CMAD'],
 
-            # surfaces/ wind angles
-            'flap': dFlap['DELTA'] if cases.get("flap") is not None else {},
-            'alrn': dAileron['DELTA'] if cases.get("flap") is not None else {},
-            'elev': dElevator['DELTA'],
-            'alpha': dStatic['ALPHA'],
-        }
+                # yaw moment
+                'dCn_Aileron': dAileron['CN'] if cases.get("flap") is not None else {},
+                cn_beta: dStatic['CNB'],
+                cn_p: dDynamic['CNP'],
+                cn_r: dDynamic['CNR'],
 
+                # surfaces/ wind angles
+                'flap': dFlap['DELTA'] if cases.get("flap") is not None else {},
+                'alrn': dAileron['DELTA'] if cases.get("flap") is not None else {},
+                'elev': dElevator['DELTA'],
+                'alpha': dStatic['ALPHA'],
+            }
+
+        except Exception as e:
+             print(e)
+             return {}
     def get_cases(self):
         return self.cases
