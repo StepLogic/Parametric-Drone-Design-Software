@@ -236,7 +236,7 @@ def get_parameters_for_unconventional(surface_name="", part=""):
     x = []
     y = []
     z = []
-    profile_ = "0012"
+    profile_ = airfoil
 
     from scipy.spatial.transform import Rotation as R
     r = R.from_euler('zyx', [rot_z_, rot_y_, rot_x_], degrees=True)

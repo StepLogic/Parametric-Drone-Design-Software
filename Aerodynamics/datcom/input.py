@@ -13,10 +13,10 @@ from Utils.database.geometry.boom_database import read_boom_objects, get_boom_ob
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data
 
 
-#TODO Remove multiple mach number support
+# TODO Remove multiple mach number support
 
 def build_datcom_input():
-    boom_list = read_boom_objects()
+
     surface_list = read_lifting_surface_objects()
     ls_statements = []
     boom_statements = []
@@ -55,14 +55,19 @@ def build_datcom_input():
                 dihedral_=1.3,
                 profile=profile_.split("naca")[1]
             ))
-    for l in boom_list:
-        design_type_, surface_type_ = get_boom_object_data(l)
-        if design_type_ == unconventional_design:
-          pass
-        elif design_type_ == conventional_design:
-            radii, x, z = get_parameters_from_conventional_boom(l)
-            boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
-                                                              iter_=(boom_list.index(l) + 1)))
+
+    try:
+        boom_list = read_boom_objects()
+        for l in boom_list:
+            design_type_, surface_type_ = get_boom_object_data(l)
+            if design_type_ == unconventional_design:
+                pass
+            elif design_type_ == conventional_design:
+                radii, x, z = get_parameters_from_conventional_boom(l)
+                boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
+                                                                  iter_=(boom_list.index(l) + 1)))
+    except:
+        pass
 
     mesh = trimesh.load(model_filepath)
     try:
@@ -78,6 +83,7 @@ def build_datcom_input():
                       set_synths_parameters(center_of_gravity_x=round(list(mesh.center_mass)[0],2),center_of_gravity_z=round(list(mesh.center_mass)[2],2),
                                             vtp_tip_position_x=round(synths.get("vtp"),2),
                                             htp_tip_position_x=round(synths.get("htp"),2)),
+
                       "".join(ls_statements),
                       "".join(boom_statements),
                       create_footer()])

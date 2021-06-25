@@ -10,7 +10,7 @@ from Aerodynamics.sandbox.input import create_aircraft
 def run_analysis():
     airplane = create_aircraft()
     values = {}
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -41,8 +41,7 @@ def run_analysis():
         ap_sol.draw(show=True)  # Generates a pretty picture!
         values = {"type": "CAS", "CL": ap_sol.CL, "CD": ap_sol.CD, "CY": ap_sol.CY, "Cl": ap_sol.Cl, "Cm": ap_sol.Cm,
                   "Cn": ap_sol.Cn}
-    else:
-        print(airplane.wings[0])
+    except:
         aero_problem = vlm3(  # Analysis type: Vortex Lattice Method, version 3
             airplane=airplane,
             op_point=OperatingPoint(
