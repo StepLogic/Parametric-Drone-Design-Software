@@ -92,7 +92,7 @@ class h_stab_tab(QWidget):
             self.show_default_values()
     ############################################################################
     def show_default_values(self, root_location_x=0, root_location_y=0, root_location_z=0, dihedral=0, sweep=0, twist=0,
-                            span=0, taper_ratio=1, chord=0,profile="naca0006"):
+                            span=0, taper_ratio=1, chord=0,profile=airfoil_profiles()[0]):
         self.span_text.setText(str(span))
 
         self.chord_length_text.setText(str(chord))

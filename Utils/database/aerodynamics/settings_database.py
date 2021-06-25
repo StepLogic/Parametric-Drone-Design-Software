@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from Utils.data_objects.aerodynamics_placeholders import aoa_range, mach_number, altitude
 from Utils.database import database
 
@@ -39,7 +41,17 @@ def set_mach_number(value=0.0):
 
 
 def get_mach_number():
-    return database.read_work_file()[mach_number]
+    mach_number_=0
+    try:
+        mach_number_=database.read_work_file()[mach_number]
+    except:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText("Error")
+        msg.setInformativeText("ERROR!")
+        msg.setWindowTitle("Aerosoft")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    return mach_number_
 
 
 def set_altitude(altitude_=0):

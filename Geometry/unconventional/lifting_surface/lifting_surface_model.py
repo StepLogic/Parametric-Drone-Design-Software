@@ -100,13 +100,18 @@ class lifting_surface_model:
                  self.section_4_twist_angle_, self.section_5_twist_angle_]
 
         profile = self.airfoil_type
-        constant = 0.0
+        constant = 0.1
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():
             if len(nacanumber) == 4:
                 constant = int(nacanumber[2:]) * 0.01
+            elif len(nacanumber) == 5:
+                constant = int(nacanumber[3:]) * 0.01
+                print(constant)
+        else:
+            constant=0.1
         # decrease section size towards wing tips
-        print()
+        print(constant)
         wires = []
         curves = []
         n_sections = self.lifting_surface.get_section_count()

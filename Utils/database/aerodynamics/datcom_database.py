@@ -123,12 +123,13 @@ def get_parameters_from_conventional_wing(surface_name=""):
     taper_ratio_ = values[taper_ratio]
     profile_ = values.get(profile)
     tip_chord = root_chord / taper_ratio_
-    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_
+    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_,profile_
 
 
 def get_parameters_from_sections_lifting_surface(surface_name=""):
-    values = values = database.read_aircraft_specifications()
+    values = database.read_aircraft_specifications()
     parameters = values[lifting_surface][surface_name]
+    profile_=values[lifting_surface][surface_name]
     x_list = [parameters[section_1_x], parameters[section_2_x], parameters[section_3_x], parameters[section_4_x],
               parameters[section_5_x]]
     y_list = [parameters[section_1_y], parameters[section_2_y], parameters[section_3_y], parameters[section_4_y],
@@ -150,4 +151,4 @@ def get_parameters_from_sections_lifting_surface(surface_name=""):
     span_ = max(y_list)
     tip_chord = min(chords)
     root_chord = max(chords)
-    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_
+    return span_/divider, tip_chord/divider, root_chord/divider, dihedral_, sweep_,profile_

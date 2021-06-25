@@ -68,10 +68,8 @@ class wing_model:
             if nacanumber.isdigit():
                 if len(nacanumber) == 4:
                     constant = int(nacanumber[2:]) * 0.01
-                elif len(nacanumber)==5:
+                elif len(nacanumber) == 5:
                     constant = int(nacanumber[3:]) * 0.01
-
-
 
         wing_main.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_location_x
                                                                 , self.root_location_y
@@ -117,10 +115,10 @@ class wing_model:
 
         # create winglet
 
-
         loft.append(wing_main.get_loft().shape())
         loft.append(wing_main.get_mirrored_loft().shape())
         return loft
+
     def get_lower_surface(self):
         self.read_parameters()
         loft = []
@@ -179,6 +177,18 @@ class wing_model:
 
             ce.set_width((1 - theta) * root_width + theta * tip_width)
             ce.set_height((1 - theta) * root_height + theta * tip_height)
+        try:
+            s = wing_main.get_section(tip_idx)
+            e = s.get_section_element(1)
+            ce = e.get_ctigl_section_element()
+            pre_tip = wing_main.get_section(tip_idx - 1).get_section_element(1).get_ctigl_section_element().get_center()
+            ce.set_center(pre_tip + tigl3.geometry.CTiglPoint(self.winglet_center_translation.x,
+                                                              self.winglet_center_translation_y,
+                                                              self.winglet_center_translation_z))
+            s.set_rotation(self.winglet_rotation)
+            ce.set_width(self.winglet_width)
+        except:
+            pass
 
         wing_main.set_sweep(self.sweep)
         wing_main.set_dihedral(self.dihedral)

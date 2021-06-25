@@ -97,8 +97,8 @@ class lifting_surface_dialog(QDialog):
                             self.surfaces.append(self.surfaca_tab_)
                             self.inputArea.addTab(self.surfaca_tab_, text)
                             self.indexes.append(text)
-                    write_lifting_surface_objects(value=text)
-                    write_lifting_surface_to_objects(surface_name=text, design_type_=design_type_,
+                write_lifting_surface_objects(value=text)
+                write_lifting_surface_to_objects(surface_name=text, design_type_=design_type_,
                                                      surface_type_=surface_type_)
 
 
@@ -122,3 +122,4 @@ class lifting_surface_dialog(QDialog):
     def save_all(self):
         for l in self.surfaces:
             l.tab_.init_action()
+

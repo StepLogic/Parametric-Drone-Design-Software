@@ -8,18 +8,17 @@ from Utils.database.geometry.lifting_database import write_lifting_surface_objec
 
 
 class lifting_surface_tab(QWidget):
-    def __init__(self, name="",surface_type_="",design_type_="",lifting_surface_pane=None):
+    def __init__(self, name="", surface_type_="", design_type_="", lifting_surface_pane=None):
         super().__init__()
         self.wing_profile_selection = None
         self._name = name
-        self.surface_type_=surface_type_
-        self.design_type_=design_type_
+        self.surface_type_ = surface_type_
+        self.design_type_ = design_type_
         self.xz_mirror_ = None
         self.xy_mirror_ = None
         self.yz_mirror_ = None
         self.surface_curve_type_ = None
-        self.lifting_surface_pane=lifting_surface_pane
-
+        self.lifting_surface_pane = lifting_surface_pane
 
     def create_tab(self):
         self.create_widget()
@@ -253,12 +252,13 @@ class lifting_surface_tab(QWidget):
         ##########################################################################################
 
         self.zero_all_text_fields()
-        self.layout=QFormLayout()
+        self.layout = QFormLayout()
         self.layout.addRow(self.inputArea)
         return self.layout
 
     def surfaceType_Checked(self, button):
-        self.surface_curve_type_= button
+        self.surface_curve_type_ = button
+
     def xz_mirror_Checked(self, button):
         self.xz_mirror_ = button
 
@@ -270,7 +270,7 @@ class lifting_surface_tab(QWidget):
 
     def zero_all_text_fields(self):
         try:
-            profile_,surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_, rot_x_, rot_y_, rot_z_, root_le_pos_x_, root_le_pos_y_, root_le_pos_z_, \
+            profile_, surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_, rot_x_, rot_y_, rot_z_, root_le_pos_x_, root_le_pos_y_, root_le_pos_z_, \
             section_1_x_, section_2_x_, section_3_x_, section_4_x_, section_5_x_, \
             section_1_y_, section_2_y_, section_3_y_, section_4_y_, section_5_y_, \
             section_1_z_, section_2_z_, section_3_z_, section_4_z_, section_5_z_, \
@@ -278,7 +278,7 @@ class lifting_surface_tab(QWidget):
             section_5_chord_, section_1_twist_angle_, section_2_twist_angle_, \
             section_3_twist_angle_, section_4_twist_angle_, section_5_twist_angle_ = read_surface_data(self._name)
 
-            self.show_default_values( profile_=profile_,
+            self.show_default_values(profile_=profile_,
                                      surfaceType_=surfaceType_,
                                      xz_mirror_=xz_mirror_,
                                      xy_mirror_=xy_mirror_,
@@ -317,10 +317,9 @@ class lifting_surface_tab(QWidget):
         except:
             self.show_default_values()
 
-
     def show_default_values(self,
                             name="",
-                            profile_="naca0012",
+                            profile_=airfoil_profiles()[0],
                             surfaceType_=False,
                             rot_x_=0,
                             rot_y_=0,
@@ -357,7 +356,6 @@ class lifting_surface_tab(QWidget):
                             section_4_twist_angle_=0,
                             section_5_twist_angle_=0):
 
-
         self.root_le_position_x_text.setText(str(root_le_pos_x_))
         self.root_le_position_y_text.setText(str(root_le_pos_y_))
         self.root_le_position_z_text.setText(str(root_le_pos_z_))
@@ -366,17 +364,15 @@ class lifting_surface_tab(QWidget):
         self.xy_mirror_ = xy_mirror_
         if surfaceType_ is None:
             self.typeCheck.setChecked(False)
-            self.surface_curve_type_=False
+            self.surface_curve_type_ = False
         else:
             self.typeCheck.setChecked(surfaceType_)
-            self.surface_curve_type_ =surfaceType_
-
+            self.surface_curve_type_ = surfaceType_
 
         self.XZsymmetryCheck.setChecked(xz_mirror_)
         self.xz_mirror_ = xz_mirror_
-        print(profile_,root_le_pos_x_)
+        print(profile_, root_le_pos_x_)
         self.wing_profile_combo.setCurrentIndex(airfoil_profiles().index(profile_) if profile_ is not None else 1)
-
 
         self.YZsymmetryCheck.setChecked(yz_mirror_)
         self.yz_mirror_ = yz_mirror_
@@ -420,8 +416,8 @@ class lifting_surface_tab(QWidget):
         self.parameters = {
             lifting_surface: {
                 str(self._name): {
-                    design_type:self.design_type_,
-                    surface_type:self.surface_type_,
+                    design_type: self.design_type_,
+                    surface_type: self.surface_type_,
                     root_le_position_x: float(self.root_le_position_x_text.text()),
                     root_le_position_y: float(self.root_le_position_y_text.text()),
                     root_le_position_z: float(self.root_le_position_z_text.text()),
@@ -429,7 +425,7 @@ class lifting_surface_tab(QWidget):
                     xz_mirror: self.xz_mirror_,
                     yz_mirror: self.yz_mirror_,
                     profile: str(self.wing_profile_selection),
-                    surface_curve_type:self.surface_curve_type_,
+                    surface_curve_type: self.surface_curve_type_,
                     rotation_x: float(self.rotation_x_text.text()),
                     rotation_y: float(self.rotation_y_text.text()),
                     rotation_z: float(self.rotation_z_text.text()),

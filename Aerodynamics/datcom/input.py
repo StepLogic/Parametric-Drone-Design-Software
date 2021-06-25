@@ -1,4 +1,5 @@
 import numpy as np
+import trimesh
 
 from Utils.data_objects.lifting_surface_placeholder import wing, fin
 from Utils.data_objects.placeholder import conventional_design, unconventional_design
@@ -7,6 +8,7 @@ from Utils.database.aerodynamics.datcom_database import get_parameters_from_conv
     get_parameters_from_conventional_wing, \
     get_parameters_from_sections_lifting_surface
 from Utils.database.aerodynamics.settings_database import get_mach_number, get_aoa_range, get_altitude
+from Utils.database.database import model_filepath
 from Utils.database.geometry.boom_database import read_boom_objects, get_boom_object_data
 from Utils.database.geometry.lifting_database import read_lifting_surface_objects, get_surface_object_data
 
@@ -18,35 +20,40 @@ def build_datcom_input():
     surface_list = read_lifting_surface_objects()
     ls_statements = []
     boom_statements = []
+    synths={}
     for l in surface_list:
         design_type_, surface_type_ = get_surface_object_data(l)
         span_, tip_chord, root_chord, dihedral_, sweep_ = 0, 0, 0, 0, 0
+        profile_="0012"
         if design_type_ == unconventional_design:
-            span_, tip_chord, root_chord, dihedral_, sweep_ = get_parameters_from_sections_lifting_surface(l)
+            span_, tip_chord, root_chord, dihedral_, sweep_,profile_ = get_parameters_from_sections_lifting_surface(l)
         elif design_type_ == conventional_design:
             print(l)
-            span_, tip_chord, root_chord, dihedral_, sweep_ = get_parameters_from_conventional_wing(l)
-
+            span_, tip_chord, root_chord, dihedral_, sweep_,profile_ = get_parameters_from_conventional_wing(l)
+        print(profile_.split("naca"))
         if surface_type_ == wing:
+            synths.update({"wing": span_ / 2})
             ls_statements.append(set_planform_parameters(
                 type_1="W,G", tip_chord=tip_chord,
                 root_chord=root_chord, semi_span=(span_ / 2), sweep_angle=sweep_,
                 dihedral_=1.2,
-                profile="0012"
+                profile=profile_.split("naca")[1]
             ))
         elif surface_type_ == fin:
+            synths.update({"vtp":span_ / 2})
             ls_statements.append(set_planform_parameters(
                 type_1="V,T", tip_chord=tip_chord,
                 root_chord=root_chord, semi_span=(span_ / 2), sweep_angle=sweep_,
                 dihedral_=1.3,
-                profile="0012"
+                profile=profile_.split("naca")[1]
             ))
         else:
+            synths.update({"vtp": span_ / 2})
             ls_statements.append(set_planform_parameters(
                 type_1="H,T", tip_chord=tip_chord,
                 root_chord=root_chord, semi_span=(span_ / 2), sweep_angle=sweep_,
                 dihedral_=1.3,
-                profile="0012"
+                profile=profile_.split("naca")[1]
             ))
     for l in boom_list:
         design_type_, surface_type_ = get_boom_object_data(l)
@@ -57,9 +64,20 @@ def build_datcom_input():
             boom_statements.append(set_body_parameters_radius(section_positions=x, radius_of_sections=radii,
                                                               iter_=(boom_list.index(l) + 1)))
 
+    mesh = trimesh.load(model_filepath)
+    try:
+        value=synths["vtp"]
+    except:
+        synths.update({"vtp":0})
+    try:
+        value=synths["htp"]
+    except:
+        synths.update({"htp":0})
 
     input_ = "".join([set_flight_conditions(mach_numbers=get_mach_number(), angle_of_attack=get_aoa_range(), altitude=get_altitude()),
-                      set_synths_parameters(),
+                      set_synths_parameters(center_of_gravity_x=round(list(mesh.center_mass)[0],2),center_of_gravity_z=round(list(mesh.center_mass)[2],2),
+                                            vtp_tip_position_x=round(synths.get("vtp"),2),
+                                            htp_tip_position_x=round(synths.get("htp"),2)),
                       "".join(ls_statements),
                       "".join(boom_statements),
                       create_footer()])

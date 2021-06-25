@@ -87,6 +87,7 @@ def update_control_surfaces(config=None, res=None):
     lofts = {}
     surface_list = read_control_surface_objects()
     loft_table = res[1]
+
     for surface in surface_list:
         for name, loft in loft_table.items():
             if name == get_parent_name(surface):

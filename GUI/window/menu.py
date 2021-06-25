@@ -203,11 +203,13 @@ def setup_ui(workflow):
         workflow.add_menu("Aerodynamics")
 
         def sandbox():
+            workflow.viewer.save_model()
             pool = QThreadPool.globalInstance()
             runnable = AerodynamicThread(workflow, command=sandbox_)
             pool.start(runnable)
 
         def datcom():
+            workflow.viewer.save_model()
             pool = QThreadPool.globalInstance()
             runnable = AerodynamicThread(workflow, command=datcom_)
             pool.start(runnable)
