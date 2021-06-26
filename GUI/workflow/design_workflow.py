@@ -16,7 +16,6 @@ from Geometry.propulsion.propeller_model import propeller_model
 from Geometry.propulsion.shroud_model import shroud_model
 from Geometry.unconventional.boom.boom_model import boom_model
 from Geometry.unconventional.lifting_surface.lifting_surface_model import lifting_surface_model
-from Utils.data_objects.boom_placeholders import fuselage, boom
 from Utils.data_objects.landing_gear_key import landing_gear
 from Utils.data_objects.lifting_surface_placeholder import fin, wing, tailplane
 from Utils.data_objects.placeholder import conventional_design
@@ -71,14 +70,22 @@ def start(e, receiveTasks, sendLofts):
 
 def update_propeller(config=None):
     loft = {}
-    propeller_list = read_propeller_objects()
-    for l in propeller_list:
-        loft.update({l: propeller_model(name=l, config=config).get_current_loft()})
+    try:
+        propeller_list = read_propeller_objects()
+        for l in propeller_list:
+            loft.update({l: propeller_model(name=l, config=config).get_current_loft()})
+    except:
+        pass
     return loft
 
 
 def update_landing_gear():
-    return {landing_gear: landing_gear_model().get_current_loft()}
+    value = {}
+    try:
+        value = {landing_gear: landing_gear_model().get_current_loft()}
+    except:
+        pass
+    return value
 
 
 def update_control_surfaces(config=None, res=None):
@@ -87,13 +94,14 @@ def update_control_surfaces(config=None, res=None):
     lofts = {}
     surface_list = read_control_surface_objects()
     loft_table = res[1]
-
-    for surface in surface_list:
-        for name, loft in loft_table.items():
-            if name == get_parent_name(surface):
-                lofts.update(
-                    {name: control_surface_model(name=surface, config=config, part_loft=loft).get_current_loft()})
-
+    try:
+        for surface in surface_list:
+            for name, loft in loft_table.items():
+                if name == get_parent_name(surface):
+                    lofts.update(
+                        {name: control_surface_model(name=surface, config=config, part_loft=loft).get_current_loft()})
+    except:
+        pass
     return lofts
 
 
@@ -107,50 +115,45 @@ def generate_control_surfaces(config=None):
     except:
         pass
     try:
-        surface_list = read_control_surface_objects()
-        loft_table = update_surface_3d(config)
-        for surface in surface_list:
-            for name, loft in loft_table.items():
-                if name == get_parent_name(surface):
-                    lofts.update(
-                        {name: control_surface_model(name=surface, config=config, part_loft=loft).get_wing_loft()})
+        try:
+            surface_list = read_control_surface_objects()
+            loft_table = update_surface_3d(config)
+            for surface in surface_list:
+                for name, loft in loft_table.items():
+                    if name == get_parent_name(surface):
+                        lofts.update(
+                            {name: control_surface_model(name=surface, config=config, part_loft=loft).get_wing_loft()})
+        except:
+            lofts = update_surface_3d(config)
     except:
-        lofts = update_surface_3d(config)
+        pass
     return lofts
 
 
 def update_boom_3d(config=None):
     boom_list = read_boom_objects()
     lofts = {}
-    for l in boom_list:
-        design_type_, boom_type_ = get_boom_object_data(l)
-        print(l)
-        lofts.update({l: generate_boom_3D_model(config, name=l, boom_type_=boom_type_, design_type_=design_type_)})
+    try:
+        for l in boom_list:
+            design_type_, boom_type_ = get_boom_object_data(l)
+            lofts.update({l: generate_boom_3D_model(config, name=l, boom_type_=boom_type_, design_type_=design_type_)})
+    except:
+        pass
     return lofts
 
 
 def export_files(config=None):
-    loft={}
+    loft = {}
     try:
-     booms =update_boom_3d(config=config)
-     loft.update(booms)
+        booms = update_boom_3d(config=config)
+        loft.update(booms)
     except:
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText("Error")
-        msg.setInformativeText("ERROR! Exporting Boom")
-        msg.setWindowTitle("Aerosoft")
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        pass
     try:
-     wing =generate_control_surfaces(config=config)
-     loft.update(wing)
+        wing = generate_control_surfaces(config=config)
+        loft.update(wing)
     except:
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText("Error")
-        msg.setInformativeText("ERROR! Exporting Wing")
-        msg.setWindowTitle("Aerosoft")
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        pass
 
     return loft
 
@@ -158,9 +161,12 @@ def export_files(config=None):
 def update_surface_3d(config=None):
     surface_list = read_lifting_surface_objects()
     lofts = {}
-    for l in surface_list:
-        design_type_, surface_type_ = get_surface_object_data(l)
-        lofts.update({l: generate_wing_3D(config, l, surface_type_, design_type_)})
+    try:
+        for l in surface_list:
+            design_type_, surface_type_ = get_surface_object_data(l)
+            lofts.update({l: generate_wing_3D(config, l, surface_type_, design_type_)})
+    except:
+        pass
     return lofts
 
 
