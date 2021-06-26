@@ -291,4 +291,17 @@ class lifting_surface_model:
         loft.append(spar1.get_loft().shape())
         loft.append(spar3.get_loft().shape())
         loft.append(spar2.get_loft().shape())
+        for i in loft:
+            if self.xy_mirror_:
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_xyplane()
+                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
+            elif self.xz_mirror_:
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_xzplane()
+                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
+            elif self.yz_mirror_:
+                trafo = tigl3.geometry.CTiglTransformation()
+                trafo.add_mirroring_at_yzplane()
+                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
         return loft
