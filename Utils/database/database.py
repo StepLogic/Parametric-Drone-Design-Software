@@ -1,7 +1,5 @@
 import json
-
 from Helper import absolute_path, resource_path
-
 airfoil_path = resource_path(absolute_path + "/Resources/airfoil/export/names.txt")
 resource_dir_cpacs = resource_path(absolute_path + "/Resources/cpacs")
 resource_dir_cpacs_out = resource_path(absolute_path + "/Resources/cpacs/structure.xml")

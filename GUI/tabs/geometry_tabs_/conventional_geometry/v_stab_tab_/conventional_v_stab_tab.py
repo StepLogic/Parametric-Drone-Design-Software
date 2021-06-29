@@ -114,6 +114,7 @@ class v_stab_tab(QDialog):
         self.vtp_position_z_text.setText(str(root_location_z))
 
     def init_action(self):
+        self.accept_inputs()
         self.parameters = {
             lifting_surface: {
                 str(self.text): {

@@ -27,14 +27,12 @@ class plotter_tab(QWidget):
         self.graphWidget.setLabel('bottom', alpha, units='degrees')
         self.graphWidget.setLabel('left',name)
         self.graphWidget.addLegend()
-        for l in velocity_:
-
-            try:
-                self.graphWidget.plot(alpha_[:len(y[velocity_.index(l)])], y[velocity_.index(l)], name=f"{l}m/s",
+        try:
+                self.graphWidget.plot(alpha_, y[0][:len(alpha_)],
                                       pen=pg.mkPen(color=(random.randint(0, 255),
                                                           random.randint(0, 255),
                                                           random.randint(0, 255))))
-            except:
-                pass
+        except:
+                print(y,alpha_)
 
 

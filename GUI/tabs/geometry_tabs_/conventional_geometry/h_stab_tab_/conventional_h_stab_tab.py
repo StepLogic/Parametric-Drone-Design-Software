@@ -115,6 +115,7 @@ class h_stab_tab(QWidget):
 
 
     def init_action(self):
+        self.accept_inputs()
         self.parameters = {
             lifting_surface: {
                 str(self.text): {
@@ -134,6 +135,7 @@ class h_stab_tab(QWidget):
             }
         }}
         try:
+            print(self.parameters)
             database.update_aircraft_specifications(key=lifting_surface, value=self.parameters[lifting_surface])
         except:
             database.write_aircraft_specification(self.parameters)

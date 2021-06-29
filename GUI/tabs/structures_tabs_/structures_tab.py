@@ -55,14 +55,17 @@ class structures_tab(QWidget):
         self.zero_all_text_fields()
 
     def zero_all_text_fields(self):
-        mass_of_battery_or_fuel_, \
-        mass_of_engine_or_motor_, \
-        maximum_takeoff_weight_, \
-        mass_of_payload_,  = get_structures_specifications()
-        self.show_default_values(mass_of_battery_or_fuel_,
-           mass_of_engine_or_motor_,
-           maximum_takeoff_weight_,
-           mass_of_payload_ )
+        try:
+            mass_of_battery_or_fuel_, \
+            mass_of_engine_or_motor_, \
+            maximum_takeoff_weight_, \
+            mass_of_payload_,  = get_structures_specifications()
+            self.show_default_values(mass_of_battery_or_fuel_,
+               mass_of_engine_or_motor_,
+               maximum_takeoff_weight_,
+               mass_of_payload_ )
+        except:
+            self.show_default_values()
 
 
     def show_default_values(self,

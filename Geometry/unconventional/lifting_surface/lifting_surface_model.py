@@ -177,7 +177,7 @@ class lifting_surface_model:
         print()
         wires = []
         curves = []
-        print(constant)
+        print("wing",constant)
         n_sections = self.lifting_surface.get_section_count()
         print(n_sections)
         for idx in range(1, n_sections + 1):
@@ -187,7 +187,6 @@ class lifting_surface_model:
             ce.set_width(chords[idx - 1])
             ce.set_height(chords[idx - 1] * constant)
             center = ce.get_center()
-
             center.x = x[idx - 1]
             center.y = y[idx - 1]
             center.z = z[idx - 1]
@@ -291,17 +290,5 @@ class lifting_surface_model:
         loft.append(spar1.get_loft().shape())
         loft.append(spar3.get_loft().shape())
         loft.append(spar2.get_loft().shape())
-        for i in loft:
-            if self.xy_mirror_:
-                trafo = tigl3.geometry.CTiglTransformation()
-                trafo.add_mirroring_at_xyplane()
-                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
-            elif self.xz_mirror_:
-                trafo = tigl3.geometry.CTiglTransformation()
-                trafo.add_mirroring_at_xzplane()
-                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
-            elif self.yz_mirror_:
-                trafo = tigl3.geometry.CTiglTransformation()
-                trafo.add_mirroring_at_yzplane()
-                loft.append(tigl3.geometry.CNamedShape(trafo.transform(i), "cut").shape())
+
         return loft
