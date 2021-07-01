@@ -68,7 +68,7 @@ def init_display(backend_str=None, app=None):
                 self._menu_methods = {}
                 # place the window in the center of the screen, at half the
                 # screen size
-                self.centerOnScreen()
+
 
             def add_text_to_console(self, message):
                 self.console.setText(message)

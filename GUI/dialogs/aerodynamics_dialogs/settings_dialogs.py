@@ -1,7 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from GUI.tabs.aerodynamics.aerodynamic_settings_tab import aerodynamic_settings_tab
+from GUI.tabs.aerodynamic_tabs_.aerodynamic_settings_tab import aerodynamic_settings_tab
 
 
 class settings_dialog(QDialog):

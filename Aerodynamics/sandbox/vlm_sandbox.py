@@ -36,9 +36,9 @@ def f_alpha_vlm(x, velocity, airplane):
     )
     ap.run()
 
-    return {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.Cl),
+    return  {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.CY),
             "Cm": check_if_nan(ap.Cm),
-            "Cn": check_if_nan(ap.Cn)}
+            "Cn": check_if_nan(ap.Cn),"Cl":check_if_nan(ap.Cl)}
 
 
 def f_beta_vlm(x, velocity, airplane):
@@ -55,9 +55,9 @@ def f_beta_vlm(x, velocity, airplane):
     )
     ap.run()
 
-    return {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.Cl),
+    return  {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.CY),
             "Cm": check_if_nan(ap.Cm),
-            "Cn": check_if_nan(ap.Cn)}
+            "Cn": check_if_nan(ap.Cn),"Cl":check_if_nan(ap.Cl)}
 
 
 def f_p_vlm(x, velocity, airplane):
@@ -74,9 +74,9 @@ def f_p_vlm(x, velocity, airplane):
     )
     ap.run()
 
-    return {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.Cl),
+    return  {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.CY),
             "Cm": check_if_nan(ap.Cm),
-            "Cn": check_if_nan(ap.Cn)}
+            "Cn": check_if_nan(ap.Cn),"Cl":check_if_nan(ap.Cl)}
 
 
 def f_q_vlm(x, velocity, airplane):
@@ -93,9 +93,9 @@ def f_q_vlm(x, velocity, airplane):
     )
     ap.run()
 
-    return {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.Cl),
+    return  {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.CY),
             "Cm": check_if_nan(ap.Cm),
-            "Cn": check_if_nan(ap.Cn)}
+            "Cn": check_if_nan(ap.Cn),"Cl":check_if_nan(ap.Cl)}
 
 
 def f_r_vlm(x, velocity, airplane):
@@ -112,6 +112,6 @@ def f_r_vlm(x, velocity, airplane):
     )
     ap.run()
 
-    return {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.Cl),
+    return  {"CL": check_if_nan(ap.CL), "CD": check_if_nan(ap.CDi), "CY": check_if_nan(ap.CY),
             "Cm": check_if_nan(ap.Cm),
-            "Cn": check_if_nan(ap.Cn)}
+            "Cn": check_if_nan(ap.Cn),"Cl":check_if_nan(ap.Cl)}

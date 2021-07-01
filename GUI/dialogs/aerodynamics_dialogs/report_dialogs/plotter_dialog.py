@@ -2,7 +2,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from GUI.tabs.aerodynamics.plotter_tab import plotter_tab
+from GUI.tabs.aerodynamic_tabs_.plotter_tab import plotter_tab
 from Utils.data_objects.aerodynamics_placeholders import *
 from Utils.database import database
 

@@ -60,19 +60,10 @@ def read_datcom_table_data(type_="", major_key="", key=""):
     x_label = alpha
     alpha_ = get_aoa_range()
     velocity_ = get_free_stream_velocity_range()
-    y = []
-    j_y = []
-    prev = 0
-    for i in range(9, len(val) + 1, 9):
-        y.append(val[prev:i:1])
-        prev = i
-    for i in y:
-        try:
-            j_y.append(i[0])
-        except:
-            pass
-
-    return alpha_, velocity_, j_y
+    for i in val:
+        if i =="NDM":
+            val[val.index(i)]=0
+    return alpha_, velocity_, val
 
 
 def read_sandbox_table_data(type_="", major_key="", key=""):
@@ -87,3 +78,4 @@ def read_sandbox_table_data(type_="", major_key="", key=""):
     y = val
 
     return alpha_, velocity_, y
+

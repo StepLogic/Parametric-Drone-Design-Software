@@ -7,8 +7,7 @@ from Utils.data_objects.lifting_surface_placeholder import fin, tailplane
 from Utils.database import database
 from Utils.database.aerodynamics.settings_database import get_mach_number
 from Utils.database.geometry.lifting_database import read_surface_data
-divider=100
-
+divider=1
 def get_parameters_for_fuselage(fuselage_name=''):
     values = database.read_aircraft_specifications()[boom][fuselage_name]
     fuselage_length = values.get("fuselage_length")
@@ -205,7 +204,7 @@ def get_parameters_for_conventional(surface_name="", part=""):
 
 def get_parameters_for_unconventional(surface_name="", part=""):
     airfoil,surfaceType_, xz_mirror_, xy_mirror_, yz_mirror_ \
-        , rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
+        ,rot_x_, rot_y_, rot_z_, root_le_pos_x_, \
     root_le_pos_y_, root_le_pos_z_, section_1_x_, section_2_x_, \
     section_3_x_, section_4_x_, section_5_x_, section_1_y_, \
     section_2_y_, section_3_y_, section_4_y_, section_5_y_, \
@@ -239,9 +238,9 @@ def get_parameters_for_unconventional(surface_name="", part=""):
     profile_ = airfoil
 
     from scipy.spatial.transform import Rotation as R
-    r = R.from_euler('zyx', [rot_z_, rot_y_, rot_x_], degrees=True)
+    r = R.from_euler('xyz', [rot_x_, rot_y_, rot_z_], degrees=True)
     for x_, y_, z_ in zip(x__, y__, z__):
-        point = list(r.apply([z_, y_, x_]))
+        point = list(r.apply([x_, y_, z_]))
         x.append(point[0])
         y.append(point[1])
         z.append(point[2])

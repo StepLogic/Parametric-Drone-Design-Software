@@ -15,9 +15,6 @@ class aerodynamic_settings_tab(QWidget):
         layout.addRow(altitude_label, self.altitude_text)
 
         mach_number_label = QLabel("Free Stream Mach Number()")
-        layout.addRow(mach_number_label)
-
-        mach_number_label = QLabel("Min")
         self.mach_number_text = QLineEdit()
         layout.addRow(mach_number_label, self.mach_number_text)
 

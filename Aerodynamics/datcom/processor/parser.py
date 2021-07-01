@@ -487,9 +487,9 @@ class DatcomParser(Parser):
                 if col == '':
                     val = 0
                 elif col == 'NDM':
-                    val = 'NDM'
+                    val = 0
                 elif col == 'NA':
-                    val = 'NA'
+                    val = 0
                 elif col.__contains__("*"):
                     val = "0.0"
                 else:
@@ -633,5 +633,6 @@ class DatcomParser(Parser):
             CL: {col_alpha: static_result["CLA"], col_q: dynamic_result["CLQ"]},
             CD: {cd: static_result["CD"]},
             CY: {cy_beta: static_result["CYB"], cy_p: dynamic_result["CYP"]}}
+
     def get_cases(self):
         return self.cases

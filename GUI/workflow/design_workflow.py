@@ -43,10 +43,7 @@ def start(e, receiveTasks, sendLofts):
         command = res[0]
         if command == datcom_:
             from Aerodynamics.datcom.datcom import run_datcom
-            try:
-                run_datcom()
-            except:
-                pass
+            run_datcom()
             sendLofts.send(done)
         elif command == sandbox_:
             from Aerodynamics.sandbox.sandbox import run_analysis

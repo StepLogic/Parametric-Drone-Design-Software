@@ -104,7 +104,6 @@ def get_surface_for_cas():
                 l)
             xsecs = []
             for x_, y_, z_, chord_, t in zip(x, y, z, chords, twist_):
-                print(profile_)
                 xsecs.append(
                     WingXSec(  # Root
                         x_le=x_,
@@ -123,6 +122,7 @@ def get_surface_for_cas():
                     symmetric=xz_mirror_,
                     xsecs=xsecs
                 ))
+            print(l,x,y,z)
         elif design_type_ == conventional_design:
             x, y, z, chords, twist, profile_, root_location_x, root_location_y, root_location_z = get_parameters_for_conventional(
                 l, surface_type_)
@@ -160,6 +160,7 @@ def get_surface_for_cas():
                     xsecs=xsecs
                 )
             )
+            print(l, x, y, z)
     return wings
 
 

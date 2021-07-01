@@ -106,15 +106,15 @@ class lifting_surface_model:
                 constant = int(nacanumber[2:]) * 0.01
             elif len(nacanumber) == 5:
                 constant = int(nacanumber[3:]) * 0.01
-                print(constant)
+
         else:
             constant=0.1
         # decrease section size towards wing tips
-        print(constant)
+
         wires = []
         curves = []
         n_sections = self.lifting_surface.get_section_count()
-        print(n_sections)
+
         for idx in range(1, n_sections + 1):
             s = self.lifting_surface.get_section(idx)
             e = s.get_section_element(1)
@@ -133,7 +133,7 @@ class lifting_surface_model:
         self.lifting_surface.set_root_leposition(tigl3.geometry.CTiglPoint(self.root_le_pos_x_
                                                                            , self.root_le_pos_y_
                                                                            , self.root_le_pos_z_))
-        print("vstab", self.root_le_pos_y_)
+
         loft = []
         loft.append(self.lifting_surface.get_loft().shape())
         if self.xy_mirror_:
@@ -156,7 +156,7 @@ class lifting_surface_model:
         self.read_parameters()
         n = random.random()
         self.lifting_surface = self.wings.create_wing(f"{n}", 5, self.airfoil_type)
-        print(self.name_, (self.root_le_pos_x_, self.root_le_pos_y_, self.root_le_pos_z_))
+
 
         chords = [self.section_1_chord_, self.section_2_chord_, self.section_3_chord_, self.section_4_chord_,
                   self.section_5_chord_]
@@ -173,12 +173,12 @@ class lifting_surface_model:
             if len(nacanumber) == 4:
                 constant = int(nacanumber[2:]) * 0.01
         # decrease section size towards wing tips
-        print()
+
         wires = []
         curves = []
-        print("wing",constant)
+
         n_sections = self.lifting_surface.get_section_count()
-        print(n_sections)
+
         for idx in range(1, n_sections + 1):
             s = self.lifting_surface.get_section(idx)
             e = s.get_section_element(1)
@@ -252,7 +252,7 @@ class lifting_surface_model:
                  self.section_4_twist_angle_, self.section_5_twist_angle_]
 
         profile = self.airfoil_type
-        print(self.airfoil_type)
+
         constant = 0.0
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():

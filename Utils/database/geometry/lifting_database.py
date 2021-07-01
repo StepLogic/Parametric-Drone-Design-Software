@@ -11,7 +11,6 @@ def airfoil_profiles():
     with open(airfoil_path) as p:
         line=p.readline()
         profiles.extend(line.split(","))
-        print(profiles)
     return profiles
 def get_sweep_and_dihedral(part=""):
     values = database.read_aircraft_specifications()[part]
@@ -123,7 +122,7 @@ def read_surface_data(surface_name=""):
     values = database.read_aircraft_specifications()
     design_type_ = values[objects][surface_name][design_type]
     surface_type_ = values[objects][surface_name][surface_type]
-    print(design_type_,surface_type_)
+
     if design_type_ == unconventional_design:
             return read_lifting_surface_params(values[lifting_surface][surface_name])
     else:

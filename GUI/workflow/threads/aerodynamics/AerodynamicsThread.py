@@ -19,7 +19,6 @@ class AerodynamicThread(QtCore.QThread):
         self.workflow = workflow
 
     def run(self):
-        self.workflow.update_progress(start_)
         self.workflow.events.set()
         self.workflow.sendTasks.send([self.command])
 

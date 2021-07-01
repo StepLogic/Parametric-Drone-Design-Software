@@ -371,7 +371,7 @@ class lifting_surface_tab(QWidget):
 
         self.XZsymmetryCheck.setChecked(xz_mirror_)
         self.xz_mirror_ = xz_mirror_
-        print(profile_, root_le_pos_x_)
+
         self.wing_profile_combo.setCurrentIndex(airfoil_profiles().index(profile_) if profile_ is not None else 1)
 
         self.YZsymmetryCheck.setChecked(yz_mirror_)
@@ -468,4 +468,4 @@ class lifting_surface_tab(QWidget):
     def accept_inputs(self):
         if self.wing_profile_selection is None:
             self.wing_profile_selection = airfoil_profiles()[self.wing_profile_combo.currentIndex()]
-            print(self.wing_profile_selection)
+

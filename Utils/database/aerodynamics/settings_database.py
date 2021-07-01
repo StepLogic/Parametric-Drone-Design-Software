@@ -5,7 +5,12 @@ from Utils.database import database
 
 
 def get_aoa_range():
-    return database.read_work_file()[aoa_range]
+    aoa = []
+    try:
+        aoa = database.read_work_file()[aoa_range]
+    except:
+        print("ERROR:Enter Aerodynamic Settings Value")
+    return aoa
 
 
 def set_aoa_range(max=0, min=0):
@@ -45,12 +50,7 @@ def get_mach_number():
     try:
         mach_number_=database.read_work_file()[mach_number]
     except:
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
-        msg.setText("Error")
-        msg.setInformativeText("ERROR!")
-        msg.setWindowTitle("Aerosoft")
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        print("ERROR:Enter Aerodynamic Settings Value")
     return mach_number_
 
 
@@ -65,7 +65,12 @@ def set_altitude(altitude_=0):
 
 
 def get_altitude():
-    return database.read_work_file()[altitude]
+    alt=0.0
+    try:
+        alt=database.read_work_file()[altitude]
+    except:
+        print("ERROR:Enter Aerodynamic Settings Value")
+    return alt
 
 
 def read_settings():

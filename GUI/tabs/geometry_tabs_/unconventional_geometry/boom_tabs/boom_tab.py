@@ -191,7 +191,7 @@ class boom_tab(QWidget):
         self.inputArea.addTab(widget, "Section Two Design")
         ##############################################################################
         self.layout = QFormLayout()
-        self.section_3_width_label = QLabel("Section (3) radius")
+        self.section_3_width_label = QLabel("Section (3) Width")
         self.section_3_width_text = QLineEdit()
         self.layout.addRow(self.section_3_width_label, self.section_3_width_text)
         ##############################################################################
@@ -223,16 +223,7 @@ class boom_tab(QWidget):
 
         self.layout = QFormLayout()
 
-        self.tail_profile_label = QLabel("Tail Profile")
-        self.tail_profile_combo = QComboBox()
-        self.tail_profile_combo.addItems(fuselage_profiles)
-        self.tail_profile_selection = None
-        self.tail_profile_combo.currentIndexChanged.connect(self.tail_profile_selectionChanged)
-        self.layout.addRow(self.tail_profile_label, self.tail_profile_combo)
 
-        self.tail_position_z_label = QLabel("Tail Position Z")
-        self.tail_position_z_text = QLineEdit()
-        self.layout.addRow(self.tail_position_z_label, self.tail_position_z_text)
         ##############################################################################
 
         ##############################################################################
@@ -244,6 +235,17 @@ class boom_tab(QWidget):
         self.tail_height_text = QLineEdit()
         self.layout.addRow(self.tail_height_label, self.tail_height_text)
         ##############################################################################
+        self.tail_profile_label = QLabel("Tail Profile")
+        self.tail_profile_combo = QComboBox()
+        self.tail_profile_combo.addItems(fuselage_profiles)
+        self.tail_profile_selection = None
+        self.tail_profile_combo.currentIndexChanged.connect(self.tail_profile_selectionChanged)
+        self.layout.addRow(self.tail_profile_label, self.tail_profile_combo)
+
+        self.tail_position_z_label = QLabel("Tail Position Z")
+        self.tail_position_z_text = QLineEdit()
+        self.layout.addRow(self.tail_position_z_label, self.tail_position_z_text)
+
 
         self.tail_length_label = QLabel("Tail Length")
         self.tail_length_text = QLineEdit()

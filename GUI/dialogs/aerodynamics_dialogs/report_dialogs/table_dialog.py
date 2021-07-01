@@ -2,7 +2,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
-from GUI.tabs.aerodynamics.table_tab import table_tab
+from GUI.tabs.aerodynamic_tabs_.table_tab import table_tab
 from Utils.data_objects.aerodynamics_placeholders import *
 from Utils.database import database
 
@@ -22,6 +22,8 @@ class table_dialog(QDialog):
         self.layout.addRow(mainTabs)
         self.layout.addRow(self.buttons)
         self.setLayout(self.layout)
+        self.setFixedWidth(600)
+        self.setFixedHeight(600)
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)
         self.load_tabs()
