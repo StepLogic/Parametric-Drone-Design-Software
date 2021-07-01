@@ -218,7 +218,12 @@ def update_surface_lower_3d(config=None):
 
 
 def generate_wing_lower_3D(config=None, name="", surface_type_="", design_type_=""):
-    if surface_type_ == wing and design_type_ == unconventional_design:
+    if surface_type_ == wing and design_type_ == conventional_design:
         return lifting_surface_model(config=config, name=name,
                                      surface_type_=surface_type_,
                                      design_type_=design_type_).get_lower_surface()
+    elif surface_type_ == wing and design_type_ == unconventional_design:
+        return lifting_surface_model(config=config, name=name,
+                                     surface_type_=surface_type_,
+                                     design_type_=design_type_).get_lower_surface()
+

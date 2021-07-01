@@ -14,4 +14,6 @@ build_message="Wait"
 designs_="designs_"
 done_=1
 start_=0
+start_server_="start_server"
+stop_server_="stop_server"
 

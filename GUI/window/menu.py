@@ -19,9 +19,10 @@ from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThre
 from GUI.workflow.threads.geometry.ExportThread import ExportThread
 
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
+from GUI.workflow.threads.simulator.SimulatorThread import SimulatorThread
 from Structures.trimesh.trimeshWrapper import get_functions
 from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_surface_3D_, update_boom_3D_, build_cs, \
-    build_landing_gear, start_multisandbox, build_shroud, build_propeller, done_
+    build_landing_gear, start_multisandbox, build_shroud, build_propeller, done_, start_, start_server_
 from Utils.database.geometry.control_surface_database import read_control_surface_objects
 from Utils.database.geometry.main_database import wipe_design_options, wipe_design
 from Utils.database.settings.workfile_database import open_design
@@ -247,6 +248,9 @@ def setup_ui(workflow):
             thread.setup(workflow)  # just setting up a parameter
             thread.start()
             workflow.threads.append(thread)
+            workflow.sim_events.set()
+            workflow.sendTasks.send([start_server_])
+
 
         workflow.add_function_to_menu("Simulation", start_simulation)
 

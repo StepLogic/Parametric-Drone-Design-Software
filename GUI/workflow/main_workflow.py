@@ -8,6 +8,7 @@ class work_flow_monitor(QApplication):
     def __init__(self, *args, **kwargs):
         super(work_flow_monitor, self).__init__(*args, **kwargs)
         self.events=None
+        self.sim_events=None
         self.receiveLofts=None
         self.threads=[]
         self.sendTasks=None

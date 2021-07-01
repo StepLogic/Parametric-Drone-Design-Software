@@ -5,17 +5,19 @@ import tigl3.configuration
 import tigl3.tigl3wrapper
 import tixi3.tixi3wrapper
 
-from GUI.workflow import design_workflow
-from GUI.workflow.workflow import work_flow_monitor
+from GUI.workflow import design_workflow, simulator_workflow
+from GUI.workflow.main_workflow import work_flow_monitor
+from Server.app import server
 from Utils.data_objects.workflow_placeholders import shutdown_
 from Utils.database.database import resource_dir_cpacs
 
 sendTasks, receiveTasks = mp.Pipe()
 sendLofts, receiveLofts = mp.Pipe()
 e = mp.Event()
+sim_event=mp.Event()
 
 
-def start(e, sendTasks, receiveLofts):
+def start(e,sim_event, sendTasks, receiveLofts):
     filename = resource_dir_cpacs + "/empty.cpacs3.xml"
     tixi_h = tixi3.tixi3wrapper.Tixi3()
     tixi_h.open(filename)
@@ -26,6 +28,7 @@ def start(e, sendTasks, receiveLofts):
     work_flow = work_flow_monitor(sys.argv)
     work_flow.config = config_value
     work_flow.events = e
+    work_flow.sim_events=sim_event
     work_flow.sendTasks = sendTasks
     work_flow.receiveLofts = receiveLofts
     work_flow.execute_design_window()
@@ -43,7 +46,9 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    gui = mp.Process(target=start, args=(e, sendTasks, receiveLofts))
+   # server.run(host='0.0.0.0', debug=True, threaded=True)
+    gui = mp.Process(target=start, args=(e,sim_event, sendTasks, receiveLofts))
     gui.start()
     design = mp.Process(target=design_workflow.start, args=(e, receiveTasks, sendLofts))
     design.start()
+

@@ -87,7 +87,6 @@ class lifting_surface_model:
             return self.straight_surface()
 
     def straight_surface(self):
-
         n = random.random()
         self.lifting_surface = self.wings.create_wing(f"{n}", 5, self.airfoil_type)
 
