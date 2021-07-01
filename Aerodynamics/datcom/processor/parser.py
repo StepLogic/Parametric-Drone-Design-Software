@@ -166,7 +166,7 @@ class DatcomParser(Parser):
         'BOOL',
         'CASEID',
         'NAMELIST',
-         'BUILD']
+        'BUILD']
     tokens.extend(reserved_INPUT.keys())
 
     # Tokens
@@ -182,16 +182,15 @@ class DatcomParser(Parser):
 
     t_INPUT_ignore = ' \r\n\t'
 
-
     def t_INPUT_BOOL(self, t):
         r'(\.TRUE\.|\.FALSE\.)'
         return t
 
     def t_INPUT_NEXTCASE(self, t):
         r'NEXT\ CASE'
-    def t_ANY_BUILD(self,t):
-        r'BUILD'
 
+    def t_ANY_BUILD(self, t):
+        r'BUILD'
 
     def t_CASE_NEWCASE(self, t):
         r'.*THE\ FOLLOWING\ IS\ A\ LIST\ OF\ ALL.*'
@@ -278,7 +277,6 @@ class DatcomParser(Parser):
     def t_ANY_error(self, t):
         print("Illegal character '%s' at line" % t.value[0], t.lexer.lineno)
         t.lexer.skip(1)
-
 
     def t_INPUT_end_INPUT(self, t):
         r'1.*AUTOMATED\ STABILITY\ AND\ CONTROL\ METHODS.*'
@@ -492,10 +490,10 @@ class DatcomParser(Parser):
                     val = 'NDM'
                 elif col == 'NA':
                     val = 'NA'
-                elif  col.__contains__("*"):
-                    val="0.0"
+                elif col.__contains__("*"):
+                    val = "0.0"
                 else:
-                    print ('raw: %11s' % col)
+                    print('raw: %11s' % col)
                     val = float(col)
                     # print 'float: %11f\n' % val
                 dataArray[-1].append(val)
@@ -554,7 +552,6 @@ class DatcomParser(Parser):
             p[0] = {p[1]: False}
         else:
             print(p[3])
-
 
     def p_airfoil(self, p):
         'statement : AIRFOIL'
@@ -624,68 +621,17 @@ class DatcomParser(Parser):
             elif re_total.match(name):
                 print(case)
                 cases.update({'total': case})
-        for key in ['aileron', 'flap', 'total']:
-            if key not in cases:
-                pass
-
-        # extract some need dictionaries
-        print(cases)
-        dFlap = cases['flap']['SYMFLP'] if cases.get("flap") is not None else {}
-        dAileron = cases['aileron']['ASYFLP'] if cases.get("aileron") is not None else {}
-        dElevator = cases['total']['SYMFLP']
-        dDynamic = cases['total']['DYNAMIC']
-        dStatic = cases['total']['STATIC']
-
-        # create model name
-        if self.file_name is None:
-            model_name = 'name'
-        else:
-            model_name = os.path.split(os.path.splitext(self.file_name)[0])[1]
 
         # fill dict
+        static_result = self.cases[0]["STATIC"]
+        dynamic_result = self.cases[0]["DYNAMIC"]
         return {
-            'name': model_name,
-            # lift
-            CL: dStatic['CL'],
-            'dCL_Flap': dFlap['DERIV']['D(CL)'] if cases.get("flap") is not None else {},
-            'dCL_Elevator': dElevator['DERIV']['D(CL)'],
-            'dCL_PitchRate': dDynamic['CLQ'],
-            'dCL_AlphaDot': dDynamic['CLAD'],
-
-            # drag
-            CD: dStatic['CD'],
-            'dCD_Flap': dFlap['CD'] if cases.get("flap") is not None else {},
-            'dCD_Elevator': dElevator['CD'],
-
-            # side force
-            cy_beta: dStatic['CYB'],
-            cy_p: dDynamic['CYP'],
-
-            # roll moment
-            'dCl_Aileron': dAileron['ROLL']['CL(ROLL)'] if cases.get("flap") is not None else {},
-            cl_beta: dStatic['CLB'],
-            cl_p: dDynamic['CLP'],
-            cl_r: dDynamic['CLR'],
-
-            # pitch moment
-            cm_alpha: dStatic['CM'],
-            'dCm_Flap': dFlap['DERIV']['D(CM)'] if cases.get("flap") is not None else {},
-            'dCm_Elevator': dElevator['DERIV']['D(CM)'],
-            cm_q: dDynamic['CMQ'],
-            'dCm_AlphaDot': dDynamic['CMAD'],
-
-            # yaw moment
-            'dCn_Aileron': dAileron['CN'] if cases.get("flap") is not None else {},
-            cn_beta: dStatic['CNB'],
-            cn_p: dDynamic['CNP'],
-            cn_r: dDynamic['CNR'],
-
-            # surfaces/ wind angles
-            'flap': dFlap['DELTA'] if cases.get("flap") is not None else {},
-            'alrn': dAileron['DELTA'] if cases.get("flap") is not None else {},
-            'elev': dElevator['DELTA'],
-            'alpha': dStatic['ALPHA'],
-        }
-
+            Cn: {cn: static_result["CN"], cn_beta: static_result["CNB"], cn_p: dynamic_result["CNP"],
+                 cn_r: dynamic_result["CNR"]},
+            Cl: {cl_beta: static_result["CLB"], cl_p: dynamic_result["CLP"], cl_r: dynamic_result["CLR"]},
+            Cm: {cm_alpha: static_result["CMA"], cm_q: dynamic_result["CMQ"]},
+            CL: {col_alpha: static_result["CLA"], col_q: dynamic_result["CLQ"]},
+            CD: {cd: static_result["CD"]},
+            CY: {cy_beta: static_result["CYB"], cy_p: dynamic_result["CYP"]}}
     def get_cases(self):
         return self.cases

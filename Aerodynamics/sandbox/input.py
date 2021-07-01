@@ -1,15 +1,16 @@
+import trimesh
 from aerosandbox import Fuselage, FuselageXSec, np
 
 from Utils.data_objects.lifting_surface_placeholder import fin
 from Utils.data_objects.placeholder import conventional_design, unconventional_design
 from Utils.database.aerodynamics.sandbox_database import get_parameters_for_conventional, \
     get_parameters_for_unconventional, get_parameters_for_boom, get_parameters_for_fuselage
+from Utils.database.database import model_filepath
 from Utils.database.geometry.boom_database import get_boom_object_data, read_boom_objects
 from Utils.database.geometry.lifting_database import get_surface_object_data, read_lifting_surface_objects, tailplane
 
 
 def create_aircraft():
-    print(get_booms())
     if len(get_booms()) > 0:
         from aerosandbox import Airplane
         airplane = Airplane(
@@ -19,7 +20,10 @@ def create_aircraft():
 
     else:
         from aerosandbox_legacy_v0 import Airplane
+        print("vlm")
+        mesh = trimesh.load(model_filepath)
         airplane = Airplane(
+            xyz_ref=[round(list(mesh.center_mass)[0],2), round(list(mesh.center_mass)[1],2), round(list(mesh.center_mass)[2],2)],  # CG location
             wings=get_lifting_surfaces(type_="vlm")
         )
 
@@ -56,7 +60,8 @@ def get_booms():
                         xsecs=xsecs
                     ))
             elif design_type_ == unconventional_design:
-                radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_boom(l)
+                radii, x, z, root_position_x_, root_position_y_, root_position_z_, xz_mirror_ = get_parameters_for_boom(
+                    l)
                 for radius, x_, z_ in zip(radii, x, z):
                     xsecs.append(
                         FuselageXSec(
@@ -77,7 +82,6 @@ def get_booms():
                 return fuselages
     except:
         return []
-
 
 
 def get_lifting_surfaces(type_="vlm"):
@@ -172,7 +176,6 @@ def get_surface_for_vlm():
                 l)
             xsecs = []
             for x_, y_, z_, chord_, t in zip(x, y, z, chords, twist_):
-                print(profile_)
                 xsecs.append(
                     WingXSec(  # Root
                         xyz_le=[x_, y_, z_],
@@ -193,7 +196,6 @@ def get_surface_for_vlm():
                 l, surface_type_)
             xsecs = []
             for x_, y_, z_, chord_ in zip(x, y, z, chords):
-                print(surface_type_)
                 if surface_type_ == wing or surface_type_ == tailplane:
                     xsecs.append(
                         WingXSec(  # Root

@@ -37,4 +37,5 @@ def process_output():
     parser = DatcomParser(database.datcom_output_file)
     dict = parser.get_common()
     stability_derivatives = dict
+    print(dict)
     database.write_datcom_stability_specification(stability_derivatives)

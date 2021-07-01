@@ -67,7 +67,7 @@ def run_sandbox_simulation():
         cm_q_.append(cm_q_temp)
 
     stability_derivatives = {
-        Cn: {cn_beta: cnb, cn_p: cnp, cn_r: cnr},
+        Cn: {cn:[],cn_beta: cnb, cn_p: cnp, cn_r: cnr},
         Cl: {cl_beta: clb, cl_p: clp, cl_r: clr},
         Cm: {cm_alpha: cm_a, cm_q:cm_q_},
         CL: {col_alpha: col_a, col_q: col_q_},

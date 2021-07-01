@@ -1,17 +1,16 @@
 import copy
 
-from aerosandbox import *
-from aerosandbox_legacy_v0 import vlm3
+from aerosandbox import cas, Casll1, OperatingPoint
 
 from Aerodynamics.sandbox.input import create_aircraft
 
-#TODO Remove multiple mach number support
+# TODO Remove multiple mach number support
+from Aerodynamics.sandbox.vlm_sandbox import start_vlm
+
 
 def run_analysis():
     airplane = create_aircraft()
-    values = {}
     try:
-        airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
             airplane=airplane,
@@ -42,8 +41,6 @@ def run_analysis():
         values = {"type": "CAS", "CL": ap_sol.CL, "CD": ap_sol.CD, "CY": ap_sol.CY, "Cl": ap_sol.Cl, "Cm": ap_sol.Cm,
                   "Cn": ap_sol.Cn}
     except:
-       pass
+        values=start_vlm(airplane)
+    print(values)
     return values
-
-
-

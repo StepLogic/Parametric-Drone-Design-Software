@@ -3,10 +3,11 @@ import copy
 from aerosandbox import *
 
 from Aerodynamics.sandbox.input import create_aircraft
+from Aerodynamics.sandbox.vlm_sandbox import f_alpha_vlm, f_beta_vlm, f_p_vlm, f_r_vlm, f_q_vlm
 from Utils.maths.math_library import check_if_nan
 
 
-def f_alpha(x,velocity):
+def f_alpha(x, velocity):
     airplane = create_aircraft()
     try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
@@ -40,12 +41,13 @@ def f_alpha(x,velocity):
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
     except:
-        pass
+        values = f_alpha_vlm(x, velocity, airplane)
     return values
 
-def f_beta(x,velocity):
+
+def f_beta(x, velocity):
     airplane = create_aircraft()
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -76,11 +78,14 @@ def f_beta(x,velocity):
 
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
-        return values
+    except:
+        values = f_beta_vlm(x, velocity, airplane)
+    return values
 
-def f_p(x,velocity):
+
+def f_p(x, velocity):
     airplane = create_aircraft()
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -111,11 +116,14 @@ def f_p(x,velocity):
 
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
-        return values
+    except:
+        values = f_p_vlm(x, velocity, airplane)
+    return values
 
-def f_q(x,velocity):
+
+def f_q(x, velocity):
     airplane = create_aircraft()
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -146,10 +154,14 @@ def f_q(x,velocity):
 
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
-        return values
-def f_r(x,velocity):
+    except:
+        values = f_q_vlm(x, velocity, airplane)
+    return values
+
+
+def f_r(x, velocity):
     airplane = create_aircraft()
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -180,6 +192,6 @@ def f_r(x,velocity):
 
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
-        return values
-
-
+    except:
+        values = f_r_vlm(x, velocity, airplane)
+    return values
