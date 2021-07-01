@@ -129,7 +129,7 @@ def get_parameters_from_conventional_wing(surface_name=""):
 def get_parameters_from_sections_lifting_surface(surface_name=""):
     values = database.read_aircraft_specifications()
     parameters = values[lifting_surface][surface_name]
-    profile_=values[lifting_surface][surface_name]
+    profile_=values[lifting_surface][surface_name][profile]
     x_list = [parameters[section_1_x], parameters[section_2_x], parameters[section_3_x], parameters[section_4_x],
               parameters[section_5_x]]
     y_list = [parameters[section_1_y], parameters[section_2_y], parameters[section_3_y], parameters[section_4_y],

@@ -8,7 +8,7 @@ from Utils.maths.math_library import check_if_nan
 
 def f_alpha(x,velocity):
     airplane = create_aircraft()
-    if len(airplane.fuselages) > 0:
+    try:
         airplane.set_spanwise_paneling_everywhere(8)  # Set the resolution of your analysis
         opti = cas.Opti()
         ap = Casll1(  # Set up the AeroProblem
@@ -39,7 +39,9 @@ def f_alpha(x,velocity):
 
         values = {"CL": check_if_nan(ap_sol.CL), "CD": check_if_nan(ap_sol.CD), "CY": check_if_nan(ap_sol.CY),
                   "Cl": check_if_nan(ap_sol.Cl), "Cm": check_if_nan(ap_sol.Cm), "Cn": check_if_nan(ap_sol.Cn)}
-        return values
+    except:
+        pass
+    return values
 
 def f_beta(x,velocity):
     airplane = create_aircraft()

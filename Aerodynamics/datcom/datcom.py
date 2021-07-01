@@ -7,6 +7,7 @@ from Utils.database import database
 from Utils.database.database import datcom_output_file
 from Utils.file_manager.file_manager_ import clean_up_after_datcom
 
+
 def run_datcom():
     build_datcom_input()
     location = database.datcom_exe
@@ -16,4 +17,3 @@ def run_datcom():
     out, err = p.communicate()
     clean_up_after_datcom()
     process_output()
-

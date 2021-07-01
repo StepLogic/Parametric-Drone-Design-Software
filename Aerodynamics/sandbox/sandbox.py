@@ -42,20 +42,7 @@ def run_analysis():
         values = {"type": "CAS", "CL": ap_sol.CL, "CD": ap_sol.CD, "CY": ap_sol.CY, "Cl": ap_sol.Cl, "Cm": ap_sol.Cm,
                   "Cn": ap_sol.Cn}
     except:
-        aero_problem = vlm3(  # Analysis type: Vortex Lattice Method, version 3
-            airplane=airplane,
-            op_point=OperatingPoint(
-                velocity=10,
-                alpha=5,
-                beta=0,
-                p=0,
-                q=0,
-                r=0,
-            ),
-        )
-
-        aero_problem.run()  # Runs and prints results to console
-        aero_problem.draw()
+       pass
     return values
 
 

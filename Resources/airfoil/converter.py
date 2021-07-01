@@ -58,28 +58,5 @@ for f in filenames:
                         pass
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             value.append(cv(f.split(".")[0], x, y))
 
-for i in value:
-    if i is not None:
-        print("\n", i)
-with open('names.txt', 'w') as f:
-    f.write('readme')
-a_file = open(resource_path(absolute_path + "/Resources") + "/airfoil/export/names.txt", "w")
-a_file.writelines("".join(names))
-a_file.close()
