@@ -19,7 +19,7 @@ from GUI.workflow.threads.aerodynamics.AerodynamicsThread import AerodynamicThre
 from GUI.workflow.threads.geometry.ExportThread import ExportThread
 
 from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
-from GUI.workflow.threads.simulator.SimulatorThread import SimulatorThread
+
 from Structures.trimesh.trimeshWrapper import get_functions
 from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_surface_3D_, update_boom_3D_, build_cs, \
     build_landing_gear, start_multisandbox, build_shroud, build_propeller, done_, start_, start_server_
@@ -204,21 +204,22 @@ def setup_ui(workflow):
         workflow.add_menu("Aerodynamics")
 
         def sandbox():
-            workflow.viewer.save_model()
-            pool = QThreadPool.globalInstance()
-            runnable = AerodynamicThread(workflow, command=sandbox_)
-            pool.start(runnable)
+            thread = AerodynamicThread()
+            thread.setup(workflow, command=sandbox_)  # just setting up a parameter
+            thread.start()
+            workflow.threads.append(thread)
+
         def datcom():
-            workflow.viewer.save_model()
-            pool = QThreadPool.globalInstance()
-            runnable = AerodynamicThread(workflow, command=datcom_)
-            pool.start(runnable)
+            thread = AerodynamicThread()
+            thread.setup(workflow, command=datcom_)  # just setting up a parameter
+            thread.start()
+            workflow.threads.append(thread)
 
         def multisandbox():
-            pool = QThreadPool.globalInstance()
-            runnable = AerodynamicThread(workflow, command=start_multisandbox)
-            pool.start(runnable)
-
+            thread = AerodynamicThread()
+            thread.setup(workflow, command=start_multisandbox)  # just setting up a parameter
+            thread.start()
+            workflow.threads.append(thread)
         def plot_graphs():
             dialog = plotter_dialog()
             results = dialog.exec_()
@@ -248,8 +249,7 @@ def setup_ui(workflow):
             thread.setup(workflow)  # just setting up a parameter
             thread.start()
             workflow.threads.append(thread)
-            workflow.sim_events.set()
-            workflow.sendTasks.send([start_server_])
+
 
 
         workflow.add_function_to_menu("Simulation", start_simulation)
