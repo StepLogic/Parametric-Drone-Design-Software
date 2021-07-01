@@ -21,6 +21,7 @@ class AerodynamicThread(QtCore.QThread):
     def run(self):
         self.workflow.events.set()
         self.workflow.sendTasks.send([self.command])
+        self.workflow.receiveLofts.recv()
 
 
 
