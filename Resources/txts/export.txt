@@ -1,0 +1,1 @@
+cn:0,cn_beta:0,cn_p:0,cn_r:0,cl_beta:0,cl_p:0.0,cl_r:0.0,cm_alpha:0,cm_q:0,col_alpha:0,col_q:0,cd:0,cy_beta:0,cy_p:0,
