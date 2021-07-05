@@ -15,7 +15,7 @@ class control_surface_model():
 
     def __init__(self, name=None, config=None, part_loft=None):
         super().__init__()
-        self.profile = "0012"
+        self.profile = "naca4412"
         self.aircraft = config
         self.part_loft = part_loft
         self.wings = self.aircraft.get_wings()
@@ -34,14 +34,14 @@ class control_surface_model():
         profile = self.profile
         wings = self.aircraft.get_wings()
         try:
-            wing_main = wings.create_wing(f"{self.name}{self.iter}", 3, "naca0012")
+            wing_main = wings.create_wing(f"{self.name}{self.iter}", 3, "naca4412")
         except:
             n = random.random()
-            wing_main = wings.create_wing(f"{self.name}{n}{self.iter}", 3, "naca0012")
+            wing_main = wings.create_wing(f"{self.name}{n}{self.iter}", 3, "naca4412")
 
         self.iter += 1
 
-        profile = "naca0012"
+        profile = "naca4412"
         constant = 1
         nacanumber = profile.split("naca")[1]
         if nacanumber.isdigit():
@@ -69,8 +69,10 @@ class control_surface_model():
         if read_parent_data(self.parent__, key=design_type) == conventional_design:
             sweep_ = read_parent_data(self.parent__, key=sweep)
             dihedral_ = read_parent_data(self.parent__, key=dihedral)
-            wing_main.set_sweep(sweep_)
-            wing_main.set_sweep(dihedral_)
+            if sweep_>0.0:
+                wing_main.set_sweep(sweep_)
+            if dihedral_>0.0:
+                wing_main.set_sweep(dihedral_)
         if read_parent_data(self.parent__, key=surface_type) == fin and read_parent_data(self.parent__,
                                                                                          key=design_type) == conventional_design:
             wing_main.set_rotation(tigl3.geometry.CTiglPoint(90, 0, 0))
@@ -144,6 +146,9 @@ class control_surface_model():
                 trafo.add_mirroring_at_yzplane()
                 wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
                 ret_loft = [wing_2, wing_1, surfaces[0], surfaces[1]]
+            else:
+
+                ret_loft=[wing_1,surfaces[0]]
 
 
         return ret_loft
@@ -175,6 +180,7 @@ class control_surface_model():
         lofts = self.part_loft
         surfaces = self.create_aileron()
         cut_shapes = self.create_aileron(10)
+
         logging.info(time.strftime('%X'))
         wing_1 = cut_wing(lofts[0], cut_shapes[0])
         logging.info(time.strftime('%X'))
@@ -204,5 +210,7 @@ class control_surface_model():
                 trafo.add_mirroring_at_yzplane()
                 wing_2 = tigl3.geometry.CNamedShape(trafo.transform(wing_1), "cut").shape()
                 ret_loft = [wing_2, wing_1]
+            else:
+                ret_loft = [wing_1, surfaces[0]]
 
         return ret_loft

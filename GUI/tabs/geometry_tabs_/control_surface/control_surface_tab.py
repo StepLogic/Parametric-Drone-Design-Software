@@ -33,6 +33,12 @@ class control_surface_tab(QWidget):
         self.span_label = QLabel("Span")
         self.span_text = QLineEdit()
         layout.addRow(self.span_label, self.span_text)
+
+        ##############################################################################
+        self.chord_length_label = QLabel("Chord Length")
+        self.chord_length_text = QLineEdit()
+        layout.addRow(self.chord_length_label, self.chord_length_text)
+
         self.rotation_label = QLabel("Rotation(XYZ)")
         layout.addRow(self.rotation_label)
 
@@ -49,10 +55,7 @@ class control_surface_tab(QWidget):
         layout.addRow(self.rotation_z_label, self.rotation_z_text)
 
         ##################################################################################
-        ##############################################################################
-        self.chord_length_label = QLabel("Chord Length")
-        self.chord_length_text = QLineEdit()
-        layout.addRow(self.chord_length_label, self.chord_length_text)
+
 
         self.Wing_postion_tlabel = QLabel("Position")
         layout.addWidget(self.Wing_postion_tlabel)

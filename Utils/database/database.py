@@ -22,7 +22,7 @@ model_dir = resource_path(absolute_path + "/Resources/model")
 settings_filepath = absolute_path + "/Resources/json/settings.json"
 saved_designs_ = absolute_path + "/Resources/saved_designs/saved.json"
 saved_designs_dir = absolute_path + "/Resources/saved_designs/"
-
+sim_export_txt_dir = absolute_path + "/Resources/txts/export.txt"
 
 def read_settings():
     return readFile(settings_filepath)
@@ -212,6 +212,11 @@ def readFile(filepath=""):
         data = json.load(json_file)
     return data
 
+
+def writeTxt(filepath="", values=""):
+    a_file = open(filepath, "w")
+    a_file.write(values)
+    a_file.close()
 
 def write(filepath="", values={}):
     a_file = open(filepath, "w")

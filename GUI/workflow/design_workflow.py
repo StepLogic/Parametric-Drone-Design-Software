@@ -111,7 +111,6 @@ def generate_control_surfaces(config=None):
         surface_list = read_control_surface_objects()
         for surface in surface_list:
             lofts.update(control_surface_model(name=surface, config=config, part_loft=None).get_surface_loft())
-
     except:
         pass
     try:

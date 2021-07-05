@@ -12,7 +12,7 @@ class h_stab_model():
         self._name = name
         self.surface_type_ = surface_type_
         self.design_type_ = design_type_
-        self.profile = "0012"
+        self.profile = "naca0012"
         self.current_loft = None
         self.aircraft = config
         self.wings = self.aircraft.get_wings()
