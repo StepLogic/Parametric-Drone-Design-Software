@@ -28,6 +28,7 @@ from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_s
 from Utils.database.geometry.control_surface_database import read_control_surface_objects
 from Utils.database.geometry.main_database import wipe_design_options, wipe_design
 from Utils.database.settings.workfile_database import open_design
+from Utils.database.simulator.exportValues import exportValues
 
 
 def setup_ui(workflow):
@@ -258,6 +259,7 @@ def setup_ui(workflow):
             thread.setup(workflow)  # just setting up a parameter
             thread.start()
             workflow.threads.append(thread)
+            exportValues()
 
 
 

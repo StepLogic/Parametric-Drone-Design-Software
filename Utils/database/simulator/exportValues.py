@@ -20,4 +20,3 @@ def exportValues():
         output = output + f"{key}:{value},"
     writeTxt(sim_export_txt_dir,output)
 
-exportValues()
