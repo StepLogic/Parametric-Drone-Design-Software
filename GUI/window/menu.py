@@ -9,6 +9,8 @@ from GUI.dialogs.geometry_dialogs.boom_dialog_.boom_dialog import boom_dialog
 from GUI.dialogs.geometry_dialogs.control_surface.control_surface_dialogs import control_surface_dialog
 from GUI.dialogs.geometry_dialogs.landing_dialog.landing_gear_dialog import landing_gear_dialog
 from GUI.dialogs.geometry_dialogs.lifting_surface_dialog_.lifting_surface_dialog import lifting_surface_dialog
+from GUI.dialogs.performance_dialogs.report_dialogs.performance_plotter_dialog import performance_plotter_dialog
+from GUI.dialogs.performance_dialogs.report_dialogs.performance_table_dialog import performance_table_dialog
 from GUI.dialogs.propulsion_dialogs.propeller.propeller_dialog import propeller_dialog
 from GUI.dialogs.propulsion_dialogs.propulsion_dialog import propulsion_dialog
 from GUI.dialogs.propulsion_dialogs.shroud.shroud_dialog import shroud_dialog
@@ -124,10 +126,17 @@ def setup_ui(workflow):
     def setup_performance_menu():
         workflow.add_menu("Performance")
 
-        def enter_parameters():
-            pass
+        def plot_graphs():
+            dialog = performance_plotter_dialog()
+            results = dialog.exec_()
 
-        workflow.add_function_to_menu("Performance", enter_parameters)
+        def show_tables():
+            dialog = performance_table_dialog()
+            results = dialog.exec_()
+
+        workflow.add_function_to_menu("Performance", plot_graphs)
+        workflow.add_function_to_menu("Performance", show_tables)
+
 
     def setup_geometry_menu(workflow=workflow):
         workflow.add_menu("Geometry")

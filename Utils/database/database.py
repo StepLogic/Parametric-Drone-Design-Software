@@ -1,5 +1,6 @@
 import json
 from Helper import absolute_path, resource_path
+
 airfoil_path = resource_path(absolute_path + "/Resources/airfoil/export/names.txt")
 resource_dir_cpacs = resource_path(absolute_path + "/Resources/cpacs")
 resource_dir_cpacs_out = resource_path(absolute_path + "/Resources/cpacs/structure.xml")
@@ -14,7 +15,8 @@ datcom_input_file = absolute_path + "/Resources/datcom_files/input.inp"
 datcom_output_file = absolute_path + "/Resources/datcom_files/datcom.out"
 datcom_temp_dir = absolute_path + "Aerodynamics/datcom"
 datcom_exe = absolute_path + "/Resources/programs_exe/datcom.exe"
-datcom_stability_specification_filepath = resource_path(absolute_path + "/Resources/json/datcom_stability_specification.json")
+datcom_stability_specification_filepath = resource_path(
+    absolute_path + "/Resources/json/datcom_stability_specification.json")
 model_filepath = resource_path(absolute_path + "/Resources/model/model.stl")
 sim_export_fixed = resource_path(absolute_path + "/Resources/model/body")
 sim_export_moveable = resource_path(absolute_path + "/Resources/model/moveables")
@@ -23,6 +25,7 @@ settings_filepath = absolute_path + "/Resources/json/settings.json"
 saved_designs_ = absolute_path + "/Resources/saved_designs/saved.json"
 saved_designs_dir = absolute_path + "/Resources/saved_designs/"
 sim_export_txt_dir = absolute_path + "/Resources/txts/export.txt"
+
 
 def read_settings():
     return readFile(settings_filepath)
@@ -53,6 +56,10 @@ def write_datcom_input(input=""):
 
 def read_structures_specifications():
     return readFile(structure_specification_filepath)
+
+
+def read_performance_specifications():
+    return readFile(performance_specification_filepath)
 
 
 def update_structure_specifications(key="", value={}):
@@ -126,8 +133,6 @@ def update_propulsion_specifications(key="", value={}):
 
 
 ########################################################################################
-def read_performance_specifications():
-    return readFile(propulsion_specification_filepath)
 
 
 def write_performance_specification(values=None):
@@ -217,6 +222,7 @@ def writeTxt(filepath="", values=""):
     a_file = open(filepath, "w")
     a_file.write(values)
     a_file.close()
+
 
 def write(filepath="", values={}):
     a_file = open(filepath, "w")

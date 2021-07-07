@@ -84,8 +84,15 @@ class display_engine(_viewer_):
         stl_writer = StlAPI_Writer()
         stl_writer.SetASCIIMode(True)
         for part in self.current_table.values():
-            for loft in part:
-                stl_writer.Write(loft, model_filepath)
+                try:
+                    for loft in part:
+                        stl_writer.Write(loft, model_filepath)
+                except:
+
+                        stl_writer.Write(part, model_filepath)
+
+
+
 
     def switch_to_normal(self):
         self.eraseAll()

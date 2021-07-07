@@ -17,6 +17,7 @@ def start_vlm(airplane):
         ),
     )
     ap.run()
+    ap.draw()
 
     return {"type": "VLM", "CL": ap.CL, "CD": ap.CDi, "CY": ap.CY, "Cl": ap.Cl, "Cm": ap.Cm,
             "Cn": ap.Cn}

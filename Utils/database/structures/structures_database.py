@@ -1,12 +1,25 @@
 import logging
 
+from PyQt5.QtWidgets import QMessageBox
+
 from Utils.data_objects.structures_placeholder import center_of_gravity, moments_of_inertia, mass_of_battery_or_fuel, \
     mass_of_payload, mass_of_wing, mass_of_fuselage, maximum_takeoff_weight, mass_of_engine_or_motor
 from Utils.database import database
 
 
 def get_center_of_mass():
-    return database.read_structures_specifications()[center_of_gravity]
+
+    try:
+        value = database.read_structures_specifications()[center_of_gravity]
+        return value
+    except:
+        dialog = QMessageBox()
+        dialog.setIcon(QMessageBox.Warning)
+        dialog.setText(
+            f"{e.__str__()}")
+        dialog.addButton(QMessageBox.Ok)
+        dialog.exec()
+
 
 
 def set_center_of_mass(value=None):
@@ -23,7 +36,17 @@ def set_center_of_mass(value=None):
 
 
 def get_moments_of_inertia():
-    return database.read_structures_specifications()[moments_of_inertia]
+    try:
+        value=database.read_structures_specifications()[moments_of_inertia]
+        return value
+    except Exception as e:
+        dialog = QMessageBox()
+        dialog.setIcon(QMessageBox.Warning)
+        dialog.setText(
+            f"{e.__str__()}")
+        dialog.addButton(QMessageBox.Ok)
+        dialog.exec()
+
 
 
 def set_moments_of_inertia(value=None):

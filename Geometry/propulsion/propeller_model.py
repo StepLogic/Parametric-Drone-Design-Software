@@ -48,7 +48,7 @@ class propeller_model():
                  section_4_pitch_angle_, section_5_pitch_angle_, section_5_pitch_angle_]
 
         n = random.random()
-        lifting_surface = self.config.get_wings().create_wing(f"{n}", len(chords), f"naca0012")
+        lifting_surface = self.config.get_wings().create_wing(f"{n}", len(chords), f"naca4412")
 
         sections = [-hub_length / 2,
                     0.1 * hub_length,
@@ -72,7 +72,7 @@ class propeller_model():
         print(x_, radii)
 
         n = random.random()
-        hub = self.config.get_fuselages().create_fuselage(f"hub{n}", len(x_), "fuselageCircleProfileuID")
+        hub = self.config.get_fuselages().create_fuselage(f"hub{n}", len(x_), "circularProfile")
         for (x, rad, index) in zip(x_, radii, range(1, len(x_) + 1)):
             section = hub.get_section(index)
             sectionElement = section.get_section_element(1)

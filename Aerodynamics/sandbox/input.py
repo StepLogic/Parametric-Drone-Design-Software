@@ -8,6 +8,7 @@ from Utils.database.aerodynamics.sandbox_database import get_parameters_for_conv
 from Utils.database.database import model_filepath
 from Utils.database.geometry.boom_database import get_boom_object_data, read_boom_objects
 from Utils.database.geometry.lifting_database import get_surface_object_data, read_lifting_surface_objects, tailplane
+from Utils.database.structures.structures_database import get_center_of_mass
 
 
 def create_aircraft():
@@ -21,9 +22,10 @@ def create_aircraft():
     else:
         from aerosandbox_legacy_v0 import Airplane
         print("vlm")
-        mesh = trimesh.load(model_filepath)
+        mesh = get_center_of_mass()
+        print(mesh)
         airplane = Airplane(
-            xyz_ref=[round(list(mesh.center_mass)[0],2), round(list(mesh.center_mass)[1],2), round(list(mesh.center_mass)[2],2)],  # CG location
+            xyz_ref=[round(mesh["x"],2), round(mesh["y"],2), round(mesh["z"],2)],  # CG location
             wings=get_lifting_surfaces(type_="vlm")
         )
 

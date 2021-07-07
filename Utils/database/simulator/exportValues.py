@@ -14,6 +14,10 @@ def exportValues():
             except:
                 value=0
             output=output+f"{key}:{value},"
+    for key,value in database.read_propulsion_specifications()["propulsion_dialogs"].items():
+        output = output + f"{key}:{value},"
+    for key, value in database.read_structures_specifications().items():
+        output = output + f"{key}:{value},"
     writeTxt(sim_export_txt_dir,output)
 
 exportValues()

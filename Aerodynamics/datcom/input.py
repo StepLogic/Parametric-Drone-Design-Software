@@ -14,6 +14,8 @@ from Utils.database.geometry.lifting_database import read_lifting_surface_object
 
 
 # TODO Remove multiple mach number support
+from Utils.database.structures.structures_database import get_center_of_mass
+
 
 def build_datcom_input():
 
@@ -69,7 +71,7 @@ def build_datcom_input():
     except:
         pass
 
-    mesh = trimesh.load(model_filepath)
+    mesh = get_center_of_mass()
     try:
         value=synths["vtp"]
     except:
@@ -80,7 +82,7 @@ def build_datcom_input():
         synths.update({"htp":0})
 
     input_ = "".join([set_flight_conditions(mach_numbers=get_mach_number(), angle_of_attack=get_aoa_range(), altitude=get_altitude()),
-                      set_synths_parameters(center_of_gravity_x=round(list(mesh.center_mass)[0],2),center_of_gravity_z=round(list(mesh.center_mass)[2],2),
+                      set_synths_parameters(center_of_gravity_x=round(mesh["x"],2),center_of_gravity_z=round(mesh["z"],2),
                                             vtp_tip_position_x=round(synths.get("vtp"),2),
                                             htp_tip_position_x=round(synths.get("htp"),2)),
 
