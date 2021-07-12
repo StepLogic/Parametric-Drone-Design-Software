@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QThreadPool
 from PyQt5.QtWidgets import QMessageBox
 
+from GUI.alerts.information_dialog import information_dialog
 from GUI.alerts.load_design_dialog import load_design_dialog
 from GUI.dialogs.aerodynamics_dialogs.report_dialogs.plotter_dialog import plotter_dialog
 from GUI.dialogs.aerodynamics_dialogs.report_dialogs.table_dialog import table_dialog
@@ -178,7 +179,10 @@ def setup_ui(workflow):
                 dialog.tab.init_action()
 
         def show_internals():
-            show_structure(workflow.viewer)
+            dialog = information_dialog()
+            results = dialog.exec_()
+            if results == 1:
+                show_structure(workflow.viewer)
 
         workflow.add_function_to_menu("Structures", structures)
         workflow.add_function_to_menu("Structures", show_internals)
@@ -214,22 +218,31 @@ def setup_ui(workflow):
         workflow.add_menu("Aerodynamics")
 
         def sandbox():
-            thread = AerodynamicThread()
-            thread.setup(workflow, command=sandbox_)  # just setting up a parameter
-            thread.start()
-            workflow.threads.append(thread)
+            dialog = information_dialog()
+            results = dialog.exec_()
+            if results == 1:
+                thread = AerodynamicThread()
+                thread.setup(workflow, command=sandbox_)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         def datcom():
-            thread = AerodynamicThread()
-            thread.setup(workflow, command=datcom_)  # just setting up a parameter
-            thread.start()
-            workflow.threads.append(thread)
+            dialog = information_dialog()
+            results = dialog.exec_()
+            if results == 1:
+                thread = AerodynamicThread()
+                thread.setup(workflow, command=datcom_)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
 
         def multisandbox():
-            thread = AerodynamicThread()
-            thread.setup(workflow, command=start_multisandbox)  # just setting up a parameter
-            thread.start()
-            workflow.threads.append(thread)
+            dialog = information_dialog()
+            results = dialog.exec_()
+            if results == 1:
+                thread = AerodynamicThread()
+                thread.setup(workflow, command=start_multisandbox)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
         def plot_graphs():
             dialog = plotter_dialog()
             results = dialog.exec_()
@@ -255,11 +268,14 @@ def setup_ui(workflow):
         workflow.add_menu("Simulation")
 
         def start_simulation():
-            thread = ExportThread()
-            thread.setup(workflow)  # just setting up a parameter
-            thread.start()
-            workflow.threads.append(thread)
-            exportValues()
+            dialog = information_dialog()
+            results = dialog.exec_()
+            if results == 1:
+                thread = ExportThread()
+                thread.setup(workflow)  # just setting up a parameter
+                thread.start()
+                workflow.threads.append(thread)
+                exportValues()
 
 
 
