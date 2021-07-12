@@ -21,10 +21,11 @@ model_filepath = resource_path(absolute_path + "/Resources/model/model.stl")
 sim_export_fixed = resource_path(absolute_path + "/Resources/model/body")
 sim_export_moveable = resource_path(absolute_path + "/Resources/model/moveables")
 model_dir = resource_path(absolute_path + "/Resources/model")
-settings_filepath = absolute_path + "/Resources/json/settings.json"
-saved_designs_ = absolute_path + "/Resources/saved_designs/saved.json"
-saved_designs_dir = absolute_path + "/Resources/saved_designs/"
-sim_export_txt_dir = absolute_path + "/Resources/txts/export.txt"
+settings_filepath = resource_path(absolute_path + "/Resources/json/settings.json")
+saved_designs_ =resource_path( absolute_path + "/Resources/saved_designs/saved.json")
+saved_designs_dir = resource_path(absolute_path + "/Resources/saved_designs/")
+sim_export_txt_dir = resource_path(absolute_path + "/Resources/txts/export.txt")
+sim_exe_dir=resource_path(absolute_path+"/Simulator/Ningen.exe")
 
 
 def read_settings():

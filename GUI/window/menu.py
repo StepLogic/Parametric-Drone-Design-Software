@@ -1,3 +1,5 @@
+from subprocess import Popen, PIPE
+
 from PyQt5.QtCore import QThreadPool
 from PyQt5.QtWidgets import QMessageBox
 
@@ -26,6 +28,7 @@ from GUI.workflow.threads.geometry.GeometryThread import GeometryThread
 from Structures.trimesh.trimeshWrapper import get_functions
 from Utils.data_objects.workflow_placeholders import datcom_, sandbox_, update_surface_3D_, update_boom_3D_, build_cs, \
     build_landing_gear, start_multisandbox, build_shroud, build_propeller, done_, start_, start_server_
+from Utils.database.database import sim_exe_dir
 from Utils.database.geometry.control_surface_database import read_control_surface_objects
 from Utils.database.geometry.main_database import wipe_design_options, wipe_design
 from Utils.database.settings.workfile_database import open_design
@@ -276,6 +279,8 @@ def setup_ui(workflow):
                 thread.start()
                 workflow.threads.append(thread)
                 exportValues()
+                p = Popen(sim_exe_dir, stdin=PIPE, stdout=PIPE, stderr=PIPE, encoding="UTF8", shell=True)
+
 
 
 
