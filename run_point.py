@@ -4,7 +4,8 @@ import sys
 import tigl3.configuration
 import tigl3.tigl3wrapper
 import tixi3.tixi3wrapper
-
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 from GUI.workflow import design_workflow
 from GUI.workflow.main_workflow import work_flow_monitor
 from Utils.data_objects.workflow_placeholders import shutdown_

@@ -1,1 +1,1 @@
-cn:0,cn_beta:0,cn_p:0,cn_r:0,cl_beta:0,cl_p:0.0,cl_r:0.0,cm_alpha:0,cm_q:0,col_alpha:0,col_q:0,cd:0,cy_beta:0,cy_p:0,
+cn:0.005,cn_beta:-323400000.0,cn_p:-55760000000.0,cn_r:-3.132,cl_beta:-1795.0,cl_p:-860100000000.0,cl_r:4.625e-05,cm_alpha:0.1986,cm_q:0,col_alpha:0.002608,col_q:0,cd:0,cy_beta:0.002026,cy_p:-1643.0,voltage:1.0,max_current:0.0,discharge_rate:0.0,max_thrust:0.0,battery_capacity:0.0,mass_of_battery_or_fuel:0.0,maximum_takeoff_weight:0.0,mass_of_payload:0.0,mass_of_engine_or_motor:0.0,x:0.33,y:0.0,z:0.02,Ixx:0.0,Ixy:-0.0,Ixz:-0.0,Iyy:0.0,Iyz:-0.0,Izz:-0.0,
